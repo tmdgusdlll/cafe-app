@@ -37,10 +37,14 @@ public class OrderService {
     // 주문,결제
     @Transactional
     public OrderResponse orderAndPay(Long userId, OrderRequest request) {
-        // user 확인
-        User user = userRepository.findById(userId).orElseThrow(
+        // user 확인 (비관적 락 적용)
+        User user = userRepository.findByIdwithPessimisticLock(userId).orElseThrow(
                 () -> new OrderException(ErrorCode.USER_NOT_FOUND)
         );
+        // 락 X (동시성 재현용)
+//        User user = userRepository.findById(userId).orElseThrow(
+//                () -> new OrderException(ErrorCode.USER_NOT_FOUND)
+//        );
         // menu 확인
         Menu menu = menuRepository.findById(request.getMenuId()).orElseThrow(
                 () -> new OrderException(ErrorCode.MENU_NOT_FOUND)
