@@ -1,5 +1,6 @@
 package com.cafeapp.domain.order.controller;
 
+import com.cafeapp.common.config.kafka.event.OrderCompletedEvent;
 import com.cafeapp.domain.order.service.RedissonService;
 import com.cafeapp.global.response.ApiResponse;
 import com.cafeapp.domain.order.dto.request.OrderRequest;

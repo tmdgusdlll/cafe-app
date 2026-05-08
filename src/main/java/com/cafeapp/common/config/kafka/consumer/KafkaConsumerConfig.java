@@ -10,7 +10,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.listener.CommonErrorHandler;
+import org.springframework.kafka.listener.DeadLetterPublishingRecoverer;
+import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.kafka.support.serializer.JacksonJsonDeserializer;
+import org.springframework.util.backoff.FixedBackOff;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,11 +54,14 @@ public class KafkaConsumerConfig {
         return buildConsumerFactory("order-history-group");
     }
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, OrderCompletedEvent> orderHistoryKafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, OrderCompletedEvent> orderHistoryKafkaListenerContainerFactory(
+            CommonErrorHandler commonErrorHandlerWithDLT
+    ) {
         ConcurrentKafkaListenerContainerFactory<String, OrderCompletedEvent> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
 
         factory.setConsumerFactory(orderHistoryEventConsumerFactory());
+        factory.setCommonErrorHandler(commonErrorHandlerWithDLT);
 
         return factory;
     }
@@ -64,10 +72,24 @@ public class KafkaConsumerConfig {
         return buildConsumerFactory("menu-ranking-group");
     }
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, OrderCompletedEvent> menuRankingKafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, OrderCompletedEvent> menuRankingKafkaListenerContainerFactory(
+            CommonErrorHandler commonErrorHandlerWithDLT
+    ) {
         ConcurrentKafkaListenerContainerFactory<String, OrderCompletedEvent> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(menuRankingConsumerFactory());
+        factory.setCommonErrorHandler(commonErrorHandlerWithDLT);
         return factory;
+    }
+
+    // DLT
+    @Bean
+    public CommonErrorHandler commonErrorHandlerWithDLT(
+            KafkaTemplate<String, OrderCompletedEvent> orderCompletedEventKafkaTemplate) {
+        DeadLetterPublishingRecoverer recoverer = new DeadLetterPublishingRecoverer(orderCompletedEventKafkaTemplate);
+
+        FixedBackOff backOff = new FixedBackOff(1000L, 2L);
+
+        return new DefaultErrorHandler(recoverer, backOff);
     }
 }
