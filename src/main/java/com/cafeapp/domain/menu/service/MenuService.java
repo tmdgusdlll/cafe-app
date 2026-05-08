@@ -1,5 +1,6 @@
 package com.cafeapp.domain.menu.service;
 
+import com.cafeapp.common.config.redis.CacheManagerConfig;
 import com.cafeapp.domain.MenuRanking.dto.PopularMenuResponse;
 import com.cafeapp.domain.MenuRanking.service.MenuRankingService;
 import com.cafeapp.domain.menu.dto.response.GetAllMenuResponse;
@@ -10,6 +11,8 @@ import com.cafeapp.domain.menu.exception.MenuException;
 import com.cafeapp.domain.menu.repository.MenuRepository;
 import com.cafeapp.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +24,7 @@ import java.util.stream.IntStream;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 @Transactional(readOnly = true)
 public class MenuService {
 
@@ -28,7 +32,13 @@ public class MenuService {
     private final MenuRankingService menuRankingService;
 
     // 커피 메뉴 목록 조회
+    @Cacheable(
+            value = CacheManagerConfig.CACHE_NAME,
+            key = "'#all'",
+            cacheManager = "redisCacheManager"
+    )
     public List<GetAllMenuResponse> getAllMenu() {
+        log.info("[Cache MISS] 메뉴 목록 DB 조회");
         return menuRepository.findAllByStatus(MenuStatus.ON_SALE).stream()
                 .map(GetAllMenuResponse::from)
                 .toList();

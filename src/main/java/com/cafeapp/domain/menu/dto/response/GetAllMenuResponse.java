@@ -2,14 +2,16 @@ package com.cafeapp.domain.menu.dto.response;
 
 import com.cafeapp.domain.menu.entity.Menu;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class GetAllMenuResponse {
 
-    private final Long menuId;
-    private final String menuName;
-    private final Long price;
-    private final int stock;
+    private Long menuId;
+    private String menuName;
+    private Long price;
+    private int stock;
 
     private GetAllMenuResponse(Long menuId, String menuName, Long price, int stock) {
         this.menuId = menuId;
