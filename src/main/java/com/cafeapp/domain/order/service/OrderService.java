@@ -18,6 +18,7 @@ import com.cafeapp.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -45,6 +46,54 @@ public class OrderService {
 //        User user = userRepository.findById(userId).orElseThrow(
 //                () -> new OrderException(ErrorCode.USER_NOT_FOUND)
 //        );
+        // menu 확인
+        Menu menu = menuRepository.findById(request.getMenuId()).orElseThrow(
+                () -> new OrderException(ErrorCode.MENU_NOT_FOUND)
+        );
+        // menu 상태 확인
+        if (!menu.getStatus().equals(MenuStatus.ON_SALE)) {
+            throw new OrderException(ErrorCode.MENU_NOT_ON_SALE);
+        }
+        // 결제 금액(포인트)
+        Long amount = menu.getPrice() * request.getQuantity();
+
+        // 주문 생성
+        Order order = new Order(user, menu, amount);
+        orderRepository.save(order);
+
+        // 커피 재고 차감
+        menu.decreaseStock(request.getQuantity());
+
+        // 포인트 차감
+        user.usePoint(order.getAmount());
+
+        // 주문 상태 변경 (PENDING -> COMPLETED)
+        order.complete();
+
+        // 포인트 사용 이력 저장
+        PointTransaction pt = PointTransaction.use(user, order, order.getAmount(), user.getPoint());
+        pointTransactionRepository.save(pt);
+
+        // 이벤트 큐에 일단 쌓아두고 대기 -> 커밋이 완료 되면 @TransactionalEventListener에 의해 handle() 실행
+        // handle() 에서 orderProducer.send(event) 호출
+        // DB와 Kafka 간의 데이터 정합성 보장
+        eventPublisher.publishEvent(new OrderCompletedEvent(
+                user.getId(),
+                menu.getId(),
+                request.getQuantity(),
+                order.getAmount(),
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+        ));
+
+        return OrderResponse.from(order);
+    }
+
+    // Redisson 적용
+    @Transactional
+    public OrderResponse orderAndPayWithRedisson(Long userId, OrderRequest request) {
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new OrderException(ErrorCode.USER_NOT_FOUND)
+        );
         // menu 확인
         Menu menu = menuRepository.findById(request.getMenuId()).orElseThrow(
                 () -> new OrderException(ErrorCode.MENU_NOT_FOUND)

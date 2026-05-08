@@ -19,7 +19,8 @@ public enum ErrorCode {
     OUT_OF_STOCK(HttpStatus.BAD_REQUEST, "재고가 부족합니다."),
 
     // Order
-    ORDER_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 주문입니다.");
+    ORDER_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 주문입니다."),
+    TOO_MANY_REQUESTS(HttpStatus.TOO_MANY_REQUESTS, "잠시 후 다시 시도해주세요.");
 
     private final HttpStatus status;
     private final String message;

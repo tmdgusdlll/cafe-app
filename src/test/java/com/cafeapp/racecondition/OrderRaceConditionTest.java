@@ -4,6 +4,7 @@ import com.cafeapp.domain.menu.repository.MenuRepository;
 import com.cafeapp.domain.order.dto.request.OrderRequest;
 import com.cafeapp.domain.order.repository.OrderRepository;
 import com.cafeapp.domain.order.service.OrderService;
+import com.cafeapp.domain.order.service.RedissonService;
 import com.cafeapp.domain.pointTransaction.repository.PointTransactionRepository;
 import com.cafeapp.domain.user.entity.User;
 import com.cafeapp.domain.user.repository.UserRepository;
@@ -41,13 +42,18 @@ public class OrderRaceConditionTest {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private RedissonService redissonService;
+
     private Long userId;
     private Long menuId;
+
+    public static final Long INITIAL_POINT = 1000000L;
 
     @BeforeEach
     void setUp() {
         // 테스트용 유저 생성 (포인트 10000)
-        User user = new User("테스트유저", 100000L);
+        User user = new User("테스트유저", INITIAL_POINT);
         userId = userRepository.save(user).getId();
 
         // 테스트용 메뉴 조회 (기존 메뉴 사용)
@@ -63,6 +69,7 @@ public class OrderRaceConditionTest {
         userRepository.deleteById(userId);
     }
 
+    // 락 없는 버전
     private int runConcurrentTest(
             Long userId,
             Consumer<Long> task,
@@ -106,13 +113,13 @@ public class OrderRaceConditionTest {
         User user = userRepository.findById(userId).orElseThrow();
 
         // 정상적으로 차감됐다면 나와야 할 포인트
-        long properlyDeductedPoint = 100000L - (successCount.get() * 4500L);
+        long properlyDeductedPoint = INITIAL_POINT - (successCount.get() * 4500L);
 
         System.out.println("\n===== [" + lockType + "] 결과 =====");
         System.out.println("총 요청 수             : " + threadCount);
         System.out.println("성공 건수              : " + successCount.get());
         System.out.println("실패 건수              : " + failCount.get());
-        System.out.println("초기 포인트            : " + 100000L);
+        System.out.println("초기 포인트            : " + INITIAL_POINT);
         System.out.println("차감될 포인트           : " + successCount.get() * 4500L);
         System.out.println("정상 차감 시 예상 포인트 : " + properlyDeductedPoint);
         System.out.println("실제 남은 포인트         : " + user.getPoint());
@@ -124,6 +131,7 @@ public class OrderRaceConditionTest {
         return successCount.get();
     }
 
+    // 락 있는 버전
     private int runConcurrentTestWithLock(
             Long userId,
             Consumer<Long> task,
@@ -131,7 +139,7 @@ public class OrderRaceConditionTest {
     ) throws InterruptedException {
 
         int poolSize = 32;
-        int threadCount = 10;
+        int threadCount = 100;
         ExecutorService executorService = Executors.newFixedThreadPool(poolSize);
         CyclicBarrier barrier = new CyclicBarrier(poolSize);
         CountDownLatch latch = new CountDownLatch(threadCount);
@@ -165,13 +173,13 @@ public class OrderRaceConditionTest {
         executorService.shutdown();
 
         User user = userRepository.findById(userId).orElseThrow();
-        long expectedPoint = 100000L - (successCount.get() * 4500L);
+        long expectedPoint = INITIAL_POINT - (successCount.get() * 4500L);
 
         System.out.println("\n===== [" + lockType + "] 결과 =====");
         System.out.println("총 요청 수    : " + threadCount);
         System.out.println("성공 건수     : " + successCount.get());
         System.out.println("실패 건수     : " + failCount.get());
-        System.out.println("초기 포인트   : " + 100000L);
+        System.out.println("초기 포인트   : " + INITIAL_POINT);
         System.out.println("차감될 포인트    : " + successCount.get() * 4500L);
         System.out.println("예상 남은 포인트   : " + expectedPoint);
         System.out.println("실제 남은 포인트   : " + user.getPoint());
@@ -183,7 +191,7 @@ public class OrderRaceConditionTest {
     }
 
     @Test
-    @DisplayName("락 없이 동시 100번 주문 시 포인트 정합성이 깨진다")
+    @DisplayName("락 없이 동시 N번 주문 시 포인트 정합성이 깨진다")
     void 락없이_동시_주문_포인트_정합성_깨짐() throws InterruptedException {
         // when
         int successCount = runConcurrentTest(
@@ -194,7 +202,7 @@ public class OrderRaceConditionTest {
 
         // then
         User user = userRepository.findById(userId).orElseThrow();
-        long expectedPoint = 100000L - (successCount * 4500L);
+        long expectedPoint = INITIAL_POINT - (successCount * 4500L);
 
         System.out.println("정합성 깨짐 여부: " + (user.getPoint() != expectedPoint ? "💥 불일치" : "✅ 정상"));
 
@@ -203,7 +211,7 @@ public class OrderRaceConditionTest {
     }
 
     @Test
-    @DisplayName("동시에 100번 주문 시 포인트가 정확히 차감되어야 한다")
+    @DisplayName("비관적 락 - 동시에 N번 주문 시 포인트가 정확히 차감되어야 한다")
     void 동시_주문_포인트_정합성() throws InterruptedException {
         int successCount = runConcurrentTestWithLock(
                 userId,
@@ -213,7 +221,22 @@ public class OrderRaceConditionTest {
 
         // then
         User user = userRepository.findById(userId).orElseThrow();
-        long expectedPoint = 100000L - (successCount * 4500L);
+        long expectedPoint = INITIAL_POINT - (successCount * 4500L);
+
+        assertThat(user.getPoint()).isEqualTo(expectedPoint);
+    }
+
+    @Test
+    @DisplayName("분산 락 - 동시 10번 주문 시 포인트가 정확히 차감되어야 한다")
+    void 분산락_동시_주문_포인트_정합성() throws InterruptedException {
+        int successCount = runConcurrentTestWithLock(
+                userId,
+                (id) -> redissonService.orderAndPayWithRedisson(id, new OrderRequest(menuId, 1)),
+                "분산 락"
+        );
+
+        User user = userRepository.findById(userId).orElseThrow();
+        long expectedPoint = INITIAL_POINT - ((long) successCount * 4500L);
 
         assertThat(user.getPoint()).isEqualTo(expectedPoint);
     }

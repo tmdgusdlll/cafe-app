@@ -146,69 +146,82 @@ services:
     networks:
       - kafka-net
 
-#  # --------------------------
-#  # Spring Boot App 1
-#  # --------------------------
-#  app-1:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    container_name: cafe-app-1
-#    environment:
-#      SPRING_PROFILES_ACTIVE: docker
-#      APP_NAME: app-1
-#      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/coffee
-#      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
-#      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-#      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-1:29092
-#      SPRING_DATA_REDIS_HOST: redis
-#      SPRING_DATA_REDIS_PORT: 6379
-#    depends_on:
-#      - mysql
-#      - kafka-1
-#      - redis
-#    networks:
-#      - kafka-net
+  # --------------------------
+  # Spring Boot App 1
+  # --------------------------
+  app-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cafe-app-1
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      APP_NAME: app-1
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/coffee
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-1:29092
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+    depends_on:
+      - mysql
+      - kafka-1
+      - redis
+    networks:
+      - kafka-net
 
   # --------------------------
   # Spring Boot App 2
   # --------------------------
-#  app-2:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    container_name: cafe-app-2
-#    environment:
-#      SPRING_PROFILES_ACTIVE: docker
-#      APP_NAME: app-2
-#      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/coffee
-#      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
-#      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-#      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-1:29092
-#      SPRING_DATA_REDIS_HOST: redis
-#      SPRING_DATA_REDIS_PORT: 6379
-#    depends_on:
-#      - mysql
-#      - kafka-1
-#      - redis
-#    networks:
-#      - kafka-net
-#
-#  # --------------------------
-#  # Nginx
-#  # --------------------------
-#  nginx:
-#    image: nginx:latest
-#    container_name: nginx
-#    ports:
-#      - "80:80"
-#    volumes:
-#      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-#    depends_on:
-#      - app-1
-#      - app-2
-#    networks:
-#      - kafka-net
+  app-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cafe-app-2
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      APP_NAME: app-2
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/coffee
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-1:29092
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+    depends_on:
+      - mysql
+      - kafka-1
+      - redis
+    networks:
+      - kafka-net
+
+  # --------------------------
+  # Nginx
+  # --------------------------
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./infra/nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app-1
+      - app-2
+    networks:
+      - kafka-net
+
+  # --------------------------
+  # K6
+  # --------------------------
+  k6:
+    image: grafana/k6:latest
+    container_name: k6
+    volumes:
+      - ./infra/k6:/scripts
+    networks:
+      - kafka-net
+    depends_on:
+      - nginx
 
 volumes:
   mysql_data:
