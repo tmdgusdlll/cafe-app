@@ -49,7 +49,7 @@
 ## 설계 내용
 
 ### ERD
-
+<img width="875" height="729" alt="Image" src="https://github.com/user-attachments/assets/aca7ed8e-f79c-4dbc-9473-ba2dd3b391e0" />
 
 
 ### API 명세서
