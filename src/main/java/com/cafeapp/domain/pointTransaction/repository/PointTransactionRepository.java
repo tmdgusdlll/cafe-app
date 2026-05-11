@@ -7,7 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public interface PointTransactionRepository extends JpaRepository<PointTransaction, Long> {
+
+    @Query("SELECT pt FROM PointTransaction pt WHERE pt.user.id = :userId")
+    List<PointTransaction> findAllByUserId(@Param("userId") Long userId);
 
     @Modifying
     @Transactional

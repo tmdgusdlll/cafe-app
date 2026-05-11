@@ -1,5 +1,7 @@
 package com.cafeapp.racecondition;
 
+import com.cafeapp.domain.menu.entity.Menu;
+import com.cafeapp.domain.menu.entity.MenuStatus;
 import com.cafeapp.domain.menu.repository.MenuRepository;
 import com.cafeapp.domain.order.dto.request.OrderRequest;
 import com.cafeapp.domain.order.repository.OrderRepository;
@@ -17,6 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
@@ -239,5 +243,62 @@ public class OrderRaceConditionTest {
         long expectedPoint = INITIAL_POINT - ((long) successCount * 4500L);
 
         assertThat(user.getPoint()).isEqualTo(expectedPoint);
+    }
+
+    @Test
+    @DisplayName("비관적 락 - 재고 1개 메뉴에 N명이 동시 주문 시 정확히 1건만 성공하고 재고가 0이 된다")
+    void 재고_동시성_정합성() throws InterruptedException {
+        int threadCount = 10;
+        Menu stockOneMenu = menuRepository.save(new Menu("재고1개메뉴", 1000L, 1, MenuStatus.ON_SALE));
+        List<Long> testUserIds = new ArrayList<>();
+
+        for (int i = 0; i < threadCount; i++) {
+            testUserIds.add(userRepository.save(new User("재고테스트유저" + i, 10000L)).getId());
+        }
+
+        try {
+            ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
+            CyclicBarrier barrier = new CyclicBarrier(threadCount);
+            CountDownLatch latch = new CountDownLatch(threadCount);
+            AtomicInteger successCount = new AtomicInteger(0);
+
+            for (int i = 0; i < threadCount; i++) {
+                final Long uid = testUserIds.get(i);
+                executorService.submit(() -> {
+                    try {
+                        barrier.await(5, TimeUnit.SECONDS);
+                        orderService.orderAndPay(uid, new OrderRequest(stockOneMenu.getId(), 1));
+                        successCount.incrementAndGet();
+                    } catch (Exception e) {
+                        System.out.println(Thread.currentThread().getName() + " 실패: " + e.getMessage());
+                    } finally {
+                        latch.countDown();
+                    }
+                });
+            }
+
+            latch.await();
+            executorService.shutdown();
+
+            System.out.println("\n===== [재고 동시성] 결과 =====");
+            System.out.println("총 요청 수  : " + threadCount);
+            System.out.println("성공 건수   : " + successCount.get());
+            System.out.println("정합성 여부 : " + (successCount.get() == 1 ? "✅ 정상" : "💥 불일치"));
+            System.out.println("==============================\n");
+
+            assertThat(successCount.get()).isEqualTo(1);
+
+            Menu updated = menuRepository.findById(stockOneMenu.getId()).orElseThrow();
+            assertThat(updated.getStock()).isEqualTo(0);
+            assertThat(updated.getStatus()).isEqualTo(MenuStatus.SOLD_OUT);
+
+        } finally {
+            for (Long uid : testUserIds) {
+                pointTransactionRepository.deleteAllByUserId(uid);
+                orderRepository.deleteAllByUserId(uid);
+                userRepository.deleteById(uid);
+            }
+            menuRepository.deleteById(stockOneMenu.getId());
+        }
     }
 }
