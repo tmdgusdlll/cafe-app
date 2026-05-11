@@ -437,10 +437,10 @@ Redis ZSET을 활용하여 주문 완료 시 score를 증가시키고 조회 시
 
 ```
 카페인 (로컬 캐시)
-→ app-1 캐싱 → app-2는 모름 → DB 중복 조회 ❌
+→ app-1 캐싱 → app-2는 모름 → DB 중복 조회 
 
 Redis 캐시
-→ Redis  → app-1 캐시 미스(DB 조회) → app-2 Redis 캐시 히트 (DB 조회X) ✅
+→ app-1 캐시 미스(DB 조회) → app-2 Redis 캐시 히트 (DB 조회X) 
 ```
 
 **다중 서버 캐시 공유 확인**
