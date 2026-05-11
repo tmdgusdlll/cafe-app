@@ -44,5 +44,8 @@ public class Menu extends BaseEntity {
             throw new MenuException(ErrorCode.OUT_OF_STOCK);
         }
         this.stock -= quantity;
+        if (this.stock == 0) {
+            this.status = MenuStatus.SOLD_OUT;
+        }
     }
 }

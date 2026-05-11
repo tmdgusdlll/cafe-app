@@ -46,8 +46,8 @@ public class OrderService {
 //        User user = userRepository.findById(userId).orElseThrow(
 //                () -> new OrderException(ErrorCode.USER_NOT_FOUND)
 //        );
-        // menu 확인
-        Menu menu = menuRepository.findById(request.getMenuId()).orElseThrow(
+        // menu 확인 (비관적 락 적용 - 다른 사용자의 동시 재고 차감 방지)
+        Menu menu = menuRepository.findByIdWithPessimisticLock(request.getMenuId()).orElseThrow(
                 () -> new OrderException(ErrorCode.MENU_NOT_FOUND)
         );
         // menu 상태 확인
@@ -94,8 +94,8 @@ public class OrderService {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new OrderException(ErrorCode.USER_NOT_FOUND)
         );
-        // menu 확인
-        Menu menu = menuRepository.findById(request.getMenuId()).orElseThrow(
+        // menu 확인 (비관적 락 적용 - Redisson은 user-level 락이므로 Menu 재고는 DB 락으로 보호)
+        Menu menu = menuRepository.findByIdWithPessimisticLock(request.getMenuId()).orElseThrow(
                 () -> new OrderException(ErrorCode.MENU_NOT_FOUND)
         );
         // menu 상태 확인

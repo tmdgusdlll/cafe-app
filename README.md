@@ -98,7 +98,7 @@
 
 ```json
 {
-  "amount": 10000
+  "point": 10000
 }
 ```
 
@@ -123,7 +123,15 @@
 |---|---|
 | Method | POST |
 | URL | /users/{userId}/order |
-| 설명 | 포인트로 커피 주문/결제 (비관적 락) |
+| 설명 | 포인트로 커피 주문/결제 (User·Menu 비관적 락) |
+
+#### 3-1. 커피 주문/결제 (분산 락)
+
+| 항목 | 내용 |
+|---|---|
+| Method | POST |
+| URL | /users/{userId}/order/redisson |
+| 설명 | 포인트로 커피 주문/결제 (Redisson 분산 락 + Menu 비관적 락) |
 
 **Request**
 
@@ -167,7 +175,8 @@
 
 ```json
 {
-  "menus": [
+  "success": true,
+  "data": [
     {
       "rank": 1,
       "menuId": 1,
@@ -241,7 +250,10 @@ Kafka (비동기 이벤트 공유)
 **전략**
 
 - 단일 서버 → 비관적 락 (`SELECT ... FOR UPDATE`)
-- 다중 서버 → 분산 락 (Redisson) : DB 커넥션 점유 없이 Redis에서 락 관리
+  - User 락 → Menu 락 순서 고정 (데드락 방지)
+- 다중 서버 → 분산 락 (Redisson) : DB 커넥션 점유 없이 Redis에서 User-level 락 관리
+  - Redisson 락은 `lock:order:user:{userId}` 키로 동일 사용자의 중복 주문만 차단
+  - 서로 다른 사용자가 같은 메뉴를 동시 주문하는 경우는 Redisson 락으로 보호되지 않으므로, Menu 재고에는 DB 비관적 락을 추가 적용
 
 ---
 
