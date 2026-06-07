@@ -1,0 +1,4816 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "CafeApp",
+    "languages": [
+      "batch",
+      "conf",
+      "dockerfile",
+      "gradle",
+      "java",
+      "javascript",
+      "json",
+      "markdown",
+      "properties",
+      "yaml"
+    ],
+    "frameworks": [
+      "Docker",
+      "Docker Compose",
+      "JUnit",
+      "Redisson",
+      "Spring Boot",
+      "Spring Data JPA",
+      "Spring Data Redis",
+      "Spring Kafka",
+      "Spring Validation",
+      "Spring Web MVC"
+    ],
+    "description": "다중 서버 환경에서 동시성 제어와 데이터 일관성을 보장하는 커피숍 주문 시스템으로, 메뉴 조회(Redis 캐싱), 포인트 충전, 주문/결제, 인기 메뉴 추천(Redis ZSET) 기능을 제공합니다.",
+    "analyzedAt": "2026-06-07T10:59:20Z",
+    "gitCommitHash": "4801abe35d0bbd68de59069264fd933a99735d3f"
+  },
+  "nodes": [
+    {
+      "id": "file:src/main/java/com/cafeapp/common/DataInitializer.java",
+      "type": "file",
+      "name": "DataInitializer.java",
+      "filePath": "src/main/java/com/cafeapp/common/DataInitializer.java",
+      "summary": "애플리케이션 시작 시 테스트용 초기 데이터(사용자 3명, 메뉴 12개)를 DB에 자동으로 삽입하는 Spring Boot CommandLineRunner 구현체이다.",
+      "tags": [
+        "초기화",
+        "데이터-시드",
+        "서비스",
+        "spring-boot"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/common/DataInitializer.java:DataInitializer",
+      "type": "class",
+      "name": "DataInitializer",
+      "filePath": "src/main/java/com/cafeapp/common/DataInitializer.java",
+      "lineRange": [
+        15,
+        51
+      ],
+      "summary": "CommandLineRunner를 구현하여 DB가 비어 있을 때 초기 사용자 및 메뉴 데이터를 삽입하는 클래스이다.",
+      "tags": [
+        "초기화",
+        "데이터-시드",
+        "spring-boot"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java",
+      "type": "file",
+      "name": "CacheManagerConfig.java",
+      "filePath": "src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java",
+      "summary": "Redis 기반 CacheManager를 구성하며, TTL 10분, JSON 직렬화, JavaTimeModule 등록 설정을 포함한다.",
+      "tags": [
+        "설정",
+        "redis",
+        "캐싱",
+        "spring-boot"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Jackson2JsonRedisSerializer를 사용해 Redis에 저장되는 값을 JSON 형태로 직렬화하며, JavaTimeModule을 수동 등록하여 Java 8 날짜/시간 타입을 지원한다."
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java:CacheManagerConfig",
+      "type": "class",
+      "name": "CacheManagerConfig",
+      "filePath": "src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java",
+      "lineRange": [
+        20,
+        46
+      ],
+      "summary": "Spring의 @Configuration 클래스로, RedisCacheManager 빈을 생성하고 캐시 직렬화 및 TTL 정책을 정의한다.",
+      "tags": [
+        "설정",
+        "redis",
+        "캐싱"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java:redisCacheManager",
+      "type": "function",
+      "name": "redisCacheManager",
+      "filePath": "src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java",
+      "lineRange": [
+        26,
+        44
+      ],
+      "summary": "RedisConnectionFactory를 받아 TTL 10분, JSON 직렬화 설정이 적용된 RedisCacheManager 빈을 생성한다.",
+      "tags": [
+        "설정",
+        "redis",
+        "캐싱",
+        "팩토리"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java",
+      "type": "file",
+      "name": "MenuRankingController.java",
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java",
+      "summary": "메뉴 인기 순위 조회 REST API 엔드포인트를 제공하는 Spring MVC Controller이다.",
+      "tags": [
+        "api-handler",
+        "컨트롤러",
+        "메뉴-순위",
+        "rest-api"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java:MenuRankingController",
+      "type": "class",
+      "name": "MenuRankingController",
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java",
+      "lineRange": [
+        7,
+        19
+      ],
+      "summary": "MenuRankingService에 의존하여 인기 메뉴 순위 조회 요청을 처리하는 REST Controller이다.",
+      "tags": [
+        "api-handler",
+        "컨트롤러",
+        "메뉴-순위"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+      "type": "file",
+      "name": "PopularMenuResponse.java",
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+      "summary": "인기 메뉴 순위 API 응답에 사용되는 DTO로, 순위, 메뉴 ID, 메뉴명, 주문 횟수 필드를 포함한다.",
+      "tags": [
+        "dto",
+        "응답",
+        "메뉴-순위",
+        "데이터-모델"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java:PopularMenuResponse",
+      "type": "class",
+      "name": "PopularMenuResponse",
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+      "lineRange": [
+        6,
+        20
+      ],
+      "summary": "인기 메뉴 순위 응답 데이터를 담는 불변 DTO 클래스로, 순위(rank), menuId, menuName, orderCount를 보유한다.",
+      "tags": [
+        "dto",
+        "응답",
+        "메뉴-순위"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+      "type": "file",
+      "name": "MenuRankingListener.java",
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+      "summary": "Kafka 토픽에서 주문 완료 이벤트를 소비하여 Redis Sorted Set에 메뉴 주문 횟수를 증가시키는 이벤트 리스너이다.",
+      "tags": [
+        "이벤트-핸들러",
+        "kafka",
+        "메뉴-순위",
+        "비동기"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java:MenuRankingListener",
+      "type": "class",
+      "name": "MenuRankingListener",
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+      "lineRange": [
+        14,
+        33
+      ],
+      "summary": "Kafka Consumer로서 OrderCompletedEvent를 수신하고 MenuRankingService를 호출하여 순위 데이터를 갱신하는 클래스이다.",
+      "tags": [
+        "이벤트-핸들러",
+        "kafka",
+        "메뉴-순위"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java:consume",
+      "type": "function",
+      "name": "consume",
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+      "lineRange": [
+        21,
+        32
+      ],
+      "summary": "Kafka 메시지로부터 OrderCompletedEvent를 수신하여 menuId, quantity, 현재 날짜를 추출한 뒤 순위 증가 메서드를 호출한다.",
+      "tags": [
+        "이벤트-핸들러",
+        "kafka",
+        "소비자"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "type": "file",
+      "name": "MenuRankingService.java",
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "summary": "Redis Sorted Set을 활용하여 일별 메뉴 주문 횟수를 집계하고, 7일간 누적 인기 메뉴 Top3를 조회하는 서비스이다.",
+      "tags": [
+        "서비스",
+        "redis",
+        "메뉴-순위",
+        "캐싱"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Redis의 ZUNIONSTORE 명령을 사용해 7일치 Sorted Set을 합산하고, TTL을 1일로 설정하여 자동 만료를 처리한다."
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:MenuRankingService",
+      "type": "class",
+      "name": "MenuRankingService",
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "lineRange": [
+        20,
+        79
+      ],
+      "summary": "StringRedisTemplate을 이용해 메뉴 순위를 증가시키고 7일 누적 Top3 인기 메뉴를 집계하는 Spring Service 클래스이다.",
+      "tags": [
+        "서비스",
+        "redis",
+        "메뉴-순위"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:increaseMenuRanking",
+      "type": "function",
+      "name": "increaseMenuRanking",
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "lineRange": [
+        28,
+        38
+      ],
+      "summary": "날짜별 Redis Sorted Set 키에 menuId의 점수를 quantity만큼 증가시키고 1일 TTL을 적용한다.",
+      "tags": [
+        "redis",
+        "메뉴-순위",
+        "쓰기"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:getMenuRankingTop3In7Days",
+      "type": "function",
+      "name": "getMenuRankingTop3In7Days",
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "lineRange": [
+        40,
+        78
+      ],
+      "summary": "오늘 날짜 기준 7일치 Redis Sorted Set 키를 ZUNIONSTORE로 합산한 뒤 점수 내림차순 Top3를 반환하며, 캐시 키가 없을 경우 빈 목록을 반환한다.",
+      "tags": [
+        "redis",
+        "메뉴-순위",
+        "조회",
+        "캐싱"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/menu/controller/MenuController.java",
+      "type": "file",
+      "name": "MenuController.java",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/controller/MenuController.java",
+      "summary": "메뉴 전체 조회 및 인기 메뉴 조회 REST API 엔드포인트를 제공하는 Spring MVC Controller이다.",
+      "tags": [
+        "api-handler",
+        "컨트롤러",
+        "메뉴",
+        "rest-api"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/menu/controller/MenuController.java:MenuController",
+      "type": "class",
+      "name": "MenuController",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/controller/MenuController.java",
+      "lineRange": [
+        14,
+        31
+      ],
+      "summary": "MenuService에 의존하여 전체 메뉴 목록 조회와 인기 메뉴 조회 요청을 처리하는 REST Controller이다.",
+      "tags": [
+        "api-handler",
+        "컨트롤러",
+        "메뉴"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+      "type": "file",
+      "name": "GetAllMenuResponse.java",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+      "summary": "전체 메뉴 조회 API 응답 DTO로, Menu 엔티티로부터 정적 팩토리 메서드 from()을 통해 생성된다.",
+      "tags": [
+        "dto",
+        "응답",
+        "메뉴",
+        "데이터-모델"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java:GetAllMenuResponse",
+      "type": "class",
+      "name": "GetAllMenuResponse",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+      "lineRange": [
+        7,
+        31
+      ],
+      "summary": "menuId, menuName, price, stock 필드를 포함하며 Menu 엔티티에서 변환하는 from() 정적 팩토리를 제공하는 응답 DTO이다.",
+      "tags": [
+        "dto",
+        "응답",
+        "메뉴",
+        "팩토리"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java:from",
+      "type": "function",
+      "name": "from",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+      "lineRange": [
+        23,
+        30
+      ],
+      "summary": "Menu 엔티티를 GetAllMenuResponse DTO로 변환하는 정적 팩토리 메서드이다.",
+      "tags": [
+        "팩토리",
+        "변환",
+        "dto"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/menu/dto/response/MenuScoreDto.java",
+      "type": "file",
+      "name": "MenuScoreDto.java",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/dto/response/MenuScoreDto.java",
+      "summary": "Redis 순위 집계 결과에서 menuId와 orderCount를 담는 내부 전달 객체(record)이다.",
+      "tags": [
+        "dto",
+        "메뉴-순위",
+        "데이터-모델",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "type": "file",
+      "name": "Menu.java",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "summary": "메뉴 도메인 엔티티로, 메뉴명/가격/재고/상태 필드를 갖고 재고 차감 및 품절 처리 비즈니스 로직을 포함한다.",
+      "tags": [
+        "데이터-모델",
+        "엔티티",
+        "메뉴",
+        "jpa"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/menu/entity/Menu.java:Menu",
+      "type": "class",
+      "name": "Menu",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "lineRange": [
+        12,
+        51
+      ],
+      "summary": "JPA 엔티티로서 메뉴의 상태(ON_SALE/SOLD_OUT)와 재고를 관리하며, decreaseStock() 메서드로 주문 시 재고를 차감한다.",
+      "tags": [
+        "데이터-모델",
+        "엔티티",
+        "메뉴",
+        "jpa"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/menu/entity/Menu.java:decreaseStock",
+      "type": "function",
+      "name": "decreaseStock",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "lineRange": [
+        42,
+        50
+      ],
+      "summary": "주문 수량만큼 재고를 차감하고 재고가 0이 되면 상태를 SOLD_OUT으로 전환하며, 재고 부족 시 MenuException을 발생시킨다.",
+      "tags": [
+        "비즈니스-로직",
+        "재고-관리",
+        "메뉴"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/menu/entity/MenuStatus.java",
+      "type": "file",
+      "name": "MenuStatus.java",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/entity/MenuStatus.java",
+      "summary": "메뉴의 판매 상태를 나타내는 열거형으로 ON_SALE과 SOLD_OUT 값을 정의한다.",
+      "tags": [
+        "열거형",
+        "메뉴",
+        "데이터-모델",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+      "type": "file",
+      "name": "MenuRepository.java",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+      "summary": "메뉴 엔티티에 대한 JPA 데이터 접근 인터페이스로, 상태별 조회 및 비관적 락을 이용한 단건 조회 메서드를 제공한다.",
+      "tags": [
+        "레포지토리",
+        "jpa",
+        "메뉴",
+        "비관적-락"
+      ],
+      "complexity": "simple",
+      "languageNotes": "findByIdWithPessimisticLock 메서드에 @Lock(LockModeType.PESSIMISTIC_WRITE)을 적용하여 동시성 제어를 구현한다."
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "type": "file",
+      "name": "MenuService.java",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "summary": "Spring Cache(@Cacheable)와 Redis 순위 서비스를 결합하여 전체 메뉴 조회 및 7일 기준 인기 메뉴 Top3 조회를 제공하는 서비스이다.",
+      "tags": [
+        "서비스",
+        "메뉴",
+        "캐싱",
+        "redis",
+        "tested"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:MenuService",
+      "type": "class",
+      "name": "MenuService",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "lineRange": [
+        25,
+        80
+      ],
+      "summary": "MenuRepository와 MenuRankingService를 조합하여 메뉴 목록 캐시 조회와 인기 메뉴 정렬/매핑 비즈니스 로직을 처리하는 서비스 클래스이다.",
+      "tags": [
+        "서비스",
+        "메뉴",
+        "캐싱"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:getAllMenu",
+      "type": "function",
+      "name": "getAllMenu",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "lineRange": [
+        35,
+        45
+      ],
+      "summary": "@Cacheable 어노테이션을 통해 Redis에서 ON_SALE 상태의 전체 메뉴 목록을 캐시하여 반환한다.",
+      "tags": [
+        "조회",
+        "캐싱",
+        "메뉴"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:getPopularMenus",
+      "type": "function",
+      "name": "getPopularMenus",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "lineRange": [
+        47,
+        79
+      ],
+      "summary": "Redis 순위 데이터를 기반으로 상위 메뉴를 DB에서 조회한 뒤 순위 정보와 결합하여 PopularMenuResponse 목록을 반환한다.",
+      "tags": [
+        "조회",
+        "메뉴-순위",
+        "redis",
+        "비즈니스-로직"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "type": "file",
+      "name": "MenuServiceTest.java",
+      "filePath": "src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "summary": "MenuService의 전체 메뉴 조회 및 인기 메뉴 조회 기능을 Redis와 DB가 실제로 연동된 Spring Boot 통합 테스트로 검증한다.",
+      "tags": [
+        "test",
+        "통합-테스트",
+        "메뉴",
+        "redis"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java:MenuServiceTest",
+      "type": "class",
+      "name": "MenuServiceTest",
+      "filePath": "src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "lineRange": [
+        27,
+        136
+      ],
+      "summary": "@SpringBootTest 기반의 통합 테스트 클래스로, 판매 중 메뉴 필터링, SOLD_OUT 제외, 인기 메뉴 Top3 순위 정렬 등 4개 시나리오를 검증한다.",
+      "tags": [
+        "test",
+        "통합-테스트",
+        "메뉴"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+      "type": "file",
+      "name": "OrderController.java",
+      "filePath": "src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+      "summary": "주문 REST API 컨트롤러로, 비관적 락 기반의 일반 주문과 Redisson 분산 락 기반의 주문 두 가지 엔드포인트를 제공한다.",
+      "tags": [
+        "api-handler",
+        "동시성-제어",
+        "분산락",
+        "주문"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/order/controller/OrderController.java:OrderController",
+      "type": "class",
+      "name": "OrderController",
+      "filePath": "src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+      "lineRange": [
+        18,
+        44
+      ],
+      "summary": "Spring MVC @RestController로 주문 생성 요청을 처리하며, 일반 주문(비관적 락)과 Redisson 분산 락 주문 두 가지 경로를 노출한다.",
+      "tags": [
+        "api-handler",
+        "컨트롤러",
+        "주문"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/order/dto/request/OrderRequest.java",
+      "type": "file",
+      "name": "OrderRequest.java",
+      "filePath": "src/main/java/com/cafeapp/domain/order/dto/request/OrderRequest.java",
+      "summary": "주문 요청 DTO로 menuId와 quantity 필드를 담는 단순한 데이터 객체다.",
+      "tags": [
+        "data-model",
+        "dto",
+        "주문"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java",
+      "type": "file",
+      "name": "OrderResponse.java",
+      "filePath": "src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java",
+      "summary": "주문 응답 DTO로 Order 엔티티에서 사용자, 메뉴, 금액, 포인트 잔액 등 주요 정보를 추출하여 클라이언트에 반환한다.",
+      "tags": [
+        "data-model",
+        "dto",
+        "serialization",
+        "주문"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java:OrderResponse",
+      "type": "class",
+      "name": "OrderResponse",
+      "filePath": "src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java",
+      "lineRange": [
+        9,
+        35
+      ],
+      "summary": "Order 엔티티를 정적 팩토리 메서드 `from`으로 변환하여 orderId, userId, menuId, 잔여 포인트 등 클라이언트 응답 필드를 구성한다.",
+      "tags": [
+        "data-model",
+        "dto",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/order/entity/OrderStatus.java",
+      "type": "file",
+      "name": "OrderStatus.java",
+      "filePath": "src/main/java/com/cafeapp/domain/order/entity/OrderStatus.java",
+      "summary": "주문 상태를 나타내는 열거형으로 PENDING, COMPLETED, SOLD_OUT 등의 상태값을 정의한다.",
+      "tags": [
+        "type-definition",
+        "data-model",
+        "주문"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/order/repository/OrderRepository.java",
+      "type": "file",
+      "name": "OrderRepository.java",
+      "filePath": "src/main/java/com/cafeapp/domain/order/repository/OrderRepository.java",
+      "summary": "Order 엔티티에 대한 Spring Data JPA 리포지토리로 사용자 ID 기준 전체 삭제 메서드를 추가로 제공한다.",
+      "tags": [
+        "data-model",
+        "리포지토리",
+        "주문"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "type": "file",
+      "name": "OrderService.java",
+      "filePath": "src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "summary": "주문 핵심 비즈니스 로직을 담당하며, 비관적 락으로 재고/포인트 정합성을 보장하고 Kafka 이벤트 발행과 데이터 수집 플랫폼 연동을 처리한다.",
+      "tags": [
+        "service",
+        "동시성-제어",
+        "비관적락",
+        "Kafka",
+        "주문",
+        "tested"
+      ],
+      "complexity": "complex",
+      "languageNotes": "비관적 락(PESSIMISTIC_WRITE)을 사용하는 `findByIdwithPessimisticLock` 호출로 다중 서버 환경에서의 동시성을 DB 레벨에서 제어하며, 주문 완료 후 Kafka 이벤트를 발행한다."
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/order/service/OrderService.java:OrderService",
+      "type": "class",
+      "name": "OrderService",
+      "filePath": "src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "lineRange": [
+        27,
+        138
+      ],
+      "summary": "주문 처리 서비스 클래스로, 재고 감소·포인트 차감·포인트 내역 저장을 트랜잭션으로 묶고 완료 시 OrderCompletedEvent를 발행한다.",
+      "tags": [
+        "service",
+        "동시성-제어",
+        "트랜잭션",
+        "Kafka"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/order/service/OrderService.java:orderAndPay",
+      "type": "function",
+      "name": "orderAndPay",
+      "filePath": "src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "lineRange": [
+        39,
+        89
+      ],
+      "summary": "비관적 락으로 사용자와 메뉴를 조회한 후, 재고 감소·포인트 차감·주문 저장·이벤트 발행을 하나의 트랜잭션 내에서 수행한다.",
+      "tags": [
+        "service",
+        "비관적락",
+        "트랜잭션",
+        "주문"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/order/service/OrderService.java:orderAndPayWithRedisson",
+      "type": "function",
+      "name": "orderAndPayWithRedisson",
+      "filePath": "src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "lineRange": [
+        92,
+        137
+      ],
+      "summary": "Redisson 분산 락 획득 이후 호출되는 주문 처리 메서드로, 일반 조회(비관적 락 없음)로 사용자를 가져온 뒤 동일한 주문 흐름을 수행한다.",
+      "tags": [
+        "service",
+        "분산락",
+        "Redisson",
+        "트랜잭션"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "type": "file",
+      "name": "RedissonService.java",
+      "filePath": "src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "summary": "Redisson 분산 락을 획득하여 주문 처리를 직렬화하는 서비스로, 락 획득 실패 시 OrderException을 발생시키고 finally 블록에서 락을 해제한다.",
+      "tags": [
+        "service",
+        "분산락",
+        "Redisson",
+        "동시성-제어"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "RLock.tryLock(waitTime, leaseTime, TimeUnit)을 사용하며 InterruptedException 처리와 finally에서 락 해제를 보장한다."
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/order/service/RedissonService.java:RedissonService",
+      "type": "class",
+      "name": "RedissonService",
+      "filePath": "src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "lineRange": [
+        14,
+        55
+      ],
+      "summary": "Redisson RLock을 이용해 분산 환경에서 주문을 직렬 처리하는 서비스 클래스.",
+      "tags": [
+        "service",
+        "분산락",
+        "Redisson"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/order/service/RedissonService.java:orderAndPayWithRedisson",
+      "type": "function",
+      "name": "orderAndPayWithRedisson",
+      "filePath": "src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "lineRange": [
+        22,
+        54
+      ],
+      "summary": "사용자 ID 기반 Redis 키로 분산 락을 획득하고, 성공 시 OrderService의 주문 처리를 위임하며, 락 획득 실패 혹은 인터럽트 발생 시 예외를 던진다.",
+      "tags": [
+        "분산락",
+        "Redisson",
+        "동시성-제어"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/pointTransaction/repository/PointTransactionRepository.java",
+      "type": "file",
+      "name": "PointTransactionRepository.java",
+      "filePath": "src/main/java/com/cafeapp/domain/pointTransaction/repository/PointTransactionRepository.java",
+      "summary": "포인트 거래 내역에 대한 Spring Data JPA 리포지토리로, 사용자 ID 기준 조회 및 전체 삭제 메서드를 제공한다.",
+      "tags": [
+        "data-model",
+        "리포지토리",
+        "포인트"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/user/repository/UserRepository.java",
+      "type": "file",
+      "name": "UserRepository.java",
+      "filePath": "src/main/java/com/cafeapp/domain/user/repository/UserRepository.java",
+      "summary": "User 엔티티 리포지토리로, 비관적 락(PESSIMISTIC_WRITE)을 적용하는 `findByIdwithPessimisticLock` 쿼리 메서드를 추가로 정의한다.",
+      "tags": [
+        "data-model",
+        "리포지토리",
+        "비관적락",
+        "사용자"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "type": "file",
+      "name": "OrderServiceTest.java",
+      "filePath": "src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "summary": "OrderService 통합 테스트로, 정상 주문 성공·포인트 부족·재고 부족·SOLD_OUT 메뉴·재고 소진 시 자동 상태 전환 등 6가지 시나리오를 검증한다.",
+      "tags": [
+        "test",
+        "통합테스트",
+        "주문",
+        "서비스"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java:OrderServiceTest",
+      "type": "class",
+      "name": "OrderServiceTest",
+      "filePath": "src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "lineRange": [
+        28,
+        146
+      ],
+      "summary": "@SpringBootTest 기반 통합 테스트 클래스로, 실제 DB를 사용하여 OrderService의 주문·결제 시나리오와 재고 자동 SOLD_OUT 전환을 검증한다.",
+      "tags": [
+        "test",
+        "통합테스트",
+        "주문"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "type": "file",
+      "name": "OrderRaceConditionTest.java",
+      "filePath": "src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "summary": "다중 스레드 환경에서 동시 주문 시 포인트·재고 정합성을 검증하는 경쟁 조건 통합 테스트로, 락 없는 케이스·비관적 락·Redisson 분산 락 세 가지 전략을 비교한다.",
+      "tags": [
+        "test",
+        "동시성-테스트",
+        "경쟁조건",
+        "Redisson",
+        "분산락"
+      ],
+      "complexity": "complex",
+      "languageNotes": "CyclicBarrier로 스레드를 동시에 출발시키고 CountDownLatch로 완료를 대기하는 패턴을 사용해 재현 가능한 race condition 환경을 구성한다."
+    },
+    {
+      "id": "class:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:OrderRaceConditionTest",
+      "type": "class",
+      "name": "OrderRaceConditionTest",
+      "filePath": "src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "lineRange": [
+        30,
+        304
+      ],
+      "summary": "락 없는 동시 주문(정합성 깨짐 확인)·비관적 락 동시 주문·Redisson 분산 락 동시 주문·재고 동시성 정합성 4가지 시나리오를 멀티스레드로 실행하는 경쟁 조건 테스트 클래스.",
+      "tags": [
+        "test",
+        "동시성-테스트",
+        "경쟁조건",
+        "분산락"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:runConcurrentTest",
+      "type": "function",
+      "name": "runConcurrentTest",
+      "filePath": "src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "lineRange": [
+        77,
+        136
+      ],
+      "summary": "CyclicBarrier와 CountDownLatch를 이용해 지정된 수의 스레드를 동시에 실행하고 결과(성공/실패 카운트, 최종 포인트)를 집계하는 헬퍼 메서드.",
+      "tags": [
+        "test",
+        "동시성-테스트",
+        "유틸리티"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:runConcurrentTestWithLock",
+      "type": "function",
+      "name": "runConcurrentTestWithLock",
+      "filePath": "src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "lineRange": [
+        139,
+        195
+      ],
+      "summary": "락 기반 동시성 테스트 헬퍼로, CyclicBarrier로 스레드를 동기화한 뒤 성공 횟수만큼 포인트 차감 정합성을 검증한다.",
+      "tags": [
+        "test",
+        "동시성-테스트",
+        "유틸리티"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:재고_동시성_정합성",
+      "type": "function",
+      "name": "재고_동시성_정합성",
+      "filePath": "src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "lineRange": [
+        248,
+        303
+      ],
+      "summary": "재고 1개짜리 메뉴에 여러 사용자가 동시 주문을 시도할 때, 오직 1건만 성공하고 재고가 0으로 줄며 SOLD_OUT으로 전환됨을 검증하는 동시성 테스트.",
+      "tags": [
+        "test",
+        "동시성-테스트",
+        "재고",
+        "경쟁조건"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/order/entity/Order.java:Order",
+      "type": "class",
+      "name": "Order",
+      "filePath": "src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "lineRange": [
+        11,
+        46
+      ],
+      "summary": "주문 도메인 엔티티 클래스로, 유저와 메뉴 참조 및 주문 상태(PENDING/COMPLETE)를 관리하며 주문 완료 처리 메서드를 제공한다.",
+      "tags": [
+        "data-model",
+        "도메인-엔티티",
+        "주문"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "type": "file",
+      "name": "Order.java",
+      "filePath": "src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "summary": "주문 도메인의 JPA 엔티티로, 유저·메뉴 연관관계와 주문 금액, 상태(PENDING/COMPLETE)를 포함하며 complete() 메서드로 주문 완료를 처리한다.",
+      "tags": [
+        "data-model",
+        "도메인-엔티티",
+        "주문",
+        "jpa"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java:PointTransaction",
+      "type": "class",
+      "name": "PointTransaction",
+      "filePath": "src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+      "lineRange": [
+        11,
+        59
+      ],
+      "summary": "포인트 거래 내역 엔티티로, 충전(charge)과 사용(use) 팩토리 메서드를 통해 포인트 잔액 및 거래 타입을 기록한다.",
+      "tags": [
+        "data-model",
+        "도메인-엔티티",
+        "포인트",
+        "factory"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "정적 팩토리 메서드 패턴(charge/use)을 사용하여 엔티티 생성 로직을 캡슐화한다."
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+      "type": "file",
+      "name": "PointTransaction.java",
+      "filePath": "src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+      "summary": "포인트 충전/사용 거래 내역을 기록하는 JPA 엔티티로, charge()와 use() 정적 팩토리 메서드로 거래 생성을 캡슐화한다.",
+      "tags": [
+        "data-model",
+        "도메인-엔티티",
+        "포인트",
+        "factory"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransactionType.java",
+      "type": "file",
+      "name": "PointTransactionType.java",
+      "filePath": "src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransactionType.java",
+      "summary": "포인트 거래 유형(CHARGE, USE)을 정의하는 Java Enum 클래스이다.",
+      "tags": [
+        "type-definition",
+        "열거형",
+        "포인트"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/user/controller/UserController.java:UserController",
+      "type": "class",
+      "name": "UserController",
+      "filePath": "src/main/java/com/cafeapp/domain/user/controller/UserController.java",
+      "lineRange": [
+        12,
+        26
+      ],
+      "summary": "유저 도메인의 REST API 컨트롤러로, 포인트 충전 요청을 처리하는 chargePoint 엔드포인트를 제공한다.",
+      "tags": [
+        "api-handler",
+        "컨트롤러",
+        "유저"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/user/controller/UserController.java",
+      "type": "file",
+      "name": "UserController.java",
+      "filePath": "src/main/java/com/cafeapp/domain/user/controller/UserController.java",
+      "summary": "유저 관련 HTTP 요청을 처리하는 Spring MVC 컨트롤러로, PATCH /users/{userId}/point 엔드포인트를 통해 포인트 충전 기능을 제공한다.",
+      "tags": [
+        "api-handler",
+        "컨트롤러",
+        "유저",
+        "spring-mvc"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java:ChargePointRequest",
+      "type": "class",
+      "name": "ChargePointRequest",
+      "filePath": "src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java",
+      "lineRange": [
+        7,
+        12
+      ],
+      "summary": "포인트 충전 요청 DTO로, 충전할 포인트 금액(point 필드)을 담는다.",
+      "tags": [
+        "data-model",
+        "dto",
+        "요청"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java",
+      "type": "file",
+      "name": "ChargePointRequest.java",
+      "filePath": "src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java",
+      "summary": "포인트 충전 API 요청 데이터를 담는 DTO 클래스로, Lombok @Getter와 @NoArgsConstructor를 사용한다.",
+      "tags": [
+        "data-model",
+        "dto",
+        "요청",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java:ChargePointResponse",
+      "type": "class",
+      "name": "ChargePointResponse",
+      "filePath": "src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java",
+      "lineRange": [
+        7,
+        21
+      ],
+      "summary": "포인트 충전 응답 DTO로, userId와 충전 후 포인트 잔액을 담으며 User 엔티티로부터 생성하는 from() 팩토리 메서드를 제공한다.",
+      "tags": [
+        "data-model",
+        "dto",
+        "응답",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java",
+      "type": "file",
+      "name": "ChargePointResponse.java",
+      "filePath": "src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java",
+      "summary": "포인트 충전 API 응답 DTO로, User 엔티티를 입력받아 충전 후 포인트 잔액을 반환하는 정적 팩토리 메서드 from()을 제공한다.",
+      "tags": [
+        "data-model",
+        "dto",
+        "응답",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/user/entity/User.java:User",
+      "type": "class",
+      "name": "User",
+      "filePath": "src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "lineRange": [
+        11,
+        43
+      ],
+      "summary": "유저 도메인 엔티티로, 포인트 잔액을 관리하며 chargePoint()와 usePoint() 메서드로 포인트 충전·차감 비즈니스 로직을 포함한다.",
+      "tags": [
+        "data-model",
+        "도메인-엔티티",
+        "유저",
+        "포인트"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "type": "file",
+      "name": "User.java",
+      "filePath": "src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "summary": "유저 JPA 엔티티로, 이름과 포인트 잔액을 관리하며 포인트 부족 시 예외를 발생시키는 비즈니스 로직을 포함한다.",
+      "tags": [
+        "data-model",
+        "도메인-엔티티",
+        "유저",
+        "jpa"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/user/service/UserService.java:UserService",
+      "type": "class",
+      "name": "UserService",
+      "filePath": "src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "lineRange": [
+        16,
+        38
+      ],
+      "summary": "유저 서비스 클래스로, @Transactional 환경에서 포인트 충전 비즈니스 로직을 수행하고 포인트 거래 이력을 저장한다.",
+      "tags": [
+        "service",
+        "유저",
+        "포인트",
+        "트랜잭션"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "type": "file",
+      "name": "UserService.java",
+      "filePath": "src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "summary": "유저 포인트 충전 비즈니스 로직을 담당하는 Spring Service로, 유저 조회·포인트 업데이트·포인트 거래 이력 저장을 트랜잭션 단위로 처리한다.",
+      "tags": [
+        "service",
+        "유저",
+        "포인트",
+        "트랜잭션",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/global/entity/BaseEntity.java:BaseEntity",
+      "type": "class",
+      "name": "BaseEntity",
+      "filePath": "src/main/java/com/cafeapp/global/entity/BaseEntity.java",
+      "lineRange": [
+        13,
+        26
+      ],
+      "summary": "모든 JPA 엔티티가 상속하는 기반 엔티티로, Spring Data JPA의 @EntityListeners를 통해 생성일시(createdAt)와 수정일시(updatedAt)를 자동 관리한다.",
+      "tags": [
+        "data-model",
+        "공통",
+        "jpa",
+        "auditing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/global/entity/BaseEntity.java",
+      "type": "file",
+      "name": "BaseEntity.java",
+      "filePath": "src/main/java/com/cafeapp/global/entity/BaseEntity.java",
+      "summary": "전체 도메인 엔티티에서 공통으로 상속하는 JPA Auditing 기반 클래스로, createdAt과 updatedAt 타임스탬프를 자동으로 주입한다.",
+      "tags": [
+        "data-model",
+        "공통",
+        "jpa",
+        "auditing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/test/java/com/cafeapp/domain/user/UserServiceTest.java:UserServiceTest",
+      "type": "class",
+      "name": "UserServiceTest",
+      "filePath": "src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "lineRange": [
+        26,
+        88
+      ],
+      "summary": "UserService의 포인트 충전 기능에 대한 통합 테스트 클래스로, 포인트 충전 성공, 충전 이력 저장, 미존재 유저 예외 케이스를 검증한다.",
+      "tags": [
+        "test",
+        "통합-테스트",
+        "유저",
+        "포인트"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "type": "file",
+      "name": "UserServiceTest.java",
+      "filePath": "src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "summary": "UserService의 포인트 충전 로직을 검증하는 Spring Boot 통합 테스트로, 포인트 충전 성공·이력 저장·예외 처리 3개의 테스트 케이스를 포함한다.",
+      "tags": [
+        "test",
+        "통합-테스트",
+        "유저",
+        "포인트"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/common/DataCollectPlatformClient.java",
+      "type": "file",
+      "name": "DataCollectPlatformClient.java",
+      "filePath": "src/main/java/com/cafeapp/common/DataCollectPlatformClient.java",
+      "summary": "외부 데이터 수집 플랫폼과의 연동을 담당하는 클라이언트 인터페이스로, 주문 완료 시 사용자 ID, 메뉴 ID, 수량, 금액, 결제 시각 등의 주문 정보를 외부 플랫폼으로 전송하는 역할을 한다.",
+      "tags": [
+        "서비스",
+        "외부-연동",
+        "데이터-수집",
+        "클라이언트"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/common/DataCollectPlatformClient.java:DataCollectPlatformClient",
+      "type": "class",
+      "name": "DataCollectPlatformClient",
+      "filePath": "src/main/java/com/cafeapp/common/DataCollectPlatformClient.java",
+      "lineRange": [
+        8,
+        16
+      ],
+      "summary": "주문 완료 이벤트 데이터를 외부 데이터 수집 플랫폼으로 전송하기 위한 클라이언트 클래스. 현재는 로그 출력으로 구현되어 있으며, 실제 HTTP 호출 등의 로직으로 교체 가능한 구조다.",
+      "tags": [
+        "서비스",
+        "외부-연동",
+        "stub"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java",
+      "type": "file",
+      "name": "KafkaConsumerConfig.java",
+      "filePath": "src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java",
+      "summary": "Kafka 컨슈머 설정을 담당하는 Spring Configuration 클래스로, 주문 이력과 메뉴 랭킹 각각에 대한 독립적인 ConsumerFactory 및 KafkaListenerContainerFactory를 구성하고, DLT(Dead Letter Topic)를 활용한 공통 에러 핸들러를 제공한다.",
+      "tags": [
+        "kafka",
+        "configuration",
+        "컨슈머",
+        "에러-처리",
+        "DLT"
+      ],
+      "complexity": "complex",
+      "languageNotes": "두 개의 독립적인 ConsumerFactory를 분리 구성하여 주문 이력과 메뉴 랭킹 컨슈머 그룹을 격리하고, FixedBackOff와 DeadLetterPublishingRecoverer를 조합한 공통 에러 핸들러를 재사용한다."
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java:KafkaConsumerConfig",
+      "type": "class",
+      "name": "KafkaConsumerConfig",
+      "filePath": "src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java",
+      "lineRange": [
+        23,
+        95
+      ],
+      "summary": "Spring @Configuration 클래스로, orderHistory와 menuRanking 두 도메인에 대한 Kafka 컨슈머 팩토리와 리스너 컨테이너 팩토리를 Bean으로 등록하며, DLT 기반 공통 에러 핸들러를 통해 메시지 처리 실패 시 재시도 후 Dead Letter Topic으로 발행한다.",
+      "tags": [
+        "kafka",
+        "configuration",
+        "DLT",
+        "에러-처리"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "type": "file",
+      "name": "OrderCompletedEvent.java",
+      "filePath": "src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "summary": "Kafka 메시지로 전송되는 주문 완료 이벤트 데이터 클래스로, userId, menuId, quantity, amount, paidAt 필드를 포함하며 프로듀서와 컨슈머 간 공유되는 이벤트 페이로드다.",
+      "tags": [
+        "이벤트",
+        "kafka",
+        "데이터-모델",
+        "메시지-페이로드"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java:OrderCompletedEvent",
+      "type": "class",
+      "name": "OrderCompletedEvent",
+      "filePath": "src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "lineRange": [
+        8,
+        19
+      ],
+      "summary": "주문 완료 시 Kafka 토픽으로 발행되는 이벤트 페이로드 클래스. userId, menuId, quantity, amount, paidAt 필드를 보유하며 Lombok 또는 직렬화 어노테이션으로 처리된다.",
+      "tags": [
+        "이벤트",
+        "데이터-모델",
+        "kafka"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/common/config/kafka/producer/KafkaProducerConfig.java",
+      "type": "file",
+      "name": "KafkaProducerConfig.java",
+      "filePath": "src/main/java/com/cafeapp/common/config/kafka/producer/KafkaProducerConfig.java",
+      "summary": "Kafka 프로듀서 설정을 담당하는 Spring Configuration 클래스로, OrderCompletedEvent를 직렬화하여 발행하기 위한 ProducerFactory와 KafkaTemplate Bean을 구성한다.",
+      "tags": [
+        "kafka",
+        "configuration",
+        "프로듀서",
+        "직렬화"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/common/config/kafka/producer/KafkaProducerConfig.java:KafkaProducerConfig",
+      "type": "class",
+      "name": "KafkaProducerConfig",
+      "filePath": "src/main/java/com/cafeapp/common/config/kafka/producer/KafkaProducerConfig.java",
+      "lineRange": [
+        18,
+        40
+      ],
+      "summary": "OrderCompletedEvent 직렬화를 위한 Kafka ProducerFactory와 KafkaTemplate을 Spring Bean으로 등록하는 설정 클래스. StringSerializer/JsonSerializer 조합을 사용한다.",
+      "tags": [
+        "kafka",
+        "configuration",
+        "프로듀서"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java",
+      "type": "file",
+      "name": "OrderHistoryListener.java",
+      "filePath": "src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java",
+      "summary": "Kafka 컨슈머로서 주문 완료 이벤트를 소비하여 외부 데이터 수집 플랫폼으로 주문 이력을 전송하는 리스너 클래스. 메뉴 재고 0 여부를 체크한 뒤 DataCollectPlatformClient를 통해 이벤트 데이터를 전달한다.",
+      "tags": [
+        "kafka",
+        "컨슈머",
+        "이벤트-핸들러",
+        "주문-이력"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java:OrderHistoryListener",
+      "type": "class",
+      "name": "OrderHistoryListener",
+      "filePath": "src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java",
+      "lineRange": [
+        13,
+        40
+      ],
+      "summary": "@KafkaListener로 주문 완료 이벤트를 수신하고, 메뉴 재고 조건 검증 후 DataCollectPlatformClient를 통해 외부 플랫폼으로 데이터를 전송한다.",
+      "tags": [
+        "kafka",
+        "컨슈머",
+        "이벤트-핸들러"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java:consume",
+      "type": "function",
+      "name": "consume",
+      "filePath": "src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java",
+      "lineRange": [
+        20,
+        39
+      ],
+      "summary": "Kafka 토픽에서 OrderCompletedEvent를 수신하여 유효성을 검증하고, DataCollectPlatformClient를 통해 주문 데이터를 외부 플랫폼으로 전달한다.",
+      "tags": [
+        "kafka",
+        "컨슈머",
+        "이벤트-처리"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java",
+      "type": "file",
+      "name": "OrderProducer.java",
+      "filePath": "src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java",
+      "summary": "주문 완료 이벤트를 Kafka 토픽으로 발행하는 프로듀서 컴포넌트로, KafkaTemplate을 이용해 OrderCompletedEvent를 지정된 KafkaTopic으로 전송한다.",
+      "tags": [
+        "kafka",
+        "프로듀서",
+        "이벤트-발행",
+        "서비스"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java:OrderProducer",
+      "type": "class",
+      "name": "OrderProducer",
+      "filePath": "src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java",
+      "lineRange": [
+        11,
+        23
+      ],
+      "summary": "KafkaTemplate을 주입받아 OrderCompletedEvent를 KafkaTopic 상수에서 지정한 토픽으로 발행하는 Spring Component. 트랜잭션 이벤트 리스너에서 호출된다.",
+      "tags": [
+        "kafka",
+        "프로듀서",
+        "이벤트-발행"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java:send",
+      "type": "function",
+      "name": "send",
+      "filePath": "src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java",
+      "lineRange": [
+        18,
+        22
+      ],
+      "summary": "OrderCompletedEvent를 KafkaTopic에 정의된 토픽 이름으로 KafkaTemplate을 통해 비동기 발행하는 메서드.",
+      "tags": [
+        "kafka",
+        "이벤트-발행",
+        "프로듀서"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java",
+      "type": "file",
+      "name": "OrderTransactionalEventListener.java",
+      "filePath": "src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java",
+      "summary": "Spring 트랜잭션 이벤트 리스너로, 주문 트랜잭션이 커밋된 후 OrderCompletedEvent를 Kafka로 발행하도록 OrderProducer를 호출한다. 트랜잭션 원자성을 보장한 뒤 메시지를 발행하는 패턴을 구현한다.",
+      "tags": [
+        "이벤트-리스너",
+        "트랜잭션",
+        "kafka",
+        "서비스"
+      ],
+      "complexity": "simple",
+      "languageNotes": "@TransactionalEventListener(phase = AFTER_COMMIT) 패턴을 사용하여 DB 트랜잭션 커밋 이후에만 Kafka 메시지가 발행되도록 보장하여 데이터 정합성을 유지한다."
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java:OrderTransactionalEventListener",
+      "type": "class",
+      "name": "OrderTransactionalEventListener",
+      "filePath": "src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java",
+      "lineRange": [
+        11,
+        23
+      ],
+      "summary": "트랜잭션 커밋 후 OrderCompletedEvent를 Kafka로 전달하는 Spring 이벤트 리스너. OrderProducer를 의존성 주입받아 handle() 메서드에서 send를 호출한다.",
+      "tags": [
+        "이벤트-리스너",
+        "트랜잭션",
+        "kafka"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java:handle",
+      "type": "function",
+      "name": "handle",
+      "filePath": "src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java",
+      "lineRange": [
+        18,
+        22
+      ],
+      "summary": "트랜잭션 AFTER_COMMIT 단계에서 호출되어 OrderProducer.send()를 통해 Kafka에 주문 완료 이벤트를 발행한다.",
+      "tags": [
+        "이벤트-처리",
+        "트랜잭션",
+        "kafka"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/menu/exception/MenuException.java",
+      "type": "file",
+      "name": "MenuException.java",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/exception/MenuException.java",
+      "summary": "메뉴 도메인 전용 예외 클래스로, ErrorCode를 받아 CafeException을 상속하는 구체적인 예외 타입을 제공한다.",
+      "tags": [
+        "예외처리",
+        "도메인-예외",
+        "메뉴",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/menu/exception/MenuException.java:MenuException",
+      "type": "class",
+      "name": "MenuException",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/exception/MenuException.java",
+      "lineRange": [
+        6,
+        10
+      ],
+      "summary": "메뉴 관련 비즈니스 예외를 나타내는 클래스로, CafeException을 상속하여 ErrorCode 기반 예외 메시지를 전달한다.",
+      "tags": [
+        "예외처리",
+        "메뉴",
+        "도메인-예외"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/order/exception/OrderException.java",
+      "type": "file",
+      "name": "OrderException.java",
+      "filePath": "src/main/java/com/cafeapp/domain/order/exception/OrderException.java",
+      "summary": "주문 도메인 전용 예외 클래스로, ErrorCode를 받아 CafeException을 상속하는 구체적인 예외 타입을 제공한다.",
+      "tags": [
+        "예외처리",
+        "도메인-예외",
+        "주문",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/order/exception/OrderException.java:OrderException",
+      "type": "class",
+      "name": "OrderException",
+      "filePath": "src/main/java/com/cafeapp/domain/order/exception/OrderException.java",
+      "lineRange": [
+        6,
+        10
+      ],
+      "summary": "주문 관련 비즈니스 예외를 나타내는 클래스로, CafeException을 상속하여 ErrorCode 기반 예외 메시지를 전달한다.",
+      "tags": [
+        "예외처리",
+        "주문",
+        "도메인-예외"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/domain/user/exception/UserException.java",
+      "type": "file",
+      "name": "UserException.java",
+      "filePath": "src/main/java/com/cafeapp/domain/user/exception/UserException.java",
+      "summary": "유저 도메인 전용 예외 클래스로, ErrorCode를 받아 CafeException을 상속하는 구체적인 예외 타입을 제공한다.",
+      "tags": [
+        "예외처리",
+        "도메인-예외",
+        "유저",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/domain/user/exception/UserException.java:UserException",
+      "type": "class",
+      "name": "UserException",
+      "filePath": "src/main/java/com/cafeapp/domain/user/exception/UserException.java",
+      "lineRange": [
+        6,
+        10
+      ],
+      "summary": "유저 관련 비즈니스 예외를 나타내는 클래스로, CafeException을 상속하여 ErrorCode 기반 예외 메시지를 전달한다.",
+      "tags": [
+        "예외처리",
+        "유저",
+        "도메인-예외"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/global/exception/CafeException.java",
+      "type": "file",
+      "name": "CafeException.java",
+      "filePath": "src/main/java/com/cafeapp/global/exception/CafeException.java",
+      "summary": "전체 애플리케이션에서 공통으로 사용하는 기반 예외 클래스로, RuntimeException을 상속하며 ErrorCode를 보유하여 HTTP 상태와 메시지를 구조화한다.",
+      "tags": [
+        "예외처리",
+        "공통",
+        "기반-클래스",
+        "글로벌"
+      ],
+      "complexity": "simple",
+      "languageNotes": "RuntimeException 상속 구조를 통해 Spring의 unchecked exception 처리 흐름에 통합된다."
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/global/exception/CafeException.java:CafeException",
+      "type": "class",
+      "name": "CafeException",
+      "filePath": "src/main/java/com/cafeapp/global/exception/CafeException.java",
+      "lineRange": [
+        5,
+        14
+      ],
+      "summary": "애플리케이션 전역 기반 예외 클래스로, ErrorCode 필드를 보유하여 도메인별 하위 예외 클래스가 상속받는 루트 예외를 정의한다.",
+      "tags": [
+        "예외처리",
+        "기반-클래스",
+        "공통",
+        "글로벌"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/global/exception/ErrorCode.java",
+      "type": "file",
+      "name": "ErrorCode.java",
+      "filePath": "src/main/java/com/cafeapp/global/exception/ErrorCode.java",
+      "summary": "유저, 메뉴, 주문 도메인의 모든 오류 코드를 열거형으로 정의하며, 각 항목에 HTTP 상태 코드와 한국어 오류 메시지를 매핑한다.",
+      "tags": [
+        "예외처리",
+        "열거형",
+        "공통",
+        "글로벌"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Lombok @Getter와 @RequiredArgsConstructor를 활용하여 enum 필드 접근자와 생성자를 자동 생성한다."
+    },
+    {
+      "id": "service:docker-compose.yml",
+      "type": "service",
+      "name": "docker-compose.yml",
+      "filePath": "docker-compose.yml",
+      "summary": "다중 서버 환경 전체 인프라를 정의하는 Docker Compose 구성 파일로, MySQL, Kafka, Redis, Nginx, Spring Boot 앱 2개(app-1, app-2), Kafka UI, RedisInsight, K6 부하 테스트 도구 등 9개의 서비스를 단일 kafka-net 네트워크로 연결하여 동시성 제어 및 대용량 트래픽 처리 환경을 구성한다.",
+      "tags": [
+        "오케스트레이션",
+        "인프라스트럭처",
+        "다중-서버",
+        "컨테이너화"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Kafka 브로커 2, 3은 주석 처리되어 현재 단일 브로커(kafka-1) 구성이나, 다중 브로커 확장을 위한 설정이 주석으로 보존되어 있다. app-1, app-2는 동일한 Dockerfile을 사용하며 Nginx가 로드 밸런서 역할을 수행한다."
+    },
+    {
+      "id": "service:docker-compose.yml:mysql",
+      "type": "service",
+      "name": "mysql",
+      "filePath": "docker-compose.yml",
+      "summary": "MySQL 8.0 기반 커피숍 주문 시스템의 주 데이터베이스 서비스로, coffee 데이터베이스를 생성하고 3306 포트를 외부에 노출하며 영속적 볼륨(mysql_data)을 사용한다.",
+      "tags": [
+        "데이터베이스",
+        "MySQL",
+        "인프라스트럭처",
+        "영속성"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:docker-compose.yml:kafka-1",
+      "type": "service",
+      "name": "kafka-1",
+      "filePath": "docker-compose.yml",
+      "summary": "Apache Kafka 3.7.0 KRaft 모드 단일 브로커 서비스로, 컨트롤러와 브로커 역할을 겸하며 내부 통신용(29092)과 외부 접근용(9092) 두 개의 리스너를 운영한다.",
+      "tags": [
+        "메시지-큐",
+        "Kafka",
+        "비동기-처리",
+        "인프라스트럭처"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "ZooKeeper 없이 KRaft 프로토콜을 사용하는 구성으로, replication factor가 1로 설정되어 있어 단일 브로커 환경임을 나타낸다."
+    },
+    {
+      "id": "service:docker-compose.yml:kafka-ui",
+      "type": "service",
+      "name": "kafka-ui",
+      "filePath": "docker-compose.yml",
+      "summary": "Kafka 클러스터 모니터링을 위한 웹 UI 서비스(provectuslabs/kafka-ui)로, kafka-1 브로커에 연결하여 8088 포트에서 토픽, 메시지, 컨슈머 그룹 상태를 시각화한다.",
+      "tags": [
+        "모니터링",
+        "Kafka",
+        "관리-도구",
+        "인프라스트럭처"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:docker-compose.yml:redis",
+      "type": "service",
+      "name": "redis",
+      "filePath": "docker-compose.yml",
+      "summary": "동시성 제어 및 캐싱을 위한 Redis 서비스로, AOF(Append Only File) 영속성 모드를 활성화하여 6379 포트에서 운영되며 분산 락 구현에 활용된다.",
+      "tags": [
+        "캐시",
+        "Redis",
+        "동시성-제어",
+        "인프라스트럭처"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:docker-compose.yml:redisinsight",
+      "type": "service",
+      "name": "redisinsight",
+      "filePath": "docker-compose.yml",
+      "summary": "Redis 데이터 모니터링 및 디버깅을 위한 RedisInsight 웹 UI 서비스로, 5540 포트에서 접근 가능하며 redis 서비스에 의존한다.",
+      "tags": [
+        "모니터링",
+        "Redis",
+        "관리-도구",
+        "인프라스트럭처"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:docker-compose.yml:app-1",
+      "type": "service",
+      "name": "app-1",
+      "filePath": "docker-compose.yml",
+      "summary": "Dockerfile을 통해 빌드되는 첫 번째 Spring Boot 애플리케이션 인스턴스로, docker 프로파일을 활성화하고 MySQL, Kafka, Redis에 연결하여 다중 서버 환경에서 트래픽을 처리한다.",
+      "tags": [
+        "애플리케이션",
+        "Spring-Boot",
+        "다중-서버",
+        "배포"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:docker-compose.yml:app-2",
+      "type": "service",
+      "name": "app-2",
+      "filePath": "docker-compose.yml",
+      "summary": "Dockerfile을 통해 빌드되는 두 번째 Spring Boot 애플리케이션 인스턴스로, app-1과 동일한 환경 구성으로 수평 확장된 인스턴스이며 Nginx 로드 밸런서 뒤에서 운영된다.",
+      "tags": [
+        "애플리케이션",
+        "Spring-Boot",
+        "수평-확장",
+        "배포"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:docker-compose.yml:nginx",
+      "type": "service",
+      "name": "nginx",
+      "filePath": "docker-compose.yml",
+      "summary": "app-1과 app-2 앞단에서 80 포트로 외부 트래픽을 수신하는 Nginx 리버스 프록시/로드 밸런서 서비스로, infra/nginx/nginx.conf 설정 파일을 마운트하여 두 앱 인스턴스로 요청을 분산한다.",
+      "tags": [
+        "리버스-프록시",
+        "로드-밸런서",
+        "Nginx",
+        "인프라스트럭처"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:docker-compose.yml:k6",
+      "type": "service",
+      "name": "k6",
+      "filePath": "docker-compose.yml",
+      "summary": "대용량 트래픽 시뮬레이션을 위한 Grafana K6 부하 테스트 서비스로, infra/k6 디렉토리의 스크립트를 마운트하여 Nginx를 통해 시스템 성능을 검증한다.",
+      "tags": [
+        "부하-테스트",
+        "성능-검증",
+        "K6",
+        "테스트"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:Dockerfile",
+      "type": "service",
+      "name": "Dockerfile",
+      "filePath": "Dockerfile",
+      "summary": "Eclipse Temurin JRE 17 기반의 Spring Boot 애플리케이션 Docker 이미지 빌드 파일로, Gradle로 빌드된 JAR 파일을 컨테이너로 복사하여 8080 포트에서 실행하는 단순한 단일 스테이지 구성이다.",
+      "tags": [
+        "컨테이너화",
+        "인프라스트럭처",
+        "배포",
+        "Spring-Boot"
+      ],
+      "complexity": "simple",
+      "languageNotes": "eclipse-temurin:17-jre를 베이스 이미지로 사용하여 JDK 없이 JRE만 포함한 경량 이미지를 생성한다. build/libs/*.jar 패턴으로 Gradle bootJar 결과물을 복사한다."
+    },
+    {
+      "id": "config:.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": ".env.example",
+      "summary": "MySQL 루트 비밀번호와 데이터베이스 이름을 위한 환경 변수 템플릿 파일로, Docker Compose 실행 전 개발자가 복사하여 실제 값으로 채워야 하는 예시 설정을 제공합니다.",
+      "tags": [
+        "configuration",
+        "환경변수",
+        "database",
+        "보안",
+        "개발환경"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Redis 캐싱·분산 락, Kafka 메시지 브로커, 비관적 락을 활용한 동시성 제어와 대용량 트래픽 처리 설계를 담은 커피숍 주문 시스템 프로젝트의 핵심 문서로, ERD, API 명세서, 설계 의도 및 기술적 선택 이유를 포함한 490줄 분량의 종합 가이드입니다.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "아키텍처",
+        "Redis",
+        "Kafka",
+        "동시성-제어",
+        "분산-락"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Redis ZSET 기반 인기 메뉴 랭킹, @TransactionalEventListener 선택 이유, Dead Letter Topic(DLT) 설계 등 고급 분산 시스템 패턴에 대한 상세한 설명을 포함합니다."
+    },
+    {
+      "id": "config:build.gradle",
+      "type": "config",
+      "name": "build.gradle",
+      "filePath": "build.gradle",
+      "summary": "Spring Boot 4.0.6 기반 Java 17 프로젝트의 Gradle 빌드 설정으로, JPA, Redis(Redisson 포함), Kafka, WebMVC, Validation, Cache 등 핵심 의존성을 선언하고 JUnit 플랫폼 테스트를 구성합니다.",
+      "tags": [
+        "build-system",
+        "configuration",
+        "의존성-관리",
+        "Spring-Boot",
+        "Gradle"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Redisson 3.44.0을 별도로 명시하여 Redis 분산 락(RLock) 기능을 Spring Data Redis 외에 추가로 활용합니다."
+    },
+    {
+      "id": "file:gradlew.bat",
+      "type": "file",
+      "name": "gradlew.bat",
+      "filePath": "gradlew.bat",
+      "summary": "Windows 환경에서 Gradle Wrapper를 실행하기 위한 배치 스크립트로, JVM 옵션 설정과 Gradle 바이너리 다운로드 및 실행을 자동화합니다.",
+      "tags": [
+        "build-system",
+        "Windows",
+        "Gradle-Wrapper",
+        "자동화"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:settings.gradle",
+      "type": "config",
+      "name": "settings.gradle",
+      "filePath": "settings.gradle",
+      "summary": "Gradle 루트 프로젝트 이름을 'CafeApp'으로 지정하는 단일 라인 설정 파일입니다.",
+      "tags": [
+        "configuration",
+        "build-system",
+        "Gradle"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.gitattributes",
+      "type": "file",
+      "name": ".gitattributes",
+      "filePath": ".gitattributes",
+      "summary": "Git 저장소의 줄 끝 처리 및 diff 방식을 지정하는 프로젝트 메타 설정 파일입니다.",
+      "tags": [
+        "configuration",
+        "git",
+        "메타데이터"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "file",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "summary": "understand-anything 코드베이스 분석 도구가 무시할 파일 및 디렉토리 패턴을 정의하는 설정 파일입니다.",
+      "tags": [
+        "configuration",
+        "메타데이터",
+        "분석도구"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.understand-anything/config.json",
+      "type": "config",
+      "name": "config.json",
+      "filePath": ".understand-anything/config.json",
+      "summary": "understand-anything 분석 도구의 출력 언어 등 동작을 제어하는 JSON 설정 파일입니다.",
+      "tags": [
+        "configuration",
+        "분석도구",
+        "메타데이터"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:gradle/wrapper/gradle-wrapper.jar",
+      "type": "file",
+      "name": "gradle-wrapper.jar",
+      "filePath": "gradle/wrapper/gradle-wrapper.jar",
+      "summary": "Gradle Wrapper 실행에 필요한 바이너리 JAR 파일로, 로컬에 Gradle이 설치되어 있지 않아도 빌드를 실행할 수 있게 합니다.",
+      "tags": [
+        "build-system",
+        "gradle",
+        "바이너리"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:gradle/wrapper/gradle-wrapper.properties",
+      "type": "config",
+      "name": "gradle-wrapper.properties",
+      "filePath": "gradle/wrapper/gradle-wrapper.properties",
+      "summary": "Gradle Wrapper가 사용할 Gradle 배포 버전과 다운로드 URL을 지정하는 설정 파일입니다.",
+      "tags": [
+        "configuration",
+        "build-system",
+        "gradle"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:gradlew",
+      "type": "file",
+      "name": "gradlew",
+      "filePath": "gradlew",
+      "summary": "Unix/Linux 환경에서 Gradle 빌드를 실행하기 위한 Gradle Wrapper 쉘 스크립트로, JVM을 감지하고 Gradle Wrapper JAR을 통해 빌드를 구동합니다.",
+      "tags": [
+        "build-system",
+        "script",
+        "gradle"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:infra/k6/order-test.js",
+      "type": "file",
+      "name": "order-test.js",
+      "filePath": "infra/k6/order-test.js",
+      "summary": "K6 부하 테스트 스크립트로, 100명의 가상 사용자가 10초간 Nginx 로드 밸런서를 통해 주문 API(Redisson 분산 락)에 동시 요청을 보내 다중 서버 환경의 처리 성능을 검증합니다.",
+      "tags": [
+        "부하테스트",
+        "k6",
+        "성능테스트",
+        "동시성"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:infra/nginx/nginx.conf",
+      "type": "file",
+      "name": "nginx.conf",
+      "filePath": "infra/nginx/nginx.conf",
+      "summary": "다중 서버 환경(app-1, app-2)으로의 HTTP 트래픽을 라운드 로빈 방식으로 분산하는 Nginx 로드 밸런서 설정 파일입니다.",
+      "tags": [
+        "로드밸런싱",
+        "nginx",
+        "인프라",
+        "트래픽분산"
+      ],
+      "complexity": "simple",
+      "languageNotes": "upstream 블록에 app-1, app-2 두 개의 서버를 정의하고 max_fails/fail_timeout으로 장애 감지를 설정하며, Docker 내부 DNS resolver(127.0.0.11)를 사용합니다."
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/CafeAppApplication.java",
+      "type": "file",
+      "name": "CafeAppApplication.java",
+      "filePath": "src/main/java/com/cafeapp/CafeAppApplication.java",
+      "summary": "Spring Boot 애플리케이션의 진입점으로, SpringApplication.run()을 통해 CafeApp 서버를 구동하는 메인 클래스입니다.",
+      "tags": [
+        "entry-point",
+        "spring-boot",
+        "애플리케이션",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/CafeAppApplication.java:CafeAppApplication",
+      "type": "class",
+      "name": "CafeAppApplication",
+      "filePath": "src/main/java/com/cafeapp/CafeAppApplication.java",
+      "lineRange": [
+        7,
+        15
+      ],
+      "summary": "Spring Boot 애플리케이션 시작을 담당하는 메인 클래스로, @SpringBootApplication 어노테이션으로 자동 설정과 컴포넌트 스캔을 활성화합니다.",
+      "tags": [
+        "entry-point",
+        "spring-boot",
+        "메인클래스"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/common/config/kafka/topic/KafkaTopic.java",
+      "type": "file",
+      "name": "KafkaTopic.java",
+      "filePath": "src/main/java/com/cafeapp/common/config/kafka/topic/KafkaTopic.java",
+      "summary": "Kafka 토픽명을 상수로 정의하는 유틸리티 클래스로, 주문 완료 이벤트 토픽명(order-completed)을 중앙에서 관리합니다.",
+      "tags": [
+        "kafka",
+        "상수정의",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/common/config/kafka/topic/KafkaTopic.java:KafkaTopic",
+      "type": "class",
+      "name": "KafkaTopic",
+      "filePath": "src/main/java/com/cafeapp/common/config/kafka/topic/KafkaTopic.java",
+      "lineRange": [
+        3,
+        6
+      ],
+      "summary": "Kafka 토픽명 상수(TOPIC_ORDER_COMPLETED = \"order-completed\")를 보유하는 정적 상수 클래스입니다.",
+      "tags": [
+        "kafka",
+        "상수정의",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java",
+      "type": "file",
+      "name": "RedissonConfig.java",
+      "filePath": "src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java",
+      "summary": "application.yml에서 Redis 호스트와 포트를 주입받아 Redisson 분산 락 클라이언트(RedissonClient) Bean을 등록하는 Spring 설정 클래스입니다.",
+      "tags": [
+        "redis",
+        "분산락",
+        "configuration",
+        "spring-bean"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Redisson 라이브러리의 단일 서버 모드(useSingleServer)를 사용하며, @Value 주입으로 환경별 유연한 Redis 접속을 지원합니다."
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java:RedissonConfig",
+      "type": "class",
+      "name": "RedissonConfig",
+      "filePath": "src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java",
+      "lineRange": [
+        10,
+        26
+      ],
+      "summary": "Redis 연결 정보를 읽어 RedissonClient Bean을 생성하는 @Configuration 클래스로, 분산 락 구현의 핵심 인프라를 제공합니다.",
+      "tags": [
+        "redis",
+        "분산락",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java:redissonClient",
+      "type": "function",
+      "name": "redissonClient",
+      "filePath": "src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java",
+      "lineRange": [
+        19,
+        25
+      ],
+      "summary": "Redis 단일 서버 모드로 Config를 구성하고 Redisson.create()를 통해 RedissonClient 인스턴스를 생성하여 Spring Bean으로 등록합니다.",
+      "tags": [
+        "redis",
+        "분산락",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "type": "file",
+      "name": "GlobalExceptionHandler.java",
+      "filePath": "src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "summary": "애플리케이션 전역 예외를 처리하는 @RestControllerAdvice 핸들러로, CafeException(커스텀), 유효성 검증 실패, 일반 Exception을 각각 ApiResponse 형태로 변환하여 응답합니다.",
+      "tags": [
+        "예외처리",
+        "middleware",
+        "api-handler",
+        "글로벌핸들러"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java:GlobalExceptionHandler",
+      "type": "class",
+      "name": "GlobalExceptionHandler",
+      "filePath": "src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "lineRange": [
+        11,
+        48
+      ],
+      "summary": "세 가지 유형의 예외(커스텀, 유효성, 일반)를 처리하여 일관된 ApiResponse 포맷으로 변환하는 전역 예외 핸들러입니다.",
+      "tags": [
+        "예외처리",
+        "middleware",
+        "api-handler"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java:handleCoffeeException",
+      "type": "function",
+      "name": "handleCoffeeException",
+      "filePath": "src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "lineRange": [
+        17,
+        26
+      ],
+      "summary": "CafeException 발생 시 ErrorCode의 HTTP 상태 코드와 메시지를 추출하여 ApiResponse.fail()로 포장된 ResponseEntity를 반환합니다.",
+      "tags": [
+        "예외처리",
+        "커스텀예외",
+        "api-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java:handleValidException",
+      "type": "function",
+      "name": "handleValidException",
+      "filePath": "src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "lineRange": [
+        29,
+        37
+      ],
+      "summary": "@Valid 검증 실패(MethodArgumentNotValidException) 시 첫 번째 필드 오류 메시지를 추출하여 400 Bad Request로 응답합니다.",
+      "tags": [
+        "예외처리",
+        "유효성검증",
+        "api-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java:handleException",
+      "type": "function",
+      "name": "handleException",
+      "filePath": "src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "lineRange": [
+        40,
+        45
+      ],
+      "summary": "처리되지 않은 모든 Exception을 포착하여 500 Internal Server Error 응답으로 변환하는 폴백 핸들러입니다.",
+      "tags": [
+        "예외처리",
+        "폴백",
+        "api-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/java/com/cafeapp/global/response/ApiResponse.java",
+      "type": "file",
+      "name": "ApiResponse.java",
+      "filePath": "src/main/java/com/cafeapp/global/response/ApiResponse.java",
+      "summary": "API 응답 표준 포맷을 정의하는 제네릭 record 클래스로, success/fail 정적 팩토리 메서드를 통해 일관된 응답 구조(success, data, error)를 제공합니다.",
+      "tags": [
+        "응답포맷",
+        "type-definition",
+        "utility",
+        "api-handler"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Java record를 사용하여 불변 값 객체로 구현되었으며, 내부 record(ApiError)로 오류 정보를 캡슐화합니다."
+    },
+    {
+      "id": "file:src/test/java/com/cafeapp/CafeAppApplicationTests.java",
+      "type": "file",
+      "name": "CafeAppApplicationTests.java",
+      "filePath": "src/test/java/com/cafeapp/CafeAppApplicationTests.java",
+      "summary": "Spring 컨텍스트가 정상적으로 로드되는지 확인하는 기본 통합 테스트 클래스입니다.",
+      "tags": [
+        "test",
+        "통합테스트",
+        "spring-boot"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java:findAllByStatus",
+      "type": "function",
+      "name": "findAllByStatus",
+      "filePath": "src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+      "summary": "No summary available",
+      "tags": [
+        "untagged"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/main/java/com/cafeapp/common/DataInitializer.java",
+      "target": "class:src/main/java/com/cafeapp/common/DataInitializer.java:DataInitializer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/DataInitializer.java",
+      "target": "class:src/main/java/com/cafeapp/common/DataInitializer.java:DataInitializer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/DataInitializer.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/DataInitializer.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/MenuStatus.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/DataInitializer.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/DataInitializer.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/DataInitializer.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/repository/UserRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java",
+      "target": "class:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java:CacheManagerConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java",
+      "target": "class:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java:CacheManagerConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java:CacheManagerConfig",
+      "target": "function:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java:redisCacheManager",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java",
+      "target": "function:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java:redisCacheManager",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java",
+      "target": "function:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java:redisCacheManager",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java",
+      "target": "class:src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java:MenuRankingController",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java",
+      "target": "class:src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java:MenuRankingController",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java",
+      "target": "file:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java",
+      "target": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java",
+      "target": "file:src/main/java/com/cafeapp/global/response/ApiResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+      "target": "class:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java:PopularMenuResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+      "target": "class:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java:PopularMenuResponse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+      "target": "class:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java:MenuRankingListener",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+      "target": "class:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java:MenuRankingListener",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java:MenuRankingListener",
+      "target": "function:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java:consume",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+      "target": "function:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java:consume",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+      "target": "function:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java:consume",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+      "target": "file:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+      "target": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java:consume",
+      "target": "function:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:increaseMenuRanking",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "target": "class:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:MenuRankingService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "target": "class:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:MenuRankingService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:MenuRankingService",
+      "target": "function:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:increaseMenuRanking",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:MenuRankingService",
+      "target": "function:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:getMenuRankingTop3In7Days",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "target": "function:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:increaseMenuRanking",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "target": "function:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:getMenuRankingTop3In7Days",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "target": "function:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:increaseMenuRanking",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "target": "function:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:getMenuRankingTop3In7Days",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/controller/MenuController.java",
+      "target": "class:src/main/java/com/cafeapp/domain/menu/controller/MenuController.java:MenuController",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/controller/MenuController.java",
+      "target": "class:src/main/java/com/cafeapp/domain/menu/controller/MenuController.java:MenuController",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/controller/MenuController.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/controller/MenuController.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/controller/MenuController.java",
+      "target": "file:src/main/java/com/cafeapp/global/response/ApiResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+      "target": "class:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java:GetAllMenuResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+      "target": "class:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java:GetAllMenuResponse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java:GetAllMenuResponse",
+      "target": "function:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java:from",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+      "target": "function:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java:from",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+      "target": "function:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java:from",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "target": "class:src/main/java/com/cafeapp/domain/menu/entity/Menu.java:Menu",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "target": "class:src/main/java/com/cafeapp/domain/menu/entity/Menu.java:Menu",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/menu/entity/Menu.java:Menu",
+      "target": "function:src/main/java/com/cafeapp/domain/menu/entity/Menu.java:decreaseStock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "target": "function:src/main/java/com/cafeapp/domain/menu/entity/Menu.java:decreaseStock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "target": "function:src/main/java/com/cafeapp/domain/menu/entity/Menu.java:decreaseStock",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "target": "file:src/main/java/com/cafeapp/global/entity/BaseEntity.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/menu/entity/Menu.java:Menu",
+      "target": "file:src/main/java/com/cafeapp/global/entity/BaseEntity.java",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "class:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:MenuService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "class:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:MenuService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:MenuService",
+      "target": "function:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:getAllMenu",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:MenuService",
+      "target": "function:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:getPopularMenus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "function:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:getAllMenu",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "function:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:getPopularMenus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "function:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:getAllMenu",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "function:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:getPopularMenus",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/MenuStatus.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/exception/MenuException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:getPopularMenus",
+      "target": "function:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java:getMenuRankingTop3In7Days",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "target": "class:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java:MenuServiceTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/MenuStatus.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "file:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/controller/OrderController.java:OrderController",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/controller/OrderController.java:OrderController",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+      "target": "file:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/dto/request/OrderRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+      "target": "file:src/main/java/com/cafeapp/global/response/ApiResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java:OrderResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java:OrderResponse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/repository/OrderRepository.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/service/OrderService.java:OrderService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/service/OrderService.java:OrderService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/order/service/OrderService.java:OrderService",
+      "target": "function:src/main/java/com/cafeapp/domain/order/service/OrderService.java:orderAndPay",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/order/service/OrderService.java:OrderService",
+      "target": "function:src/main/java/com/cafeapp/domain/order/service/OrderService.java:orderAndPayWithRedisson",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "function:src/main/java/com/cafeapp/domain/order/service/OrderService.java:orderAndPay",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "function:src/main/java/com/cafeapp/domain/order/service/OrderService.java:orderAndPayWithRedisson",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/common/DataCollectPlatformClient.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/dto/request/OrderRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/entity/OrderStatus.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/exception/OrderException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/repository/OrderRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/pointTransaction/repository/PointTransactionRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/repository/UserRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/service/RedissonService.java:RedissonService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/service/RedissonService.java:RedissonService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/order/service/RedissonService.java:RedissonService",
+      "target": "function:src/main/java/com/cafeapp/domain/order/service/RedissonService.java:orderAndPayWithRedisson",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "target": "function:src/main/java/com/cafeapp/domain/order/service/RedissonService.java:orderAndPayWithRedisson",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "function:src/main/java/com/cafeapp/domain/order/service/RedissonService.java:orderAndPayWithRedisson",
+      "target": "function:src/main/java/com/cafeapp/domain/order/service/OrderService.java:orderAndPayWithRedisson",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/pointTransaction/repository/PointTransactionRepository.java",
+      "target": "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/repository/UserRepository.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "class:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java:OrderServiceTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/dto/request/OrderRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/entity/OrderStatus.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/repository/OrderRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/repository/UserRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "class:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:OrderRaceConditionTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:OrderRaceConditionTest",
+      "target": "function:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:runConcurrentTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:OrderRaceConditionTest",
+      "target": "function:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:runConcurrentTestWithLock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:OrderRaceConditionTest",
+      "target": "function:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:재고_동시성_정합성",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "function:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:runConcurrentTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "function:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:runConcurrentTestWithLock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "function:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java:재고_동시성_정합성",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/repository/OrderRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/repository/UserRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/entity/Order.java:Order",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/entity/Order.java:Order",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "target": "file:src/main/java/com/cafeapp/global/entity/BaseEntity.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/order/entity/Order.java:Order",
+      "target": "class:src/main/java/com/cafeapp/global/entity/BaseEntity.java:BaseEntity",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+      "target": "class:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java:PointTransaction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+      "target": "class:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java:PointTransaction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+      "target": "file:src/main/java/com/cafeapp/global/entity/BaseEntity.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java:PointTransaction",
+      "target": "class:src/main/java/com/cafeapp/global/entity/BaseEntity.java:BaseEntity",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/controller/UserController.java",
+      "target": "class:src/main/java/com/cafeapp/domain/user/controller/UserController.java:UserController",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/controller/UserController.java",
+      "target": "class:src/main/java/com/cafeapp/domain/user/controller/UserController.java:UserController",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/controller/UserController.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/controller/UserController.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/controller/UserController.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/controller/UserController.java",
+      "target": "file:src/main/java/com/cafeapp/global/response/ApiResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/user/controller/UserController.java:UserController",
+      "target": "class:src/main/java/com/cafeapp/domain/user/service/UserService.java:UserService",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java",
+      "target": "class:src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java:ChargePointRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java",
+      "target": "class:src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java:ChargePointRequest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java",
+      "target": "class:src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java:ChargePointResponse",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java",
+      "target": "class:src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java:ChargePointResponse",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "target": "class:src/main/java/com/cafeapp/domain/user/entity/User.java:User",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "target": "class:src/main/java/com/cafeapp/domain/user/entity/User.java:User",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "target": "file:src/main/java/com/cafeapp/global/entity/BaseEntity.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/user/entity/User.java:User",
+      "target": "class:src/main/java/com/cafeapp/global/entity/BaseEntity.java:BaseEntity",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "target": "class:src/main/java/com/cafeapp/domain/user/service/UserService.java:UserService",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "target": "class:src/main/java/com/cafeapp/domain/user/service/UserService.java:UserService",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransactionType.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/pointTransaction/repository/PointTransactionRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/exception/UserException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/repository/UserRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/user/service/UserService.java:UserService",
+      "target": "class:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java:PointTransaction",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/user/service/UserService.java:UserService",
+      "target": "class:src/main/java/com/cafeapp/domain/user/entity/User.java:User",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/entity/BaseEntity.java",
+      "target": "class:src/main/java/com/cafeapp/global/entity/BaseEntity.java:BaseEntity",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/entity/BaseEntity.java",
+      "target": "class:src/main/java/com/cafeapp/global/entity/BaseEntity.java:BaseEntity",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "target": "class:src/test/java/com/cafeapp/domain/user/UserServiceTest.java:UserServiceTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/repository/UserRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "target": "file:src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/DataCollectPlatformClient.java",
+      "target": "class:src/main/java/com/cafeapp/common/DataCollectPlatformClient.java:DataCollectPlatformClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/DataCollectPlatformClient.java",
+      "target": "class:src/main/java/com/cafeapp/common/DataCollectPlatformClient.java:DataCollectPlatformClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java",
+      "target": "file:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java",
+      "target": "file:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java",
+      "target": "file:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java",
+      "target": "class:src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java:KafkaConsumerConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java",
+      "target": "class:src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java:KafkaConsumerConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "target": "class:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java:OrderCompletedEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "target": "class:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java:OrderCompletedEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/kafka/producer/KafkaProducerConfig.java",
+      "target": "file:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/kafka/producer/KafkaProducerConfig.java",
+      "target": "class:src/main/java/com/cafeapp/common/config/kafka/producer/KafkaProducerConfig.java:KafkaProducerConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/kafka/producer/KafkaProducerConfig.java",
+      "target": "class:src/main/java/com/cafeapp/common/config/kafka/producer/KafkaProducerConfig.java:KafkaProducerConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java",
+      "target": "file:src/main/java/com/cafeapp/common/DataCollectPlatformClient.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java",
+      "target": "file:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java:OrderHistoryListener",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java:OrderHistoryListener",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java:OrderHistoryListener",
+      "target": "function:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java:consume",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "function:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java:consume",
+      "target": "class:src/main/java/com/cafeapp/common/DataCollectPlatformClient.java:DataCollectPlatformClient",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java",
+      "target": "file:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java",
+      "target": "file:src/main/java/com/cafeapp/common/config/kafka/topic/KafkaTopic.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java:OrderProducer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java:OrderProducer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java:OrderProducer",
+      "target": "function:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java:send",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java:OrderTransactionalEventListener",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java:OrderTransactionalEventListener",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java:OrderTransactionalEventListener",
+      "target": "function:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java:handle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "function:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java:handle",
+      "target": "function:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java:send",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java:OrderProducer",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/exception/MenuException.java",
+      "target": "class:src/main/java/com/cafeapp/domain/menu/exception/MenuException.java:MenuException",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/exception/MenuException.java",
+      "target": "class:src/main/java/com/cafeapp/domain/menu/exception/MenuException.java:MenuException",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/exception/MenuException.java",
+      "target": "file:src/main/java/com/cafeapp/global/exception/CafeException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/exception/MenuException.java",
+      "target": "file:src/main/java/com/cafeapp/global/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/menu/exception/MenuException.java:MenuException",
+      "target": "class:src/main/java/com/cafeapp/global/exception/CafeException.java:CafeException",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/exception/OrderException.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/exception/OrderException.java:OrderException",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/exception/OrderException.java",
+      "target": "class:src/main/java/com/cafeapp/domain/order/exception/OrderException.java:OrderException",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/exception/OrderException.java",
+      "target": "file:src/main/java/com/cafeapp/global/exception/CafeException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/exception/OrderException.java",
+      "target": "file:src/main/java/com/cafeapp/global/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/order/exception/OrderException.java:OrderException",
+      "target": "class:src/main/java/com/cafeapp/global/exception/CafeException.java:CafeException",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/exception/UserException.java",
+      "target": "class:src/main/java/com/cafeapp/domain/user/exception/UserException.java:UserException",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/exception/UserException.java",
+      "target": "class:src/main/java/com/cafeapp/domain/user/exception/UserException.java:UserException",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/exception/UserException.java",
+      "target": "file:src/main/java/com/cafeapp/global/exception/CafeException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/exception/UserException.java",
+      "target": "file:src/main/java/com/cafeapp/global/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:src/main/java/com/cafeapp/domain/user/exception/UserException.java:UserException",
+      "target": "class:src/main/java/com/cafeapp/global/exception/CafeException.java:CafeException",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/exception/CafeException.java",
+      "target": "class:src/main/java/com/cafeapp/global/exception/CafeException.java:CafeException",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/exception/CafeException.java",
+      "target": "class:src/main/java/com/cafeapp/global/exception/CafeException.java:CafeException",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "service:docker-compose.yml",
+      "target": "service:docker-compose.yml:mysql",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:docker-compose.yml",
+      "target": "service:docker-compose.yml:kafka-1",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:docker-compose.yml",
+      "target": "service:docker-compose.yml:kafka-ui",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:docker-compose.yml",
+      "target": "service:docker-compose.yml:redis",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:docker-compose.yml",
+      "target": "service:docker-compose.yml:redisinsight",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:docker-compose.yml",
+      "target": "service:docker-compose.yml:app-1",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:docker-compose.yml",
+      "target": "service:docker-compose.yml:app-2",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:docker-compose.yml",
+      "target": "service:docker-compose.yml:nginx",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:docker-compose.yml",
+      "target": "service:docker-compose.yml:k6",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:docker-compose.yml:app-1",
+      "target": "service:Dockerfile",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.yml:app-2",
+      "target": "service:Dockerfile",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.yml:kafka-ui",
+      "target": "service:docker-compose.yml:kafka-1",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.yml:redisinsight",
+      "target": "service:docker-compose.yml:redis",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.yml:app-1",
+      "target": "service:docker-compose.yml:mysql",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.yml:app-1",
+      "target": "service:docker-compose.yml:kafka-1",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.yml:app-1",
+      "target": "service:docker-compose.yml:redis",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.yml:app-2",
+      "target": "service:docker-compose.yml:mysql",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.yml:app-2",
+      "target": "service:docker-compose.yml:kafka-1",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.yml:app-2",
+      "target": "service:docker-compose.yml:redis",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.yml:nginx",
+      "target": "service:docker-compose.yml:app-1",
+      "type": "routes",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.yml:nginx",
+      "target": "service:docker-compose.yml:app-2",
+      "type": "routes",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.yml:k6",
+      "target": "service:docker-compose.yml:nginx",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:Dockerfile",
+      "target": "file:src/main/java/com/cafeapp/CafeAppApplication.java",
+      "type": "deploys",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "document:README.md",
+      "target": "config:build.gradle",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:build.gradle",
+      "target": "config:settings.gradle",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:gradlew.bat",
+      "target": "config:build.gradle",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/CafeAppApplication.java",
+      "target": "class:src/main/java/com/cafeapp/CafeAppApplication.java:CafeAppApplication",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/CafeAppApplication.java",
+      "target": "class:src/main/java/com/cafeapp/CafeAppApplication.java:CafeAppApplication",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/kafka/topic/KafkaTopic.java",
+      "target": "class:src/main/java/com/cafeapp/common/config/kafka/topic/KafkaTopic.java:KafkaTopic",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/kafka/topic/KafkaTopic.java",
+      "target": "class:src/main/java/com/cafeapp/common/config/kafka/topic/KafkaTopic.java:KafkaTopic",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java",
+      "target": "class:src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java:RedissonConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java",
+      "target": "class:src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java:RedissonConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java",
+      "target": "function:src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java:redissonClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java",
+      "target": "function:src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java:redissonClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "target": "class:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java:GlobalExceptionHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "target": "class:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java:GlobalExceptionHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "target": "function:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java:handleCoffeeException",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "target": "function:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java:handleCoffeeException",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "target": "function:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java:handleValidException",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "target": "function:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java:handleValidException",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "target": "function:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java:handleException",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "target": "function:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java:handleException",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "target": "file:src/main/java/com/cafeapp/global/response/ApiResponse.java",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/CafeAppApplication.java",
+      "target": "file:src/test/java/com/cafeapp/CafeAppApplicationTests.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Direction corrected (was test → production)"
+    },
+    {
+      "source": "file:infra/nginx/nginx.conf",
+      "target": "file:src/main/java/com/cafeapp/CafeAppApplication.java",
+      "type": "routes",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:gradlew",
+      "target": "file:gradle/wrapper/gradle-wrapper.jar",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:gradle/wrapper/gradle-wrapper.properties",
+      "target": "file:gradle/wrapper/gradle-wrapper.jar",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/controller/MenuController.java",
+      "target": "file:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/exception/MenuException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "target": "file:src/main/java/com/cafeapp/global/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/MenuStatus.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "file:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/dto/response/MenuScoreDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "target": "file:src/main/java/com/cafeapp/global/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/dto/response/MenuScoreDto.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/entity/OrderStatus.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/MenuStatus.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "target": "file:src/main/java/com/cafeapp/global/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java",
+      "target": "file:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/dto/request/OrderRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/exception/OrderException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "target": "file:src/main/java/com/cafeapp/global/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/exception/UserException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "target": "file:src/main/java/com/cafeapp/global/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "target": "file:src/main/java/com/cafeapp/global/exception/CafeException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "target": "file:src/main/java/com/cafeapp/global/exception/ErrorCode.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "target": "file:src/main/java/com/cafeapp/global/response/ApiResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/MenuStatus.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/exception/MenuException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/exception/OrderException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/pointTransaction/repository/PointTransactionRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/exception/UserException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransactionType.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/pointTransaction/repository/PointTransactionRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/user/exception/UserException.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/menu/entity/MenuStatus.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/dto/request/OrderRequest.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "target": "file:src/main/java/com/cafeapp/domain/pointTransaction/repository/PointTransactionRepository.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "function:src/main/java/com/cafeapp/domain/menu/service/MenuService.java:getAllMenu",
+      "target": "function:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java:findAllByStatus",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:api",
+      "name": "API 레이어",
+      "description": "메뉴, 주문, 사용자 포인트 충전, 메뉴 순위 조회를 위한 REST API 컨트롤러와 요청/응답 DTO를 담당하는 레이어",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java",
+        "file:src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+        "file:src/main/java/com/cafeapp/domain/menu/controller/MenuController.java",
+        "file:src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+        "file:src/main/java/com/cafeapp/domain/menu/dto/response/MenuScoreDto.java",
+        "file:src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+        "file:src/main/java/com/cafeapp/domain/order/dto/request/OrderRequest.java",
+        "file:src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java",
+        "file:src/main/java/com/cafeapp/domain/user/controller/UserController.java",
+        "file:src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java",
+        "file:src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java"
+      ]
+    },
+    {
+      "id": "layer:service",
+      "name": "서비스 레이어",
+      "description": "주문 처리, 포인트 차감, Redis 캐싱, Redisson 분산 락, Kafka 이벤트 발행 등 핵심 비즈니스 로직을 담당하는 레이어",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+        "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+        "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+        "file:src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+        "file:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java",
+        "file:src/main/java/com/cafeapp/domain/user/service/UserService.java"
+      ]
+    },
+    {
+      "id": "layer:messaging",
+      "name": "메시징 레이어",
+      "description": "Kafka를 통해 주문 완료 이벤트를 발행하고 소비하여 메뉴 순위 집계 및 외부 데이터 플랫폼 연동을 처리하는 레이어",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+        "file:src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java",
+        "file:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java",
+        "file:src/main/java/com/cafeapp/common/DataCollectPlatformClient.java",
+        "file:src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java"
+      ]
+    },
+    {
+      "id": "layer:data",
+      "name": "데이터 레이어",
+      "description": "JPA 엔티티 정의(메뉴, 주문, 사용자, 포인트 거래)와 비관적 락이 적용된 레포지토리를 포함하는 영속성 레이어",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+        "file:src/main/java/com/cafeapp/domain/menu/entity/MenuStatus.java",
+        "file:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+        "file:src/main/java/com/cafeapp/domain/order/entity/Order.java",
+        "file:src/main/java/com/cafeapp/domain/order/entity/OrderStatus.java",
+        "file:src/main/java/com/cafeapp/domain/order/repository/OrderRepository.java",
+        "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+        "file:src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransactionType.java",
+        "file:src/main/java/com/cafeapp/domain/pointTransaction/repository/PointTransactionRepository.java",
+        "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+        "file:src/main/java/com/cafeapp/domain/user/repository/UserRepository.java",
+        "file:src/main/java/com/cafeapp/global/entity/BaseEntity.java"
+      ]
+    },
+    {
+      "id": "layer:global",
+      "name": "글로벌 공통 레이어",
+      "description": "전역 예외 처리, 표준 API 응답 포맷, ErrorCode 열거형, 도메인별 예외 클래스 등 애플리케이션 전반에 걸친 공통 인프라를 제공하는 레이어",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/global/exception/CafeException.java",
+        "file:src/main/java/com/cafeapp/global/exception/ErrorCode.java",
+        "file:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+        "file:src/main/java/com/cafeapp/global/response/ApiResponse.java",
+        "file:src/main/java/com/cafeapp/domain/menu/exception/MenuException.java",
+        "file:src/main/java/com/cafeapp/domain/order/exception/OrderException.java",
+        "file:src/main/java/com/cafeapp/domain/user/exception/UserException.java"
+      ]
+    },
+    {
+      "id": "layer:config",
+      "name": "설정 레이어",
+      "description": "Redis CacheManager, Redisson 분산 락 클라이언트, Kafka 프로듀서/컨슈머 팩토리, 애플리케이션 진입점 및 데이터 초기화를 담당하는 설정 레이어",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java",
+        "file:src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java",
+        "file:src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java",
+        "file:src/main/java/com/cafeapp/common/config/kafka/producer/KafkaProducerConfig.java",
+        "file:src/main/java/com/cafeapp/common/config/kafka/topic/KafkaTopic.java",
+        "file:src/main/java/com/cafeapp/common/DataInitializer.java",
+        "file:src/main/java/com/cafeapp/CafeAppApplication.java",
+        "config:build.gradle",
+        "config:settings.gradle",
+        "config:gradle/wrapper/gradle-wrapper.properties",
+        "config:.env.example",
+        "config:.understand-anything/config.json",
+        "file:gradlew",
+        "file:gradlew.bat",
+        "file:gradle/wrapper/gradle-wrapper.jar",
+        "file:.gitattributes",
+        "file:.understand-anything/.understandignore"
+      ]
+    },
+    {
+      "id": "layer:test",
+      "name": "테스트 레이어",
+      "description": "메뉴/주문/사용자 통합 테스트, Spring 컨텍스트 로드 테스트, 비관적 락과 Redisson 분산 락 전략을 비교하는 동시성 경쟁 조건 테스트를 포함하는 레이어",
+      "nodeIds": [
+        "file:src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+        "file:src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+        "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+        "file:src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+        "file:src/test/java/com/cafeapp/CafeAppApplicationTests.java"
+      ]
+    },
+    {
+      "id": "layer:infrastructure",
+      "name": "인프라 레이어",
+      "description": "MySQL, Kafka, Redis, Nginx 로드 밸런서, Spring Boot 다중 인스턴스, K6 부하 테스트를 포함한 Docker Compose 기반 다중 서버 배포 환경을 정의하는 레이어",
+      "nodeIds": [
+        "service:Dockerfile",
+        "service:docker-compose.yml",
+        "service:docker-compose.yml:mysql",
+        "service:docker-compose.yml:kafka-1",
+        "service:docker-compose.yml:kafka-ui",
+        "service:docker-compose.yml:redis",
+        "service:docker-compose.yml:redisinsight",
+        "service:docker-compose.yml:app-1",
+        "service:docker-compose.yml:app-2",
+        "service:docker-compose.yml:nginx",
+        "service:docker-compose.yml:k6",
+        "file:infra/k6/order-test.js",
+        "file:infra/nginx/nginx.conf",
+        "document:README.md"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "프로젝트 개요",
+      "description": "README.md는 이 프로젝트가 무엇을 해결하려 하는지 한눈에 보여줍니다. 다중 서버 환경에서 발생하는 동시성 문제를 Redisson 분산 락과 비관적 락으로 제어하고, Redis 캐싱과 Kafka 메시징으로 대용량 트래픽을 처리하는 커피숍 주문 시스템의 핵심 설계 의도가 담겨 있습니다. 투어를 시작하기 전에 이 문서를 통해 프로젝트의 전체 아키텍처와 핵심 키워드를 먼저 파악하세요.",
+      "nodeIds": [
+        "document:README.md"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "인프라 구성",
+      "description": "docker-compose.yml은 이 시스템이 실제로 어떤 컴포넌트로 구성되는지 보여주는 청사진입니다. MySQL(영속성), Redis(캐시·분산 락·랭킹), Kafka(메시지 브로커), Nginx(로드 밸런서), app-1·app-2(다중 앱 인스턴스), K6(부하 테스트)가 단일 Compose 파일로 조율됩니다. Nginx가 app-1과 app-2 앞에 놓인 구조에서 동시성 문제가 왜 발생하는지, 그리고 이 투어 전체의 문제 의식이 시작됩니다.",
+      "nodeIds": [
+        "service:docker-compose.yml",
+        "file:infra/nginx/nginx.conf"
+      ],
+      "languageLesson": "docker-compose의 depends_on은 서비스 시작 순서를 보장하지만 준비 상태(readiness)는 보장하지 않습니다. Kafka나 MySQL이 완전히 초기화되기 전에 앱이 연결을 시도하면 실패할 수 있으므로 healthcheck와 함께 사용하는 것이 일반적입니다."
+    },
+    {
+      "order": 3,
+      "title": "애플리케이션 진입점 및 의존성",
+      "description": "CafeAppApplication.java는 Spring Boot 애플리케이션의 시작점이며, build.gradle은 이 시스템을 구성하는 모든 기술 스택의 목록입니다. 진입점에서 곧바로 RedissonConfig, KafkaConsumerConfig, KafkaProducerConfig, CacheManagerConfig를 로드한다는 사실에서, 이 애플리케이션이 처음부터 분산 환경을 염두에 두고 설계되었음을 알 수 있습니다. build.gradle에서 Spring Boot, Redisson, Kafka, Redis 라이브러리의 버전과 구성을 확인하면 기술 스택의 전체 그림이 완성됩니다.",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/CafeAppApplication.java",
+        "config:build.gradle"
+      ],
+      "languageLesson": "Gradle의 implementation과 testImplementation 구분은 컴파일 클래스패스를 분리하여 빌드 시간을 단축합니다. Spring Boot의 dependency management 플러그인은 라이브러리 버전 간 충돌을 BOM(Bill of Materials)으로 자동 조율합니다."
+    },
+    {
+      "order": 4,
+      "title": "도메인 핵심 엔티티",
+      "description": "User, Menu, Order 세 엔티티는 이 시스템의 데이터 모델 전체를 정의합니다. User는 포인트 충전·차감 메서드를 직접 보유하고, Menu는 재고 차감과 SOLD_OUT 전환 로직을 내부에 캡슐화하며, Order는 User와 Menu를 외래 키로 묶어 주문 이력을 영속화합니다. 이 엔티티들의 메서드 시그니처를 이해해야 이후 OrderService에서 동시성 문제가 왜 발생하는지 맥락을 파악할 수 있습니다.",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/domain/user/entity/User.java",
+        "file:src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+        "file:src/main/java/com/cafeapp/domain/order/entity/Order.java"
+      ],
+      "languageLesson": "JPA 엔티티에서 비즈니스 로직(포인트 차감, 재고 감소)을 엔티티 내부에 두는 패턴을 Rich Domain Model이라 합니다. 이는 Anemic Domain Model(엔티티에 getter/setter만 두고 서비스에 로직을 집중)과 대비되며, 도메인 불변식을 엔티티 자신이 보호한다는 장점이 있습니다."
+    },
+    {
+      "order": 5,
+      "title": "핵심 주문 서비스 흐름",
+      "description": "OrderService는 이 프로젝트의 가장 중요한 파일로, fan-out 수가 가장 높습니다. 단일 주문 요청이 들어오면 User에서 포인트를 차감하고, MenuRepository를 통해 재고를 감소시키며, Order를 영속화한 뒤, 트랜잭션 이벤트를 발행하는 전 과정을 조율합니다. 이 파일 하나가 데이터 레이어(User·Menu·Order·MenuRepository)와 메시징 레이어(OrderTransactionalEventListener)를 모두 연결하기 때문에, 다중 서버에서 동시에 이 메서드가 호출될 때 경쟁 조건이 발생하는 지점이 어디인지 명확히 보입니다.",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+        "file:src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java"
+      ],
+      "languageLesson": "@Transactional 어노테이션은 메서드 경계에서 트랜잭션을 시작하고 커밋합니다. 그런데 트랜잭션이 커밋되기 전에 Kafka 이벤트를 발행하면 DB 롤백 시 이벤트가 이미 전송된 상태가 되는 불일치가 생깁니다. 이를 해결하기 위해 @TransactionalEventListener(AFTER_COMMIT)을 사용합니다."
+    },
+    {
+      "order": 6,
+      "title": "동시성 제어 전략",
+      "description": "이 프로젝트는 동시성 문제를 두 가지 층위에서 방어합니다. DB 레벨에서는 MenuRepository에 PESSIMISTIC_WRITE 락을 걸어 동일 메뉴에 대한 재고 차감을 직렬화하고, 애플리케이션 레벨에서는 RedissonService가 Redis 기반 분산 락을 획득한 뒤 OrderService를 호출하여 다중 서버 간의 경쟁을 차단합니다. RedissonConfig는 이 분산 락 클라이언트 Bean을 구성하며, CacheManagerConfig는 Redis를 캐싱에도 활용하기 위한 CacheManager를 별도로 정의합니다.",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+        "file:src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java",
+        "file:src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java"
+      ],
+      "languageLesson": "Redisson의 분산 락은 Redis의 SET NX(Not eXists) 명령을 기반으로 구현됩니다. 락 획득 시 TTL을 설정해 애플리케이션이 비정상 종료되어도 락이 영구 점유되지 않습니다. 비관적 락(DB 레벨)은 단일 DB 인스턴스 내에서만 유효하지만, 분산 락은 여러 서버가 동일한 Redis를 바라보므로 다중 인스턴스 환경에서도 동작합니다."
+    },
+    {
+      "order": 7,
+      "title": "Redis 캐싱과 메뉴 조회",
+      "description": "MenuService는 @Cacheable 어노테이션을 통해 메뉴 조회 결과를 Redis에 캐싱합니다. CacheManagerConfig에서 설정한 TTL(10분)과 JSON 직렬화 정책에 따라 DB 조회 없이 캐시된 응답을 반환함으로써 대용량 조회 트래픽을 흡수합니다. 이 파일은 6단계의 RedissonConfig(분산 락용 Redis 클라이언트)와 달리 CacheManagerConfig(캐싱용 Redis 클라이언트)에 의존한다는 점에서, Redis가 이 시스템에서 두 가지 독립된 역할을 수행함을 보여줍니다.",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/domain/menu/service/MenuService.java"
+      ],
+      "languageLesson": "@Cacheable(value = \"menus\", key = \"#id\")는 메서드 호출 전에 캐시를 먼저 조회하고 miss 시에만 메서드를 실행합니다. @CacheEvict는 데이터 변경 시 캐시를 무효화하는 데 사용되며, 캐시와 DB 간의 정합성을 유지하는 핵심 패턴입니다."
+    },
+    {
+      "order": 8,
+      "title": "Kafka 이벤트 파이프라인",
+      "description": "주문이 DB에 커밋된 직후, OrderTransactionalEventListener가 @TransactionalEventListener(AFTER_COMMIT)으로 이를 감지하여 OrderProducer를 통해 Kafka 토픽에 OrderCompletedEvent를 발행합니다. 이 이벤트는 두 개의 독립적인 컨슈머가 병렬로 소비합니다. OrderHistoryListener는 이벤트를 외부 데이터 플랫폼으로 전달하고, MenuRankingListener는 Redis ZSET에 일별 주문 횟수를 집계합니다. KafkaProducerConfig와 KafkaConsumerConfig는 각각 직렬화 방식과 DLT(Dead Letter Topic) 재시도 정책을 정의합니다.",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java",
+        "file:src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java",
+        "file:src/main/java/com/cafeapp/common/config/kafka/producer/KafkaProducerConfig.java",
+        "file:src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java"
+      ],
+      "languageLesson": "Kafka의 DLT(Dead Letter Topic) 패턴은 컨슈머가 메시지 처리에 반복 실패할 때 해당 메시지를 별도 토픽(-DLT 접미사)으로 이동시켜 시스템 전체가 멈추지 않게 합니다. FixedBackOff는 일정 간격으로 재시도 횟수를 제한하여 일시적 오류(네트워크 순단, DB 과부하)와 영구적 오류(메시지 포맷 이상)를 구분해 처리할 수 있게 합니다."
+    },
+    {
+      "order": 9,
+      "title": "Redis ZSET 인기 메뉴 랭킹",
+      "description": "8단계에서 MenuRankingListener가 Kafka 이벤트를 수신하면, MenuRankingService를 호출하여 Redis ZSET에 날짜별 키로 메뉴 주문 횟수를 증가시킵니다. MenuRankingService는 오늘부터 7일 이전까지의 ZSET 점수를 합산하여 주간 인기 메뉴 Top 3를 반환합니다. 이 설계는 주문이 발생할 때마다 집계를 실시간으로 갱신하면서도, 조회 시에는 Redis 단일 명령(ZRANGEBYSCORE)으로 O(log N)에 결과를 낼 수 있는 효율적인 구조입니다.",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+        "file:src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java"
+      ],
+      "languageLesson": "Redis ZSET(Sorted Set)은 각 멤버에 score를 부여해 자동으로 정렬된 상태를 유지합니다. ZINCRBY 명령으로 score를 원자적으로 증가시킬 수 있어 동시 다수의 주문이 들어와도 집계 손실 없이 처리됩니다. 날짜별 키(예: ranking:2024-01-15)를 사용하면 EXPIRE로 오래된 데이터를 자동 삭제하여 메모리를 관리할 수 있습니다."
+    },
+    {
+      "order": 10,
+      "title": "공통 응답 및 예외 처리",
+      "description": "GlobalExceptionHandler는 @RestControllerAdvice로 애플리케이션 전체의 예외를 한 곳에서 처리하며, ErrorCode enum과 ApiResponse record를 통해 모든 에러 응답을 일관된 포맷으로 클라이언트에 반환합니다. 이 세 파일은 비즈니스 로직과 독립적인 공통 인프라 레이어를 구성합니다. 특히 동시성 제어 과정에서 락 획득 실패나 재고 부족 같은 예외가 발생했을 때, 이 핸들러가 의미 있는 HTTP 상태 코드와 메시지를 반환하도록 ErrorCode가 중앙 집중 관리됩니다.",
+      "nodeIds": [
+        "file:src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+        "file:src/main/java/com/cafeapp/global/response/ApiResponse.java",
+        "file:src/main/java/com/cafeapp/global/exception/ErrorCode.java"
+      ],
+      "languageLesson": "Java 16+의 record 클래스는 불변 데이터 캐리어를 간결하게 선언합니다. ApiResponse를 record로 정의하면 equals, hashCode, toString이 자동 생성되고 필드가 final로 보장됩니다. enum인 ErrorCode에 HTTP 상태와 메시지를 함께 담으면 예외 발생 지점에서 에러 코드만 던져도 응답 포맷이 결정되어 코드 중복을 최소화합니다."
+    },
+    {
+      "order": 11,
+      "title": "동시성 검증: 경쟁 조건 테스트와 부하 테스트",
+      "description": "OrderRaceConditionTest는 CyclicBarrier와 CountDownLatch를 사용해 수십 개의 스레드가 동시에 주문을 시도하는 경쟁 조건을 JVM 내에서 재현하고, 락 없음·비관적 락·Redisson 분산 락 세 가지 전략의 결과를 수치로 비교합니다. 반면 infra/k6/order-test.js는 실제 Docker 환경에서 100명의 가상 사용자(VU)가 Nginx 로드 밸런서를 통해 다중 서버에 동시 요청을 보내는 실제 부하 시나리오를 구성합니다. 이 두 테스트를 함께 이해하면 동시성 이론이 실제 시스템에서 어떻게 검증되는지 완전히 파악할 수 있습니다.",
+      "nodeIds": [
+        "file:src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+        "file:infra/k6/order-test.js"
+      ],
+      "languageLesson": "CyclicBarrier는 지정한 스레드 수가 모두 대기 지점에 도달하면 동시에 출발시키는 동기화 도구입니다. 이를 CountDownLatch와 조합하면 '모든 스레드가 준비된 순간 동시에 시작, 모든 스레드가 완료될 때까지 메인 스레드 대기'라는 경쟁 조건 재현 패턴을 구현할 수 있습니다. K6의 VU(Virtual User)는 각자 독립적인 HTTP 세션을 유지하며 스크립트를 반복 실행하므로 실제 사용자 동시 접속 시나리오를 정확히 모사합니다."
+    }
+  ]
+}

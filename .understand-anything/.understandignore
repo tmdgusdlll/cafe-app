@@ -1,0 +1,52 @@
+# .understandignore — 분석에서 제외할 파일/디렉토리 패턴
+# 구문: .gitignore와 동일 (글로브, # 주석, ! 네게이션, 디렉토리에는 / 사용)
+# 아래 줄은 제안 사항 — 주석 해제로 활성화
+# ! 접두사로 기본값에서 제외된 항목을 강제 포함 가능
+#
+# 빌트인 기본값 (네게이션 없이 항상 제외):
+#   node_modules/, .git/, dist/, build/, obj/, *.lock, *.min.js 등
+#
+# --- .gitignore에서 (주석 해제 시 제외) ---
+
+# HELP.md
+# .gradle
+# !gradle/wrapper/gradle-wrapper.jar
+# !**/src/main/**/build/
+# !**/src/test/**/build/
+# .apt_generated
+# .classpath
+# .factorypath
+# .project
+# .settings
+# .springBeans
+# .sts4-cache
+# bin/
+# !**/src/main/**/bin/
+# !**/src/test/**/bin/
+# *.iws
+# *.iml
+# *.ipr
+# !**/src/main/**/out/
+# !**/src/test/**/out/
+# /nbproject/private/
+# /nbbuild/
+# /dist/
+# /nbdist/
+# /.nb-gradle/
+# application.yml
+# application-local.yml
+# application-docker.yml
+# .env
+
+# --- 테스트 파일 패턴 (주석 해제 시 제외) ---
+
+# *.test.*
+# *.spec.*
+# *.snap
+
+# --- Gradle/IDE/빌드 결과물 (제외 권장) ---
+.gradle/
+.idea/
+build/
+*.iml
+.DS_Store

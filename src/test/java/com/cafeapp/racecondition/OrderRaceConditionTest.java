@@ -301,4 +301,60 @@ public class OrderRaceConditionTest {
             menuRepository.deleteById(stockOneMenu.getId());
         }
     }
+
+    @Test
+    @DisplayName("[측정] 락 없이 재고 차감 시 오버셀(초과 판매) 발생 횟수 측정")
+    void 락없는_재고차감_오버셀_측정() throws InterruptedException {
+        int initialStock = 10;
+        int threadCount = 100;
+        int poolSize = 32;
+
+        Menu testMenu = menuRepository.save(new Menu("오버셀측정메뉴", 1000L, initialStock, MenuStatus.ON_SALE));
+
+        ExecutorService executorService = Executors.newFixedThreadPool(poolSize);
+        CyclicBarrier barrier = new CyclicBarrier(poolSize);
+        CountDownLatch latch = new CountDownLatch(threadCount);
+        AtomicInteger successCount = new AtomicInteger(0);
+
+        try {
+            for (int i = 0; i < threadCount; i++) {
+                executorService.submit(() -> {
+                    try {
+                        try {
+                            barrier.await(5, TimeUnit.SECONDS);
+                        } catch (BrokenBarrierException | TimeoutException ignored) {}
+
+                        // 락 없이 조회 → 재고 확인 → 차감 → 저장 (check-then-act, 의도적으로 비관적 락 미적용)
+                        Menu menu = menuRepository.findById(testMenu.getId()).orElseThrow();
+                        if (menu.getStock() > 0) {
+                            menu.decreaseStock(1);
+                            menuRepository.save(menu);
+                            successCount.incrementAndGet();
+                        }
+                    } catch (Exception e) {
+                        System.out.println(Thread.currentThread().getName() + " 실패: " + e.getMessage());
+                    } finally {
+                        latch.countDown();
+                    }
+                });
+            }
+
+            latch.await();
+            executorService.shutdown();
+
+            Menu finalMenu = menuRepository.findById(testMenu.getId()).orElseThrow();
+            int oversoldCount = Math.max(0, successCount.get() - initialStock);
+
+            System.out.println("\n===== [락 없음 - 오버셀 측정] 결과 =====");
+            System.out.println("초기 재고            : " + initialStock);
+            System.out.println("총 요청 수           : " + threadCount);
+            System.out.println("성공(차감 처리) 건수  : " + successCount.get());
+            System.out.println("최종 재고(DB)         : " + finalMenu.getStock());
+            System.out.println("오버셀 발생 건수      : " + oversoldCount + " / " + threadCount);
+            System.out.println("=======================================\n");
+
+        } finally {
+            menuRepository.deleteById(testMenu.getId());
+        }
+    }
 }

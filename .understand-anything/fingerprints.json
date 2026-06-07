@@ -1,0 +1,4672 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "4801abe35d0bbd68de59069264fd933a99735d3f",
+  "generatedAt": "2026-06-07T11:00:16.242Z",
+  "files": {
+    ".gitattributes": {
+      "filePath": ".gitattributes",
+      "contentHash": "193fbf6c445dea576a6f238c5262320931945a2ea03bae24b161b30856919a09",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    ".understand-anything/.understandignore": {
+      "filePath": ".understand-anything/.understandignore",
+      "contentHash": "9458ea60a387d353c4c886ac9a7c0b1aef795f5221cf8645298215563f3fef58",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 53,
+      "hasStructuralAnalysis": false
+    },
+    "gradle/wrapper/gradle-wrapper.jar": {
+      "filePath": "gradle/wrapper/gradle-wrapper.jar",
+      "contentHash": "b92da9a59e808041964d38ef02115d081a6964c7d1740e33e0adbfeac768dfd4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 195,
+      "hasStructuralAnalysis": false
+    },
+    "gradlew": {
+      "filePath": "gradlew",
+      "contentHash": "aed171fb114f82e6eaea4970a245a200e0582a7dcc8ec0891ca41b6e4a62b754",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 249,
+      "hasStructuralAnalysis": false
+    },
+    "infra/k6/order-test.js": {
+      "filePath": "infra/k6/order-test.js",
+      "contentHash": "50436dd3edff3e66e72d20257c35c725db17ea4a1bd89720217d52a4dc5f2967",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "k6/http",
+          "specifiers": [
+            "http"
+          ]
+        },
+        {
+          "source": "k6",
+          "specifiers": [
+            "check",
+            "sleep"
+          ]
+        }
+      ],
+      "exports": [
+        "options"
+      ],
+      "totalLines": 49,
+      "hasStructuralAnalysis": true
+    },
+    "infra/nginx/nginx.conf": {
+      "filePath": "infra/nginx/nginx.conf",
+      "contentHash": "72a9170324514f8fbd17e94bec1fed5babcf2ba8fe7921726f3a1463439dd381",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 25,
+      "hasStructuralAnalysis": false
+    },
+    "src/main/java/com/cafeapp/CafeAppApplication.java": {
+      "filePath": "src/main/java/com/cafeapp/CafeAppApplication.java",
+      "contentHash": "437b41d8a7783d1da391ce5a584e516ed2321eec709281e4cf2f66b47644f9e8",
+      "functions": [
+        {
+          "name": "main",
+          "params": [
+            "args"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "CafeAppApplication",
+          "methods": [
+            "main"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.springframework.boot.SpringApplication",
+          "specifiers": [
+            "SpringApplication"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.autoconfigure.SpringBootApplication",
+          "specifiers": [
+            "SpringBootApplication"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.config.EnableJpaAuditing",
+          "specifiers": [
+            "EnableJpaAuditing"
+          ]
+        }
+      ],
+      "exports": [
+        "main",
+        "CafeAppApplication"
+      ],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java": {
+      "filePath": "src/main/java/com/cafeapp/common/config/kafka/consumer/KafkaConsumerConfig.java",
+      "contentHash": "2f02118da42f330ca6cb6af6b9bdcafb21430a35af86f1359b6ed0cd4215d775",
+      "functions": [
+        {
+          "name": "baseConsumerProps",
+          "params": [
+            "groupId"
+          ],
+          "returnType": "Map<String, Object>",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "buildConsumerFactory",
+          "params": [
+            "groupId"
+          ],
+          "returnType": "ConsumerFactory<String, OrderCompletedEvent>",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "orderHistoryEventConsumerFactory",
+          "params": [],
+          "returnType": "ConsumerFactory<String, OrderCompletedEvent>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "orderHistoryKafkaListenerContainerFactory",
+          "params": [
+            "commonErrorHandlerWithDLT"
+          ],
+          "returnType": "ConcurrentKafkaListenerContainerFactory<String, OrderCompletedEvent>",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "menuRankingConsumerFactory",
+          "params": [],
+          "returnType": "ConsumerFactory<String, OrderCompletedEvent>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "menuRankingKafkaListenerContainerFactory",
+          "params": [
+            "commonErrorHandlerWithDLT"
+          ],
+          "returnType": "ConcurrentKafkaListenerContainerFactory<String, OrderCompletedEvent>",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "commonErrorHandlerWithDLT",
+          "params": [
+            "orderCompletedEventKafkaTemplate"
+          ],
+          "returnType": "CommonErrorHandler",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "KafkaConsumerConfig",
+          "methods": [
+            "baseConsumerProps",
+            "buildConsumerFactory",
+            "orderHistoryEventConsumerFactory",
+            "orderHistoryKafkaListenerContainerFactory",
+            "menuRankingConsumerFactory",
+            "menuRankingKafkaListenerContainerFactory",
+            "commonErrorHandlerWithDLT"
+          ],
+          "properties": [
+            "bootStrapServers"
+          ],
+          "exported": true,
+          "lineCount": 73
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.common.config.kafka.event.OrderCompletedEvent",
+          "specifiers": [
+            "OrderCompletedEvent"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.MenuRanking.dto.PopularMenuResponse",
+          "specifiers": [
+            "PopularMenuResponse"
+          ]
+        },
+        {
+          "source": "org.apache.kafka.clients.consumer.ConsumerConfig",
+          "specifiers": [
+            "ConsumerConfig"
+          ]
+        },
+        {
+          "source": "org.apache.kafka.common.serialization.StringDeserializer",
+          "specifiers": [
+            "StringDeserializer"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Value",
+          "specifiers": [
+            "Value"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Bean",
+          "specifiers": [
+            "Bean"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Configuration",
+          "specifiers": [
+            "Configuration"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory",
+          "specifiers": [
+            "ConcurrentKafkaListenerContainerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.core.ConsumerFactory",
+          "specifiers": [
+            "ConsumerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.core.DefaultKafkaConsumerFactory",
+          "specifiers": [
+            "DefaultKafkaConsumerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.core.KafkaTemplate",
+          "specifiers": [
+            "KafkaTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.listener.CommonErrorHandler",
+          "specifiers": [
+            "CommonErrorHandler"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.listener.DeadLetterPublishingRecoverer",
+          "specifiers": [
+            "DeadLetterPublishingRecoverer"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.listener.DefaultErrorHandler",
+          "specifiers": [
+            "DefaultErrorHandler"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.support.serializer.JacksonJsonDeserializer",
+          "specifiers": [
+            "JacksonJsonDeserializer"
+          ]
+        },
+        {
+          "source": "org.springframework.util.backoff.FixedBackOff",
+          "specifiers": [
+            "FixedBackOff"
+          ]
+        },
+        {
+          "source": "java.util.HashMap",
+          "specifiers": [
+            "HashMap"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        }
+      ],
+      "exports": [
+        "orderHistoryEventConsumerFactory",
+        "orderHistoryKafkaListenerContainerFactory",
+        "menuRankingConsumerFactory",
+        "menuRankingKafkaListenerContainerFactory",
+        "commonErrorHandlerWithDLT",
+        "KafkaConsumerConfig"
+      ],
+      "totalLines": 96,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java": {
+      "filePath": "src/main/java/com/cafeapp/common/config/kafka/event/OrderCompletedEvent.java",
+      "contentHash": "71c4fc04cbd9f49f2994ccdc598e807ecd118fc204cf7354f04ad95a8607db8e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "OrderCompletedEvent",
+          "methods": [],
+          "properties": [
+            "userId",
+            "menuId",
+            "quantity",
+            "amount",
+            "paidAt"
+          ],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "imports": [
+        {
+          "source": "lombok.AllArgsConstructor",
+          "specifiers": [
+            "AllArgsConstructor"
+          ]
+        },
+        {
+          "source": "lombok.Builder",
+          "specifiers": [
+            "Builder"
+          ]
+        },
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        },
+        {
+          "source": "lombok.NoArgsConstructor",
+          "specifiers": [
+            "NoArgsConstructor"
+          ]
+        }
+      ],
+      "exports": [
+        "OrderCompletedEvent"
+      ],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/common/config/kafka/producer/KafkaProducerConfig.java": {
+      "filePath": "src/main/java/com/cafeapp/common/config/kafka/producer/KafkaProducerConfig.java",
+      "contentHash": "5fda5ee653d1db98a28e458dcabdcda1c5ead934ab275a4c47876b599e46a658",
+      "functions": [
+        {
+          "name": "orderCompletedEventProducerConfig",
+          "params": [],
+          "returnType": "ProducerFactory<String, OrderCompletedEvent>",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "orderCompletedEventKafkaTemplate",
+          "params": [],
+          "returnType": "KafkaTemplate<String, OrderCompletedEvent>",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "KafkaProducerConfig",
+          "methods": [
+            "orderCompletedEventProducerConfig",
+            "orderCompletedEventKafkaTemplate"
+          ],
+          "properties": [
+            "bootstrapServers"
+          ],
+          "exported": true,
+          "lineCount": 23
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.common.config.kafka.event.OrderCompletedEvent",
+          "specifiers": [
+            "OrderCompletedEvent"
+          ]
+        },
+        {
+          "source": "org.apache.kafka.clients.producer.ProducerConfig",
+          "specifiers": [
+            "ProducerConfig"
+          ]
+        },
+        {
+          "source": "org.apache.kafka.common.serialization.StringSerializer",
+          "specifiers": [
+            "StringSerializer"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Value",
+          "specifiers": [
+            "Value"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Bean",
+          "specifiers": [
+            "Bean"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Configuration",
+          "specifiers": [
+            "Configuration"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.annotation.EnableKafka",
+          "specifiers": [
+            "EnableKafka"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.core.DefaultKafkaProducerFactory",
+          "specifiers": [
+            "DefaultKafkaProducerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.core.KafkaTemplate",
+          "specifiers": [
+            "KafkaTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.core.ProducerFactory",
+          "specifiers": [
+            "ProducerFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.support.serializer.JacksonJsonSerializer",
+          "specifiers": [
+            "JacksonJsonSerializer"
+          ]
+        },
+        {
+          "source": "java.util.HashMap",
+          "specifiers": [
+            "HashMap"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        }
+      ],
+      "exports": [
+        "orderCompletedEventProducerConfig",
+        "orderCompletedEventKafkaTemplate",
+        "KafkaProducerConfig"
+      ],
+      "totalLines": 41,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/common/config/kafka/topic/KafkaTopic.java": {
+      "filePath": "src/main/java/com/cafeapp/common/config/kafka/topic/KafkaTopic.java",
+      "contentHash": "08d3497c504f49e664cda1d815809512e0456eddcfae2458b1b415ae1503e35d",
+      "functions": [],
+      "classes": [
+        {
+          "name": "KafkaTopic",
+          "methods": [],
+          "properties": [
+            "TOPIC_ORDER_COMPLETED"
+          ],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "TOPIC_ORDER_COMPLETED",
+        "KafkaTopic"
+      ],
+      "totalLines": 7,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java": {
+      "filePath": "src/main/java/com/cafeapp/common/config/redis/CacheManagerConfig.java",
+      "contentHash": "f247c861e3f7f82a128491ac997971c881fe00f706ef2d417f90038b50c76b50",
+      "functions": [
+        {
+          "name": "redisCacheManager",
+          "params": [
+            "connectionFactory"
+          ],
+          "returnType": "CacheManager",
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [
+        {
+          "name": "CacheManagerConfig",
+          "methods": [
+            "redisCacheManager"
+          ],
+          "properties": [
+            "CACHE_NAME"
+          ],
+          "exported": true,
+          "lineCount": 27
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.fasterxml.jackson.databind.ObjectMapper",
+          "specifiers": [
+            "ObjectMapper"
+          ]
+        },
+        {
+          "source": "com.fasterxml.jackson.databind.SerializationFeature",
+          "specifiers": [
+            "SerializationFeature"
+          ]
+        },
+        {
+          "source": "com.fasterxml.jackson.datatype.jsr310.JavaTimeModule",
+          "specifiers": [
+            "JavaTimeModule"
+          ]
+        },
+        {
+          "source": "org.springframework.cache.CacheManager",
+          "specifiers": [
+            "CacheManager"
+          ]
+        },
+        {
+          "source": "org.springframework.cache.annotation.EnableCaching",
+          "specifiers": [
+            "EnableCaching"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Bean",
+          "specifiers": [
+            "Bean"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Configuration",
+          "specifiers": [
+            "Configuration"
+          ]
+        },
+        {
+          "source": "org.springframework.data.redis.cache.RedisCacheConfiguration",
+          "specifiers": [
+            "RedisCacheConfiguration"
+          ]
+        },
+        {
+          "source": "org.springframework.data.redis.cache.RedisCacheManager",
+          "specifiers": [
+            "RedisCacheManager"
+          ]
+        },
+        {
+          "source": "org.springframework.data.redis.connection.RedisConnectionFactory",
+          "specifiers": [
+            "RedisConnectionFactory"
+          ]
+        },
+        {
+          "source": "org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer",
+          "specifiers": [
+            "Jackson2JsonRedisSerializer"
+          ]
+        },
+        {
+          "source": "org.springframework.data.redis.serializer.RedisSerializationContext",
+          "specifiers": [
+            "RedisSerializationContext"
+          ]
+        },
+        {
+          "source": "org.springframework.data.redis.serializer.StringRedisSerializer",
+          "specifiers": [
+            "StringRedisSerializer"
+          ]
+        },
+        {
+          "source": "java.time.Duration",
+          "specifiers": [
+            "Duration"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        }
+      ],
+      "exports": [
+        "CACHE_NAME",
+        "redisCacheManager",
+        "CacheManagerConfig"
+      ],
+      "totalLines": 47,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java": {
+      "filePath": "src/main/java/com/cafeapp/common/config/redis/RedissonConfig.java",
+      "contentHash": "9eaac6b40dd5a4cf36a4bab5a127c077eb8dd97bfe790a2141aa4a951d42cdcf",
+      "functions": [
+        {
+          "name": "redissonClient",
+          "params": [],
+          "returnType": "RedissonClient",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "RedissonConfig",
+          "methods": [
+            "redissonClient"
+          ],
+          "properties": [
+            "host",
+            "port"
+          ],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.redisson.Redisson",
+          "specifiers": [
+            "Redisson"
+          ]
+        },
+        {
+          "source": "org.redisson.api.RedissonClient",
+          "specifiers": [
+            "RedissonClient"
+          ]
+        },
+        {
+          "source": "org.redisson.config.Config",
+          "specifiers": [
+            "Config"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Value",
+          "specifiers": [
+            "Value"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Bean",
+          "specifiers": [
+            "Bean"
+          ]
+        },
+        {
+          "source": "org.springframework.context.annotation.Configuration",
+          "specifiers": [
+            "Configuration"
+          ]
+        }
+      ],
+      "exports": [
+        "redissonClient",
+        "RedissonConfig"
+      ],
+      "totalLines": 26,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/common/DataCollectPlatformClient.java": {
+      "filePath": "src/main/java/com/cafeapp/common/DataCollectPlatformClient.java",
+      "contentHash": "3c25050fcbe02208a169a4525d56b0c42b86e3ff70fa64fa5293396aa1f7bb95",
+      "functions": [
+        {
+          "name": "send",
+          "params": [
+            "userId",
+            "menuId",
+            "quantity",
+            "amount",
+            "paidAt"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "DataCollectPlatformClient",
+          "methods": [
+            "send"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "imports": [
+        {
+          "source": "lombok.extern.slf4j.Slf4j",
+          "specifiers": [
+            "Slf4j"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        },
+        {
+          "source": "java.time.LocalDateTime",
+          "specifiers": [
+            "LocalDateTime"
+          ]
+        }
+      ],
+      "exports": [
+        "send",
+        "DataCollectPlatformClient"
+      ],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/common/DataInitializer.java": {
+      "filePath": "src/main/java/com/cafeapp/common/DataInitializer.java",
+      "contentHash": "8cd031b8939934a45d594d802472ee2c1076191ccb17d836e9b38432589e8e06",
+      "functions": [
+        {
+          "name": "run",
+          "params": [
+            "args"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 29
+        }
+      ],
+      "classes": [
+        {
+          "name": "DataInitializer",
+          "methods": [
+            "run"
+          ],
+          "properties": [
+            "userRepository",
+            "menuRepository"
+          ],
+          "exported": true,
+          "lineCount": 37
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.menu.entity.Menu",
+          "specifiers": [
+            "Menu"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.entity.MenuStatus",
+          "specifiers": [
+            "MenuStatus"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.repository.MenuRepository",
+          "specifiers": [
+            "MenuRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.entity.User",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.repository.UserRepository",
+          "specifiers": [
+            "UserRepository"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.ApplicationArguments",
+          "specifiers": [
+            "ApplicationArguments"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.ApplicationRunner",
+          "specifiers": [
+            "ApplicationRunner"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "run",
+        "DataInitializer"
+      ],
+      "totalLines": 51,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/menu/controller/MenuController.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/menu/controller/MenuController.java",
+      "contentHash": "85a943a89e1d3e01dfbb5c1aaf0a5105729cec96cd65aa29b661880d5b8268a1",
+      "functions": [
+        {
+          "name": "getAllMenu",
+          "params": [],
+          "returnType": "ResponseEntity<ApiResponse<List<GetAllMenuResponse>>>",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "getPopularMenus",
+          "params": [],
+          "returnType": "ResponseEntity<ApiResponse<List<PopularMenuResponse>>>",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "MenuController",
+          "methods": [
+            "getAllMenu",
+            "getPopularMenus"
+          ],
+          "properties": [
+            "menuService"
+          ],
+          "exported": true,
+          "lineCount": 18
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.global.response.ApiResponse",
+          "specifiers": [
+            "ApiResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.MenuRanking.dto.PopularMenuResponse",
+          "specifiers": [
+            "PopularMenuResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.dto.response.GetAllMenuResponse",
+          "specifiers": [
+            "GetAllMenuResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.service.MenuService",
+          "specifiers": [
+            "MenuService"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "org.springframework.http.ResponseEntity",
+          "specifiers": [
+            "ResponseEntity"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.GetMapping",
+          "specifiers": [
+            "GetMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestController",
+          "specifiers": [
+            "RestController"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "getAllMenu",
+        "getPopularMenus",
+        "MenuController"
+      ],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/menu/dto/response/GetAllMenuResponse.java",
+      "contentHash": "7e5d7196f665c2a2f97f420e03969865404caacb28b9776a97deb2ca0d575555",
+      "functions": [
+        {
+          "name": "GetAllMenuResponse",
+          "params": [
+            "menuId",
+            "menuName",
+            "price",
+            "stock"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "from",
+          "params": [
+            "menu"
+          ],
+          "returnType": "GetAllMenuResponse",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [
+        {
+          "name": "GetAllMenuResponse",
+          "methods": [
+            "GetAllMenuResponse",
+            "from"
+          ],
+          "properties": [
+            "menuId",
+            "menuName",
+            "price",
+            "stock"
+          ],
+          "exported": true,
+          "lineCount": 25
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.menu.entity.Menu",
+          "specifiers": [
+            "Menu"
+          ]
+        },
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        },
+        {
+          "source": "lombok.NoArgsConstructor",
+          "specifiers": [
+            "NoArgsConstructor"
+          ]
+        }
+      ],
+      "exports": [
+        "from",
+        "GetAllMenuResponse"
+      ],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/menu/dto/response/MenuScoreDto.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/menu/dto/response/MenuScoreDto.java",
+      "contentHash": "600089a444522457610a3c3078bc218ba9676182dfcba22b5541278bf117806f",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 7,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/menu/entity/Menu.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/menu/entity/Menu.java",
+      "contentHash": "4a3e6326c2afa9c943c3786653fa3343dbcc0723c9e55831d0a01d1201cd2f96",
+      "functions": [
+        {
+          "name": "Menu",
+          "params": [
+            "menuName",
+            "price",
+            "stock",
+            "status"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "decreaseStock",
+          "params": [
+            "quantity"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "Menu",
+          "methods": [
+            "Menu",
+            "decreaseStock"
+          ],
+          "properties": [
+            "id",
+            "menuName",
+            "price",
+            "stock",
+            "status"
+          ],
+          "exported": true,
+          "lineCount": 40
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.menu.exception.MenuException",
+          "specifiers": [
+            "MenuException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.global.entity.BaseEntity",
+          "specifiers": [
+            "BaseEntity"
+          ]
+        },
+        {
+          "source": "com.cafeapp.global.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "jakarta.persistence",
+          "specifiers": [
+            "*"
+          ]
+        },
+        {
+          "source": "lombok.AccessLevel",
+          "specifiers": [
+            "AccessLevel"
+          ]
+        },
+        {
+          "source": "lombok.Builder",
+          "specifiers": [
+            "Builder"
+          ]
+        },
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        },
+        {
+          "source": "lombok.NoArgsConstructor",
+          "specifiers": [
+            "NoArgsConstructor"
+          ]
+        }
+      ],
+      "exports": [
+        "Menu",
+        "decreaseStock",
+        "Menu"
+      ],
+      "totalLines": 52,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/menu/entity/MenuStatus.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/menu/entity/MenuStatus.java",
+      "contentHash": "42f299e2eb75c24323cf6f27c31e8631b395504a4fc1b1b49b67c3549d4d6386",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/menu/exception/MenuException.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/menu/exception/MenuException.java",
+      "contentHash": "47c5bcdf16c3d1acf92e318e5165139e8ebaeca04aa8333b1da57d474f005a58",
+      "functions": [
+        {
+          "name": "MenuException",
+          "params": [
+            "errorCode"
+          ],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "MenuException",
+          "methods": [
+            "MenuException"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.global.exception.CafeException",
+          "specifiers": [
+            "CafeException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.global.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        }
+      ],
+      "exports": [
+        "MenuException",
+        "MenuException"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/menu/repository/MenuRepository.java",
+      "contentHash": "73bd88a07db2e6722fbb59cccd4a1a7d5f7ec1a08f0677846f2e82cffdf79b84",
+      "functions": [],
+      "classes": [
+        {
+          "name": "MenuRepository",
+          "methods": [
+            "findAllByStatus",
+            "findByIdWithPessimisticLock"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.menu.entity.Menu",
+          "specifiers": [
+            "Menu"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.entity.MenuStatus",
+          "specifiers": [
+            "MenuStatus"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.LockModeType",
+          "specifiers": [
+            "LockModeType"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.JpaRepository",
+          "specifiers": [
+            "JpaRepository"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.Lock",
+          "specifiers": [
+            "Lock"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.Query",
+          "specifiers": [
+            "Query"
+          ]
+        },
+        {
+          "source": "org.springframework.data.repository.query.Param",
+          "specifiers": [
+            "Param"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        }
+      ],
+      "exports": [
+        "MenuRepository"
+      ],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/menu/service/MenuService.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/menu/service/MenuService.java",
+      "contentHash": "22d51cb01a8bb6376471b607714bc39acb870059d7289da03622994a9ac0407f",
+      "functions": [
+        {
+          "name": "getAllMenu",
+          "params": [],
+          "returnType": "List<GetAllMenuResponse>",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "getPopularMenus",
+          "params": [],
+          "returnType": "List<PopularMenuResponse>",
+          "exported": true,
+          "lineCount": 33
+        }
+      ],
+      "classes": [
+        {
+          "name": "MenuService",
+          "methods": [
+            "getAllMenu",
+            "getPopularMenus"
+          ],
+          "properties": [
+            "menuRepository",
+            "menuRankingService"
+          ],
+          "exported": true,
+          "lineCount": 56
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.common.config.redis.CacheManagerConfig",
+          "specifiers": [
+            "CacheManagerConfig"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.MenuRanking.dto.PopularMenuResponse",
+          "specifiers": [
+            "PopularMenuResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.MenuRanking.service.MenuRankingService",
+          "specifiers": [
+            "MenuRankingService"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.dto.response.GetAllMenuResponse",
+          "specifiers": [
+            "GetAllMenuResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.dto.response.MenuScoreDto",
+          "specifiers": [
+            "MenuScoreDto"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.entity.Menu",
+          "specifiers": [
+            "Menu"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.entity.MenuStatus",
+          "specifiers": [
+            "MenuStatus"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.exception.MenuException",
+          "specifiers": [
+            "MenuException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.repository.MenuRepository",
+          "specifiers": [
+            "MenuRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.global.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "lombok.extern.slf4j.Slf4j",
+          "specifiers": [
+            "Slf4j"
+          ]
+        },
+        {
+          "source": "org.springframework.cache.annotation.Cacheable",
+          "specifiers": [
+            "Cacheable"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Transactional",
+          "specifiers": [
+            "Transactional"
+          ]
+        },
+        {
+          "source": "java.util.Collections",
+          "specifiers": [
+            "Collections"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.stream.Collectors",
+          "specifiers": [
+            "Collectors"
+          ]
+        },
+        {
+          "source": "java.util.stream.IntStream",
+          "specifiers": [
+            "IntStream"
+          ]
+        }
+      ],
+      "exports": [
+        "getAllMenu",
+        "getPopularMenus",
+        "MenuService"
+      ],
+      "totalLines": 81,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/controller/MenuRankingController.java",
+      "contentHash": "88325edb883b60fd10f53737a28aa7b8f6d7ea0616a5b420894378889292382d",
+      "functions": [],
+      "classes": [
+        {
+          "name": "MenuRankingController",
+          "methods": [],
+          "properties": [
+            "menuRankingService"
+          ],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.MenuRanking.service.MenuRankingService",
+          "specifiers": [
+            "MenuRankingService"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestController",
+          "specifiers": [
+            "RestController"
+          ]
+        }
+      ],
+      "exports": [
+        "MenuRankingController"
+      ],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/dto/PopularMenuResponse.java",
+      "contentHash": "2fcbd994bec3d8068e639ada94bf8905ca8a9c399d94aec9c180a9750a9f4891",
+      "functions": [
+        {
+          "name": "PopularMenuResponse",
+          "params": [
+            "rank",
+            "menuId",
+            "menuName",
+            "orderCount"
+          ],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "PopularMenuResponse",
+          "methods": [
+            "PopularMenuResponse"
+          ],
+          "properties": [
+            "rank",
+            "menuId",
+            "menuName",
+            "orderCount"
+          ],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.menu.entity.Menu",
+          "specifiers": [
+            "Menu"
+          ]
+        },
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        }
+      ],
+      "exports": [
+        "PopularMenuResponse",
+        "PopularMenuResponse"
+      ],
+      "totalLines": 21,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/listener/MenuRankingListener.java",
+      "contentHash": "7a4cfa104f3c4427dd92eb6705aeda7c3febfa68a66848964964c3dc4e79b79a",
+      "functions": [
+        {
+          "name": "consume",
+          "params": [
+            "event"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [
+        {
+          "name": "MenuRankingListener",
+          "methods": [
+            "consume"
+          ],
+          "properties": [
+            "menuRankingService"
+          ],
+          "exported": true,
+          "lineCount": 20
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.common.config.kafka.event.OrderCompletedEvent",
+          "specifiers": [
+            "OrderCompletedEvent"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.MenuRanking.service.MenuRankingService",
+          "specifiers": [
+            "MenuRankingService"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "lombok.extern.slf4j.Slf4j",
+          "specifiers": [
+            "Slf4j"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.annotation.KafkaListener",
+          "specifiers": [
+            "KafkaListener"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        },
+        {
+          "source": "java.time.LocalDate",
+          "specifiers": [
+            "LocalDate"
+          ]
+        },
+        {
+          "source": "com.cafeapp.common.config.kafka.topic.KafkaTopic.TOPIC_ORDER_COMPLETED",
+          "specifiers": [
+            "TOPIC_ORDER_COMPLETED"
+          ]
+        }
+      ],
+      "exports": [
+        "consume",
+        "MenuRankingListener"
+      ],
+      "totalLines": 34,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/MenuRanking/service/MenuRankingService.java",
+      "contentHash": "f84cb46aa1e0dfc95a7b7f348cad60c4695736587721a67f4e6dec3d515e54fe",
+      "functions": [
+        {
+          "name": "increaseMenuRanking",
+          "params": [
+            "menuId",
+            "quantity",
+            "currentDate"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "getMenuRankingTop3In7Days",
+          "params": [],
+          "returnType": "List<MenuScoreDto>",
+          "exported": true,
+          "lineCount": 39
+        }
+      ],
+      "classes": [
+        {
+          "name": "MenuRankingService",
+          "methods": [
+            "increaseMenuRanking",
+            "getMenuRankingTop3In7Days"
+          ],
+          "properties": [
+            "stringRedisTemplate",
+            "MENU_RANKING_KEY"
+          ],
+          "exported": true,
+          "lineCount": 60
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.MenuRanking.dto.PopularMenuResponse",
+          "specifiers": [
+            "PopularMenuResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.dto.response.MenuScoreDto",
+          "specifiers": [
+            "MenuScoreDto"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "org.springframework.data.redis.core.StringRedisTemplate",
+          "specifiers": [
+            "StringRedisTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.data.redis.core.ZSetOperations",
+          "specifiers": [
+            "ZSetOperations"
+          ]
+        },
+        {
+          "source": "org.springframework.data.redis.core.ZSetOperations.TypedTuple",
+          "specifiers": [
+            "TypedTuple"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "java.time.LocalDate",
+          "specifiers": [
+            "LocalDate"
+          ]
+        },
+        {
+          "source": "java.time.LocalDateTime",
+          "specifiers": [
+            "LocalDateTime"
+          ]
+        },
+        {
+          "source": "java.util.Collections",
+          "specifiers": [
+            "Collections"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Set",
+          "specifiers": [
+            "Set"
+          ]
+        },
+        {
+          "source": "java.util.TreeMap",
+          "specifiers": [
+            "TreeMap"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.TimeUnit",
+          "specifiers": [
+            "TimeUnit"
+          ]
+        },
+        {
+          "source": "java.util.stream.IntStream",
+          "specifiers": [
+            "IntStream"
+          ]
+        }
+      ],
+      "exports": [
+        "increaseMenuRanking",
+        "getMenuRankingTop3In7Days",
+        "MenuRankingService"
+      ],
+      "totalLines": 80,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/order/controller/OrderController.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/order/controller/OrderController.java",
+      "contentHash": "0c86e356076d05b34979e049fbc3250ea839a8e4ff1424e2b0f44d3f7760f508",
+      "functions": [
+        {
+          "name": "orderAndPay",
+          "params": [
+            "userId",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ApiResponse<OrderResponse>>",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "orderAndPayWithRedisson",
+          "params": [
+            "userId",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ApiResponse<OrderResponse>>",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [
+        {
+          "name": "OrderController",
+          "methods": [
+            "orderAndPay",
+            "orderAndPayWithRedisson"
+          ],
+          "properties": [
+            "orderService",
+            "redissonService"
+          ],
+          "exported": true,
+          "lineCount": 27
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.common.config.kafka.event.OrderCompletedEvent",
+          "specifiers": [
+            "OrderCompletedEvent"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.service.RedissonService",
+          "specifiers": [
+            "RedissonService"
+          ]
+        },
+        {
+          "source": "com.cafeapp.global.response.ApiResponse",
+          "specifiers": [
+            "ApiResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.dto.request.OrderRequest",
+          "specifiers": [
+            "OrderRequest"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.dto.response.OrderResponse",
+          "specifiers": [
+            "OrderResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.service.OrderService",
+          "specifiers": [
+            "OrderService"
+          ]
+        },
+        {
+          "source": "jakarta.validation.Valid",
+          "specifiers": [
+            "Valid"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "org.springframework.http.HttpStatus",
+          "specifiers": [
+            "HttpStatus"
+          ]
+        },
+        {
+          "source": "org.springframework.http.ResponseEntity",
+          "specifiers": [
+            "ResponseEntity"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PathVariable",
+          "specifiers": [
+            "PathVariable"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.PostMapping",
+          "specifiers": [
+            "PostMapping"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RequestBody",
+          "specifiers": [
+            "RequestBody"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestController",
+          "specifiers": [
+            "RestController"
+          ]
+        }
+      ],
+      "exports": [
+        "orderAndPay",
+        "orderAndPayWithRedisson",
+        "OrderController"
+      ],
+      "totalLines": 45,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/order/dto/request/OrderRequest.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/order/dto/request/OrderRequest.java",
+      "contentHash": "5cfa7f5714ce268bfae359e8755894b4e5caa22889832c72fafaea8c388379ab",
+      "functions": [
+        {
+          "name": "OrderRequest",
+          "params": [
+            "menuId",
+            "quantity"
+          ],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "OrderRequest",
+          "methods": [
+            "OrderRequest"
+          ],
+          "properties": [
+            "menuId",
+            "quantity"
+          ],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "imports": [
+        {
+          "source": "jakarta.validation.constraints.Min",
+          "specifiers": [
+            "Min"
+          ]
+        },
+        {
+          "source": "jakarta.validation.constraints.NotNull",
+          "specifiers": [
+            "NotNull"
+          ]
+        },
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        }
+      ],
+      "exports": [
+        "OrderRequest",
+        "OrderRequest"
+      ],
+      "totalLines": 23,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/order/dto/response/OrderResponse.java",
+      "contentHash": "d3c52cf6566a18ad16d8b6b0c0e11c54e6b0ea672b5c88937e91e865ce1fbc72",
+      "functions": [
+        {
+          "name": "OrderResponse",
+          "params": [
+            "order",
+            "orderedAt"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "from",
+          "params": [
+            "order"
+          ],
+          "returnType": "OrderResponse",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "OrderResponse",
+          "methods": [
+            "OrderResponse",
+            "from"
+          ],
+          "properties": [
+            "orderId",
+            "userId",
+            "menuId",
+            "menuName",
+            "amount",
+            "status",
+            "remainingPoint",
+            "orderedAt"
+          ],
+          "exported": true,
+          "lineCount": 27
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.order.entity.Order",
+          "specifiers": [
+            "Order"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.entity.OrderStatus",
+          "specifiers": [
+            "OrderStatus"
+          ]
+        },
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        },
+        {
+          "source": "java.time.LocalDateTime",
+          "specifiers": [
+            "LocalDateTime"
+          ]
+        }
+      ],
+      "exports": [
+        "from",
+        "OrderResponse"
+      ],
+      "totalLines": 36,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/order/entity/Order.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/order/entity/Order.java",
+      "contentHash": "6c8607878f1dcb0d8d3ad6a711f7c33eb558bf2fa21821dc3e064233f6dcd550",
+      "functions": [
+        {
+          "name": "Order",
+          "params": [
+            "user",
+            "menu",
+            "amount"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "complete",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "Order",
+          "methods": [
+            "Order",
+            "complete"
+          ],
+          "properties": [
+            "id",
+            "user",
+            "menu",
+            "amount",
+            "status"
+          ],
+          "exported": true,
+          "lineCount": 36
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.global.entity.BaseEntity",
+          "specifiers": [
+            "BaseEntity"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.entity.Menu",
+          "specifiers": [
+            "Menu"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.entity.User",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "jakarta.persistence",
+          "specifiers": [
+            "*"
+          ]
+        },
+        {
+          "source": "lombok.AccessLevel",
+          "specifiers": [
+            "AccessLevel"
+          ]
+        },
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        },
+        {
+          "source": "lombok.NoArgsConstructor",
+          "specifiers": [
+            "NoArgsConstructor"
+          ]
+        }
+      ],
+      "exports": [
+        "Order",
+        "complete",
+        "Order"
+      ],
+      "totalLines": 47,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/order/entity/OrderStatus.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/order/entity/OrderStatus.java",
+      "contentHash": "01a2b364f101f5351e085724839f84dd1316c198bc7b23f6cf943dfc634b5639",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/order/exception/OrderException.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/order/exception/OrderException.java",
+      "contentHash": "0bbb1ad64b2e854897f677a204e27d4c4acce0f9cc95f8b2f82c998dcddeb505",
+      "functions": [
+        {
+          "name": "OrderException",
+          "params": [
+            "errorCode"
+          ],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "OrderException",
+          "methods": [
+            "OrderException"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.global.exception.CafeException",
+          "specifiers": [
+            "CafeException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.global.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        }
+      ],
+      "exports": [
+        "OrderException",
+        "OrderException"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/order/listener/OrderHistoryListener.java",
+      "contentHash": "17701db781168995a8790d88faa38d0cb7bb275b4d6724809006966c21897400",
+      "functions": [
+        {
+          "name": "consume",
+          "params": [
+            "event"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 20
+        }
+      ],
+      "classes": [
+        {
+          "name": "OrderHistoryListener",
+          "methods": [
+            "consume"
+          ],
+          "properties": [
+            "dataCollectPlatformClient"
+          ],
+          "exported": true,
+          "lineCount": 28
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.common.DataCollectPlatformClient",
+          "specifiers": [
+            "DataCollectPlatformClient"
+          ]
+        },
+        {
+          "source": "com.cafeapp.common.config.kafka.event.OrderCompletedEvent",
+          "specifiers": [
+            "OrderCompletedEvent"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.service.OrderService",
+          "specifiers": [
+            "OrderService"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "lombok.extern.slf4j.Slf4j",
+          "specifiers": [
+            "Slf4j"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.annotation.KafkaListener",
+          "specifiers": [
+            "KafkaListener"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        },
+        {
+          "source": "com.cafeapp.common.config.kafka.topic.KafkaTopic.TOPIC_ORDER_COMPLETED",
+          "specifiers": [
+            "TOPIC_ORDER_COMPLETED"
+          ]
+        }
+      ],
+      "exports": [
+        "consume",
+        "OrderHistoryListener"
+      ],
+      "totalLines": 41,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/order/producer/OrderProducer.java",
+      "contentHash": "02dc7c23bac392856d850d54183aa410e9199e4f632ec07054713d4b36c47961",
+      "functions": [
+        {
+          "name": "send",
+          "params": [
+            "event"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "OrderProducer",
+          "methods": [
+            "send"
+          ],
+          "properties": [
+            "orderCompletedEventKafkaTemplate"
+          ],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.common.config.kafka.event.OrderCompletedEvent",
+          "specifiers": [
+            "OrderCompletedEvent"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "lombok.extern.slf4j.Slf4j",
+          "specifiers": [
+            "Slf4j"
+          ]
+        },
+        {
+          "source": "org.springframework.kafka.core.KafkaTemplate",
+          "specifiers": [
+            "KafkaTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "com.cafeapp.common.config.kafka.topic.KafkaTopic.TOPIC_ORDER_COMPLETED",
+          "specifiers": [
+            "TOPIC_ORDER_COMPLETED"
+          ]
+        }
+      ],
+      "exports": [
+        "send",
+        "OrderProducer"
+      ],
+      "totalLines": 24,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/order/repository/OrderRepository.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/order/repository/OrderRepository.java",
+      "contentHash": "d81c9403658bd67ffbb042c6ffd135039b4ebac75daa4bb6ba01af9a2e1bac04",
+      "functions": [],
+      "classes": [
+        {
+          "name": "OrderRepository",
+          "methods": [
+            "deleteAllByUserId"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.order.entity.Order",
+          "specifiers": [
+            "Order"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.JpaRepository",
+          "specifiers": [
+            "JpaRepository"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.Modifying",
+          "specifiers": [
+            "Modifying"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.Query",
+          "specifiers": [
+            "Query"
+          ]
+        },
+        {
+          "source": "org.springframework.data.repository.query.Param",
+          "specifiers": [
+            "Param"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Transactional",
+          "specifiers": [
+            "Transactional"
+          ]
+        }
+      ],
+      "exports": [
+        "OrderRepository"
+      ],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/order/service/OrderService.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/order/service/OrderService.java",
+      "contentHash": "470fa8a305f9c7b8ba8ce7c153e23ccd517e805ac35397637de0ac0b91353417",
+      "functions": [
+        {
+          "name": "orderAndPay",
+          "params": [
+            "userId",
+            "request"
+          ],
+          "returnType": "OrderResponse",
+          "exported": true,
+          "lineCount": 51
+        },
+        {
+          "name": "orderAndPayWithRedisson",
+          "params": [
+            "userId",
+            "request"
+          ],
+          "returnType": "OrderResponse",
+          "exported": true,
+          "lineCount": 46
+        }
+      ],
+      "classes": [
+        {
+          "name": "OrderService",
+          "methods": [
+            "orderAndPay",
+            "orderAndPayWithRedisson"
+          ],
+          "properties": [
+            "orderRepository",
+            "userRepository",
+            "menuRepository",
+            "pointTransactionRepository",
+            "orderProducer",
+            "eventPublisher"
+          ],
+          "exported": true,
+          "lineCount": 112
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.common.config.kafka.event.OrderCompletedEvent",
+          "specifiers": [
+            "OrderCompletedEvent"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.entity.Menu",
+          "specifiers": [
+            "Menu"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.entity.MenuStatus",
+          "specifiers": [
+            "MenuStatus"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.repository.MenuRepository",
+          "specifiers": [
+            "MenuRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.dto.request.OrderRequest",
+          "specifiers": [
+            "OrderRequest"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.dto.response.OrderResponse",
+          "specifiers": [
+            "OrderResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.entity.Order",
+          "specifiers": [
+            "Order"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.exception.OrderException",
+          "specifiers": [
+            "OrderException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.producer.OrderProducer",
+          "specifiers": [
+            "OrderProducer"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.repository.OrderRepository",
+          "specifiers": [
+            "OrderRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.pointTransaction.entity.PointTransaction",
+          "specifiers": [
+            "PointTransaction"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.pointTransaction.repository.PointTransactionRepository",
+          "specifiers": [
+            "PointTransactionRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.entity.User",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.repository.UserRepository",
+          "specifiers": [
+            "UserRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.global.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "org.springframework.context.ApplicationEventPublisher",
+          "specifiers": [
+            "ApplicationEventPublisher"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Isolation",
+          "specifiers": [
+            "Isolation"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Transactional",
+          "specifiers": [
+            "Transactional"
+          ]
+        },
+        {
+          "source": "java.time.LocalDateTime",
+          "specifiers": [
+            "LocalDateTime"
+          ]
+        },
+        {
+          "source": "java.time.format.DateTimeFormatter",
+          "specifiers": [
+            "DateTimeFormatter"
+          ]
+        }
+      ],
+      "exports": [
+        "orderAndPay",
+        "orderAndPayWithRedisson",
+        "OrderService"
+      ],
+      "totalLines": 139,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/order/service/OrderTransactionalEventListener.java",
+      "contentHash": "76db054e27351ca89f1b31e5d0ec4d72c90aae041b08f0ae31d2a096393521e2",
+      "functions": [
+        {
+          "name": "handle",
+          "params": [
+            "event"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [
+        {
+          "name": "OrderTransactionalEventListener",
+          "methods": [
+            "handle"
+          ],
+          "properties": [
+            "orderProducer"
+          ],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.common.config.kafka.event.OrderCompletedEvent",
+          "specifiers": [
+            "OrderCompletedEvent"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.producer.OrderProducer",
+          "specifiers": [
+            "OrderProducer"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "lombok.extern.slf4j.Slf4j",
+          "specifiers": [
+            "Slf4j"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Component",
+          "specifiers": [
+            "Component"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.event.TransactionPhase",
+          "specifiers": [
+            "TransactionPhase"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.event.TransactionalEventListener",
+          "specifiers": [
+            "TransactionalEventListener"
+          ]
+        }
+      ],
+      "exports": [
+        "handle",
+        "OrderTransactionalEventListener"
+      ],
+      "totalLines": 24,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/order/service/RedissonService.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/order/service/RedissonService.java",
+      "contentHash": "5cd7e77d8525268e6ef2a984e866379db14f84c561cacb69408d9382798232da",
+      "functions": [
+        {
+          "name": "orderAndPayWithRedisson",
+          "params": [
+            "userId",
+            "request"
+          ],
+          "returnType": "OrderResponse",
+          "exported": true,
+          "lineCount": 33
+        }
+      ],
+      "classes": [
+        {
+          "name": "RedissonService",
+          "methods": [
+            "orderAndPayWithRedisson"
+          ],
+          "properties": [
+            "orderService",
+            "redissonClient"
+          ],
+          "exported": true,
+          "lineCount": 42
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.order.dto.request.OrderRequest",
+          "specifiers": [
+            "OrderRequest"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.dto.response.OrderResponse",
+          "specifiers": [
+            "OrderResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.exception.OrderException",
+          "specifiers": [
+            "OrderException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.global.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "org.redisson.api.RLock",
+          "specifiers": [
+            "RLock"
+          ]
+        },
+        {
+          "source": "org.redisson.api.RedissonClient",
+          "specifiers": [
+            "RedissonClient"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.TimeUnit",
+          "specifiers": [
+            "TimeUnit"
+          ]
+        }
+      ],
+      "exports": [
+        "orderAndPayWithRedisson",
+        "RedissonService"
+      ],
+      "totalLines": 56,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransaction.java",
+      "contentHash": "9d11963f040e93a2e3a7bcad7b6e30e3c656bbe912b2b2fc2106fd97e536f72c",
+      "functions": [
+        {
+          "name": "charge",
+          "params": [
+            "user",
+            "amount",
+            "pointBalance"
+          ],
+          "returnType": "PointTransaction",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "use",
+          "params": [
+            "user",
+            "order",
+            "amount",
+            "pointBalance"
+          ],
+          "returnType": "PointTransaction",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "PointTransaction",
+          "methods": [
+            "charge",
+            "use"
+          ],
+          "properties": [
+            "id",
+            "user",
+            "order",
+            "type",
+            "amount",
+            "pointBalance"
+          ],
+          "exported": true,
+          "lineCount": 49
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.global.entity.BaseEntity",
+          "specifiers": [
+            "BaseEntity"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.entity.Order",
+          "specifiers": [
+            "Order"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.entity.User",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "jakarta.persistence",
+          "specifiers": [
+            "*"
+          ]
+        },
+        {
+          "source": "lombok.AccessLevel",
+          "specifiers": [
+            "AccessLevel"
+          ]
+        },
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        },
+        {
+          "source": "lombok.NoArgsConstructor",
+          "specifiers": [
+            "NoArgsConstructor"
+          ]
+        }
+      ],
+      "exports": [
+        "charge",
+        "use",
+        "PointTransaction"
+      ],
+      "totalLines": 60,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransactionType.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/pointTransaction/entity/PointTransactionType.java",
+      "contentHash": "478b82debab88585c5cf4d49769dae3be71c2ef52cc1cca06c648789520e6042",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/pointTransaction/repository/PointTransactionRepository.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/pointTransaction/repository/PointTransactionRepository.java",
+      "contentHash": "d3967d0af397e2014b2981d7566f392da7b345d8f213854588a7f1b4ce481b4c",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PointTransactionRepository",
+          "methods": [
+            "findAllByUserId",
+            "deleteAllByUserId"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.pointTransaction.entity.PointTransaction",
+          "specifiers": [
+            "PointTransaction"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.JpaRepository",
+          "specifiers": [
+            "JpaRepository"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.Modifying",
+          "specifiers": [
+            "Modifying"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.Query",
+          "specifiers": [
+            "Query"
+          ]
+        },
+        {
+          "source": "org.springframework.data.repository.query.Param",
+          "specifiers": [
+            "Param"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Transactional",
+          "specifiers": [
+            "Transactional"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        }
+      ],
+      "exports": [
+        "PointTransactionRepository"
+      ],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/user/controller/UserController.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/user/controller/UserController.java",
+      "contentHash": "115346287d77d102be6e22eba98b4c84ed3c5c2232cec2f1aed5e1540ac858e4",
+      "functions": [
+        {
+          "name": "chargePoint",
+          "params": [
+            "userId",
+            "request"
+          ],
+          "returnType": "ResponseEntity<ApiResponse<ChargePointResponse>>",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserController",
+          "methods": [
+            "chargePoint"
+          ],
+          "properties": [
+            "userService"
+          ],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.global.response.ApiResponse",
+          "specifiers": [
+            "ApiResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.dto.request.ChargePointRequest",
+          "specifiers": [
+            "ChargePointRequest"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.dto.response.ChargePointResponse",
+          "specifiers": [
+            "ChargePointResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.service.UserService",
+          "specifiers": [
+            "UserService"
+          ]
+        },
+        {
+          "source": "jakarta.validation.Valid",
+          "specifiers": [
+            "Valid"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "org.springframework.http.ResponseEntity",
+          "specifiers": [
+            "ResponseEntity"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation",
+          "specifiers": [
+            "*"
+          ]
+        }
+      ],
+      "exports": [
+        "chargePoint",
+        "UserController"
+      ],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/user/dto/request/ChargePointRequest.java",
+      "contentHash": "8a6eb26d9a9e747227e5adfc70c030a3f5759351159a10e5d139034188461585",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ChargePointRequest",
+          "methods": [],
+          "properties": [
+            "point"
+          ],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "jakarta.validation.constraints.Min",
+          "specifiers": [
+            "Min"
+          ]
+        },
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Value",
+          "specifiers": [
+            "Value"
+          ]
+        }
+      ],
+      "exports": [
+        "ChargePointRequest"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/user/dto/response/ChargePointResponse.java",
+      "contentHash": "1108a5e7d5c443009b02b63be7c318ede74bc82910fd7ce9cd629eba0324a711",
+      "functions": [
+        {
+          "name": "ChargePointResponse",
+          "params": [
+            "userId",
+            "point"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "from",
+          "params": [
+            "user"
+          ],
+          "returnType": "ChargePointResponse",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChargePointResponse",
+          "methods": [
+            "ChargePointResponse",
+            "from"
+          ],
+          "properties": [
+            "userId",
+            "point"
+          ],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.user.entity.User",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        }
+      ],
+      "exports": [
+        "from",
+        "ChargePointResponse"
+      ],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/user/entity/User.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/user/entity/User.java",
+      "contentHash": "cfa0c9594693083c06108600bf27140e44a3cf532ce668982535c6de399f0bfb",
+      "functions": [
+        {
+          "name": "User",
+          "params": [
+            "name",
+            "point"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "chargePoint",
+          "params": [
+            "amount"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "usePoint",
+          "params": [
+            "amount"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "User",
+          "methods": [
+            "User",
+            "chargePoint",
+            "usePoint"
+          ],
+          "properties": [
+            "id",
+            "name",
+            "point"
+          ],
+          "exported": true,
+          "lineCount": 33
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.user.exception.UserException",
+          "specifiers": [
+            "UserException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.global.entity.BaseEntity",
+          "specifiers": [
+            "BaseEntity"
+          ]
+        },
+        {
+          "source": "com.cafeapp.global.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "jakarta.persistence",
+          "specifiers": [
+            "*"
+          ]
+        },
+        {
+          "source": "lombok.AccessLevel",
+          "specifiers": [
+            "AccessLevel"
+          ]
+        },
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        },
+        {
+          "source": "lombok.NoArgsConstructor",
+          "specifiers": [
+            "NoArgsConstructor"
+          ]
+        }
+      ],
+      "exports": [
+        "User",
+        "chargePoint",
+        "usePoint",
+        "User"
+      ],
+      "totalLines": 44,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/user/exception/UserException.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/user/exception/UserException.java",
+      "contentHash": "9b7014bd61c1d8be7edefa3e6db5a74906644066a1b491d439dded732fbdd4d2",
+      "functions": [
+        {
+          "name": "UserException",
+          "params": [
+            "errorCode"
+          ],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserException",
+          "methods": [
+            "UserException"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.global.exception.CafeException",
+          "specifiers": [
+            "CafeException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.global.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        }
+      ],
+      "exports": [
+        "UserException",
+        "UserException"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/user/repository/UserRepository.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/user/repository/UserRepository.java",
+      "contentHash": "ef2f0b825517a509990e7c352a1ca41b5f6d38da1ec563298ba728dab2e69574",
+      "functions": [],
+      "classes": [
+        {
+          "name": "UserRepository",
+          "methods": [
+            "findByIdwithPessimisticLock"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.user.entity.User",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.LockModeType",
+          "specifiers": [
+            "LockModeType"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.JpaRepository",
+          "specifiers": [
+            "JpaRepository"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.Lock",
+          "specifiers": [
+            "Lock"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.repository.Query",
+          "specifiers": [
+            "Query"
+          ]
+        },
+        {
+          "source": "org.springframework.data.repository.query.Param",
+          "specifiers": [
+            "Param"
+          ]
+        },
+        {
+          "source": "java.util.Optional",
+          "specifiers": [
+            "Optional"
+          ]
+        }
+      ],
+      "exports": [
+        "UserRepository"
+      ],
+      "totalLines": 18,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/domain/user/service/UserService.java": {
+      "filePath": "src/main/java/com/cafeapp/domain/user/service/UserService.java",
+      "contentHash": "bb4a76a0a7a75962d649dec6f5366548bccacabf0faadbec722486ea1904e402",
+      "functions": [
+        {
+          "name": "chargePoint",
+          "params": [
+            "userId",
+            "request"
+          ],
+          "returnType": "ChargePointResponse",
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserService",
+          "methods": [
+            "chargePoint"
+          ],
+          "properties": [
+            "userRepository",
+            "pointTransactionRepository"
+          ],
+          "exported": true,
+          "lineCount": 23
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.pointTransaction.entity.PointTransaction",
+          "specifiers": [
+            "PointTransaction"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.pointTransaction.repository.PointTransactionRepository",
+          "specifiers": [
+            "PointTransactionRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.dto.request.ChargePointRequest",
+          "specifiers": [
+            "ChargePointRequest"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.dto.response.ChargePointResponse",
+          "specifiers": [
+            "ChargePointResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.entity.User",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.exception.UserException",
+          "specifiers": [
+            "UserException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.repository.UserRepository",
+          "specifiers": [
+            "UserRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.global.exception.CafeException",
+          "specifiers": [
+            "CafeException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.global.exception.ErrorCode",
+          "specifiers": [
+            "ErrorCode"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "org.springframework.stereotype.Service",
+          "specifiers": [
+            "Service"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Transactional",
+          "specifiers": [
+            "Transactional"
+          ]
+        }
+      ],
+      "exports": [
+        "chargePoint",
+        "UserService"
+      ],
+      "totalLines": 39,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/global/entity/BaseEntity.java": {
+      "filePath": "src/main/java/com/cafeapp/global/entity/BaseEntity.java",
+      "contentHash": "0c182fec336e3d01b55dcd02f7e43f6e154bee9c93081b2cce0d9afd406bbdbb",
+      "functions": [],
+      "classes": [
+        {
+          "name": "BaseEntity",
+          "methods": [],
+          "properties": [
+            "createdAt",
+            "updatedAt"
+          ],
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "imports": [
+        {
+          "source": "jakarta.persistence.Column",
+          "specifiers": [
+            "Column"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.EntityListeners",
+          "specifiers": [
+            "EntityListeners"
+          ]
+        },
+        {
+          "source": "jakarta.persistence.MappedSuperclass",
+          "specifiers": [
+            "MappedSuperclass"
+          ]
+        },
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        },
+        {
+          "source": "org.springframework.data.annotation.CreatedDate",
+          "specifiers": [
+            "CreatedDate"
+          ]
+        },
+        {
+          "source": "org.springframework.data.annotation.LastModifiedDate",
+          "specifiers": [
+            "LastModifiedDate"
+          ]
+        },
+        {
+          "source": "org.springframework.data.jpa.domain.support.AuditingEntityListener",
+          "specifiers": [
+            "AuditingEntityListener"
+          ]
+        },
+        {
+          "source": "java.time.LocalDateTime",
+          "specifiers": [
+            "LocalDateTime"
+          ]
+        }
+      ],
+      "exports": [
+        "BaseEntity"
+      ],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/global/exception/CafeException.java": {
+      "filePath": "src/main/java/com/cafeapp/global/exception/CafeException.java",
+      "contentHash": "027c409ff23091215128b1a4a46a69595c914ac3d0252afa171f711af1882436",
+      "functions": [
+        {
+          "name": "CafeException",
+          "params": [
+            "errorCode"
+          ],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "CafeException",
+          "methods": [
+            "CafeException"
+          ],
+          "properties": [
+            "errorCode"
+          ],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "imports": [
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        }
+      ],
+      "exports": [
+        "CafeException",
+        "CafeException"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/global/exception/ErrorCode.java": {
+      "filePath": "src/main/java/com/cafeapp/global/exception/ErrorCode.java",
+      "contentHash": "a7be4bbfd9c629879fb4fac9ed9622b5aba3dcfa06619db7cd04e231f01b805f",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "lombok.Getter",
+          "specifiers": [
+            "Getter"
+          ]
+        },
+        {
+          "source": "lombok.RequiredArgsConstructor",
+          "specifiers": [
+            "RequiredArgsConstructor"
+          ]
+        },
+        {
+          "source": "org.springframework.http.HttpStatus",
+          "specifiers": [
+            "HttpStatus"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 28,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java": {
+      "filePath": "src/main/java/com/cafeapp/global/exception/GlobalExceptionHandler.java",
+      "contentHash": "824300baddaf4080ad1fdc6cbdb151b5143c4991103f1acec3ca9a0dd4df73ee",
+      "functions": [
+        {
+          "name": "handleCoffeeException",
+          "params": [
+            "e"
+          ],
+          "returnType": "ResponseEntity<ApiResponse<Void>>",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "handleValidException",
+          "params": [
+            "e"
+          ],
+          "returnType": "ResponseEntity<ApiResponse<Void>>",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "handleException",
+          "params": [
+            "e"
+          ],
+          "returnType": "ResponseEntity<ApiResponse<Void>>",
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "GlobalExceptionHandler",
+          "methods": [
+            "handleCoffeeException",
+            "handleValidException",
+            "handleException"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 38
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.global.response.ApiResponse",
+          "specifiers": [
+            "ApiResponse"
+          ]
+        },
+        {
+          "source": "lombok.extern.slf4j.Slf4j",
+          "specifiers": [
+            "Slf4j"
+          ]
+        },
+        {
+          "source": "org.springframework.http.ResponseEntity",
+          "specifiers": [
+            "ResponseEntity"
+          ]
+        },
+        {
+          "source": "org.springframework.validation.FieldError",
+          "specifiers": [
+            "FieldError"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.MethodArgumentNotValidException",
+          "specifiers": [
+            "MethodArgumentNotValidException"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.ExceptionHandler",
+          "specifiers": [
+            "ExceptionHandler"
+          ]
+        },
+        {
+          "source": "org.springframework.web.bind.annotation.RestControllerAdvice",
+          "specifiers": [
+            "RestControllerAdvice"
+          ]
+        }
+      ],
+      "exports": [
+        "handleCoffeeException",
+        "handleValidException",
+        "handleException",
+        "GlobalExceptionHandler"
+      ],
+      "totalLines": 49,
+      "hasStructuralAnalysis": true
+    },
+    "src/main/java/com/cafeapp/global/response/ApiResponse.java": {
+      "filePath": "src/main/java/com/cafeapp/global/response/ApiResponse.java",
+      "contentHash": "652194db36186af96bf247e518ad00bb0f4650fbdbc57a88a542a4a66914a474",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "src/test/java/com/cafeapp/CafeAppApplicationTests.java": {
+      "filePath": "src/test/java/com/cafeapp/CafeAppApplicationTests.java",
+      "contentHash": "4f2354490a93c778fadd9fe8d88f6a4130fab0fd22f45af8a842070854bb315c",
+      "functions": [
+        {
+          "name": "contextLoads",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [
+        {
+          "name": "CafeAppApplicationTests",
+          "methods": [
+            "contextLoads"
+          ],
+          "properties": [],
+          "exported": false,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java": {
+      "filePath": "src/test/java/com/cafeapp/domain/menu/MenuServiceTest.java",
+      "contentHash": "a0017b023d8972ac00b753c04a3c9fcc97567959d74991671eccba99da27d400",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "tearDown",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "clearRankingData",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "saveTestMenu",
+          "params": [
+            "name",
+            "price",
+            "stock",
+            "status"
+          ],
+          "returnType": "Long",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "판매중인_메뉴만_반환된다",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "SOLD_OUT_메뉴는_반환되지_않는다",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "인기메뉴_Top3_주문횟수_내림차순_반환",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "인기메뉴_없으면_빈목록_반환",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "MenuServiceTest",
+          "methods": [
+            "setUp",
+            "tearDown",
+            "clearRankingData",
+            "saveTestMenu",
+            "판매중인_메뉴만_반환된다",
+            "SOLD_OUT_메뉴는_반환되지_않는다",
+            "인기메뉴_Top3_주문횟수_내림차순_반환",
+            "인기메뉴_없으면_빈목록_반환"
+          ],
+          "properties": [
+            "menuService",
+            "menuRepository",
+            "menuRankingService",
+            "redisCacheManager",
+            "stringRedisTemplate",
+            "testMenuIds"
+          ],
+          "exported": false,
+          "lineCount": 110
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.common.config.redis.CacheManagerConfig",
+          "specifiers": [
+            "CacheManagerConfig"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.MenuRanking.dto.PopularMenuResponse",
+          "specifiers": [
+            "PopularMenuResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.MenuRanking.service.MenuRankingService",
+          "specifiers": [
+            "MenuRankingService"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.dto.response.GetAllMenuResponse",
+          "specifiers": [
+            "GetAllMenuResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.entity.Menu",
+          "specifiers": [
+            "Menu"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.entity.MenuStatus",
+          "specifiers": [
+            "MenuStatus"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.repository.MenuRepository",
+          "specifiers": [
+            "MenuRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.service.MenuService",
+          "specifiers": [
+            "MenuService"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.AfterEach",
+          "specifiers": [
+            "AfterEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.DisplayName",
+          "specifiers": [
+            "DisplayName"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.cache.CacheManager",
+          "specifiers": [
+            "CacheManager"
+          ]
+        },
+        {
+          "source": "org.springframework.data.redis.core.StringRedisTemplate",
+          "specifiers": [
+            "StringRedisTemplate"
+          ]
+        },
+        {
+          "source": "org.springframework.test.context.ActiveProfiles",
+          "specifiers": [
+            "ActiveProfiles"
+          ]
+        },
+        {
+          "source": "java.time.LocalDate",
+          "specifiers": [
+            "LocalDate"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 137,
+      "hasStructuralAnalysis": true
+    },
+    "src/test/java/com/cafeapp/domain/order/OrderServiceTest.java": {
+      "filePath": "src/test/java/com/cafeapp/domain/order/OrderServiceTest.java",
+      "contentHash": "c0261222286ac4b6106148d216b97eb947f87ad95090bec181aacc45781a9e32",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "tearDown",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "정상_주문_성공",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "포인트_부족시_주문_실패",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "재고_부족시_주문_실패",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "SOLD_OUT_메뉴_주문_실패",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "존재하지_않는_메뉴_주문_실패",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "재고_마지막1개_소진시_SOLD_OUT_자동변경",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 17
+        }
+      ],
+      "classes": [
+        {
+          "name": "OrderServiceTest",
+          "methods": [
+            "setUp",
+            "tearDown",
+            "정상_주문_성공",
+            "포인트_부족시_주문_실패",
+            "재고_부족시_주문_실패",
+            "SOLD_OUT_메뉴_주문_실패",
+            "존재하지_않는_메뉴_주문_실패",
+            "재고_마지막1개_소진시_SOLD_OUT_자동변경"
+          ],
+          "properties": [
+            "orderService",
+            "userRepository",
+            "menuRepository",
+            "orderRepository",
+            "pointTransactionRepository",
+            "testUser",
+            "testMenu"
+          ],
+          "exported": false,
+          "lineCount": 119
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.menu.entity.Menu",
+          "specifiers": [
+            "Menu"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.entity.MenuStatus",
+          "specifiers": [
+            "MenuStatus"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.exception.MenuException",
+          "specifiers": [
+            "MenuException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.repository.MenuRepository",
+          "specifiers": [
+            "MenuRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.dto.request.OrderRequest",
+          "specifiers": [
+            "OrderRequest"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.dto.response.OrderResponse",
+          "specifiers": [
+            "OrderResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.entity.OrderStatus",
+          "specifiers": [
+            "OrderStatus"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.exception.OrderException",
+          "specifiers": [
+            "OrderException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.repository.OrderRepository",
+          "specifiers": [
+            "OrderRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.service.OrderService",
+          "specifiers": [
+            "OrderService"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.pointTransaction.repository.PointTransactionRepository",
+          "specifiers": [
+            "PointTransactionRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.entity.User",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.exception.UserException",
+          "specifiers": [
+            "UserException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.repository.UserRepository",
+          "specifiers": [
+            "UserRepository"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.AfterEach",
+          "specifiers": [
+            "AfterEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.DisplayName",
+          "specifiers": [
+            "DisplayName"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.test.context.ActiveProfiles",
+          "specifiers": [
+            "ActiveProfiles"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
+          "specifiers": [
+            "assertThatThrownBy"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 147,
+      "hasStructuralAnalysis": true
+    },
+    "src/test/java/com/cafeapp/domain/user/UserServiceTest.java": {
+      "filePath": "src/test/java/com/cafeapp/domain/user/UserServiceTest.java",
+      "contentHash": "2bd7e90cc7b54806081cf1d6074d45785c51cadcc012b48bfb9a200b026388d3",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "tearDown",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "chargeRequest",
+          "params": [
+            "point"
+          ],
+          "returnType": "ChargePointRequest",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "포인트_충전_성공",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "포인트_충전_이력_저장",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "존재하지_않는_유저_충전시_예외",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserServiceTest",
+          "methods": [
+            "setUp",
+            "tearDown",
+            "chargeRequest",
+            "포인트_충전_성공",
+            "포인트_충전_이력_저장",
+            "존재하지_않는_유저_충전시_예외"
+          ],
+          "properties": [
+            "userService",
+            "userRepository",
+            "pointTransactionRepository",
+            "userId"
+          ],
+          "exported": false,
+          "lineCount": 63
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.pointTransaction.entity.PointTransaction",
+          "specifiers": [
+            "PointTransaction"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.pointTransaction.entity.PointTransactionType",
+          "specifiers": [
+            "PointTransactionType"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.pointTransaction.repository.PointTransactionRepository",
+          "specifiers": [
+            "PointTransactionRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.dto.request.ChargePointRequest",
+          "specifiers": [
+            "ChargePointRequest"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.dto.response.ChargePointResponse",
+          "specifiers": [
+            "ChargePointResponse"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.entity.User",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.exception.UserException",
+          "specifiers": [
+            "UserException"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.repository.UserRepository",
+          "specifiers": [
+            "UserRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.service.UserService",
+          "specifiers": [
+            "UserService"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.AfterEach",
+          "specifiers": [
+            "AfterEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.DisplayName",
+          "specifiers": [
+            "DisplayName"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.test.context.ActiveProfiles",
+          "specifiers": [
+            "ActiveProfiles"
+          ]
+        },
+        {
+          "source": "org.springframework.test.util.ReflectionTestUtils",
+          "specifiers": [
+            "ReflectionTestUtils"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThatThrownBy",
+          "specifiers": [
+            "assertThatThrownBy"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 89,
+      "hasStructuralAnalysis": true
+    },
+    "src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java": {
+      "filePath": "src/test/java/com/cafeapp/racecondition/OrderRaceConditionTest.java",
+      "contentHash": "a9212233ca2f30a365ac697ba6b3ecc692d4f6d4a9bfdae9767abc903066967c",
+      "functions": [
+        {
+          "name": "setUp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "tearDown",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "runConcurrentTest",
+          "params": [
+            "userId",
+            "task",
+            "lockType"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 60
+        },
+        {
+          "name": "runConcurrentTestWithLock",
+          "params": [
+            "userId",
+            "task",
+            "lockType"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 57
+        },
+        {
+          "name": "락없이_동시_주문_포인트_정합성_깨짐",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "동시_주문_포인트_정합성",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "분산락_동시_주문_포인트_정합성",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "재고_동시성_정합성",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 56
+        }
+      ],
+      "classes": [
+        {
+          "name": "OrderRaceConditionTest",
+          "methods": [
+            "setUp",
+            "tearDown",
+            "runConcurrentTest",
+            "runConcurrentTestWithLock",
+            "락없이_동시_주문_포인트_정합성_깨짐",
+            "동시_주문_포인트_정합성",
+            "분산락_동시_주문_포인트_정합성",
+            "재고_동시성_정합성"
+          ],
+          "properties": [
+            "orderService",
+            "userRepository",
+            "menuRepository",
+            "pointTransactionRepository",
+            "orderRepository",
+            "redissonService",
+            "userId",
+            "menuId",
+            "INITIAL_POINT"
+          ],
+          "exported": true,
+          "lineCount": 275
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.cafeapp.domain.menu.entity.Menu",
+          "specifiers": [
+            "Menu"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.entity.MenuStatus",
+          "specifiers": [
+            "MenuStatus"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.menu.repository.MenuRepository",
+          "specifiers": [
+            "MenuRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.dto.request.OrderRequest",
+          "specifiers": [
+            "OrderRequest"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.repository.OrderRepository",
+          "specifiers": [
+            "OrderRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.service.OrderService",
+          "specifiers": [
+            "OrderService"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.order.service.RedissonService",
+          "specifiers": [
+            "RedissonService"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.pointTransaction.repository.PointTransactionRepository",
+          "specifiers": [
+            "PointTransactionRepository"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.entity.User",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "com.cafeapp.domain.user.repository.UserRepository",
+          "specifiers": [
+            "UserRepository"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.AfterEach",
+          "specifiers": [
+            "AfterEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.BeforeEach",
+          "specifiers": [
+            "BeforeEach"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.DisplayName",
+          "specifiers": [
+            "DisplayName"
+          ]
+        },
+        {
+          "source": "org.junit.jupiter.api.Test",
+          "specifiers": [
+            "Test"
+          ]
+        },
+        {
+          "source": "org.springframework.beans.factory.annotation.Autowired",
+          "specifiers": [
+            "Autowired"
+          ]
+        },
+        {
+          "source": "org.springframework.boot.test.context.SpringBootTest",
+          "specifiers": [
+            "SpringBootTest"
+          ]
+        },
+        {
+          "source": "org.springframework.test.context.ActiveProfiles",
+          "specifiers": [
+            "ActiveProfiles"
+          ]
+        },
+        {
+          "source": "org.springframework.transaction.annotation.Transactional",
+          "specifiers": [
+            "Transactional"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.concurrent",
+          "specifiers": [
+            "*"
+          ]
+        },
+        {
+          "source": "java.util.concurrent.atomic.AtomicInteger",
+          "specifiers": [
+            "AtomicInteger"
+          ]
+        },
+        {
+          "source": "java.util.function.Consumer",
+          "specifiers": [
+            "Consumer"
+          ]
+        },
+        {
+          "source": "org.assertj.core.api.Assertions.assertThat",
+          "specifiers": [
+            "assertThat"
+          ]
+        }
+      ],
+      "exports": [
+        "INITIAL_POINT",
+        "OrderRaceConditionTest"
+      ],
+      "totalLines": 305,
+      "hasStructuralAnalysis": true
+    }
+  }
+}
