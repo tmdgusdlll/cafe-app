@@ -1,6 +1,7 @@
 package com.cafeapp.domain.order.service;
 
 import com.cafeapp.common.config.kafka.event.OrderCompletedEvent;
+import com.cafeapp.common.config.redis.CacheManagerConfig;
 import com.cafeapp.domain.menu.entity.Menu;
 import com.cafeapp.domain.menu.entity.MenuStatus;
 import com.cafeapp.domain.menu.repository.MenuRepository;
@@ -16,6 +17,7 @@ import com.cafeapp.domain.user.entity.User;
 import com.cafeapp.domain.user.repository.UserRepository;
 import com.cafeapp.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -35,7 +37,8 @@ public class OrderService {
     private final OrderProducer orderProducer;
     private final ApplicationEventPublisher eventPublisher;
 
-    // 주문,결제
+    // 주문,결제 (재고 차감으로 품절될 수 있으므로 메뉴 목록 캐시 무효화)
+    @CacheEvict(value = CacheManagerConfig.CACHE_NAME, key = "'#all'")
     @Transactional
     public OrderResponse orderAndPay(Long userId, OrderRequest request) {
         // user 확인 (비관적 락 적용)
@@ -88,7 +91,8 @@ public class OrderService {
         return OrderResponse.from(order);
     }
 
-    // Redisson 적용
+    // Redisson 적용 (재고 차감으로 품절될 수 있으므로 메뉴 목록 캐시 무효화)
+    @CacheEvict(value = CacheManagerConfig.CACHE_NAME, key = "'#all'")
     @Transactional
     public OrderResponse orderAndPayWithRedisson(Long userId, OrderRequest request) {
         User user = userRepository.findById(userId).orElseThrow(
